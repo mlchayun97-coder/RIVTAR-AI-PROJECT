@@ -1,0 +1,10 @@
+# Python 3.12 only (CrewAI does not support 3.13+ yet).
+# Pins verified with a pip dry-run against crewai==1.15.34 (added in phase 2),
+# which requires pydantic < 2.13.
+streamlit==1.66.1
+pandas==3.1.0
+numpy==2.5.4
+pillow==13.0.0
+pydantic==2.12.5
+python-dotenv==1.2.4
+pytest==9.2.0

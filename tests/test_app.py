@@ -1,6 +1,7 @@
-"""The Streamlit app imports cleanly, renders without exceptions, and the form logic works."""
+"""The Streamlit app imports cleanly, every page renders in both languages, and the form logic works."""
 
 import importlib
+import json
 import sys
 from datetime import date, timedelta
 from pathlib import Path
@@ -10,56 +11,130 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "app"
 sys.path.insert(0, str(APP))
+sys.path.insert(0, str(ROOT / "scripts"))
 
 from rivatar import vocab  # noqa: E402
 from rivatar.estimator import estimate_budget  # noqa: E402
 from rivatar.leads import LEAD_FIELDS, build_record, normalize_phone, save_lead, validate_lead  # noqa: E402
+from translate_content import flatten  # noqa: E402
+
+CONTENT = APP / "content"
 
 
 def test_app_modules_import():
-    for name in ("content", "theme", "ui", "views.home", "views.gallery", "views.ml_lab", "streamlit_app"):
+    for name in ("content", "theme", "ui", "views.common", "views.home", "views.projects", "views.about",
+                 "views.services", "views.contact", "views.ml_lab", "streamlit_app"):
         importlib.import_module(name)
 
 
-def test_content_uses_shared_vocabulary():
+# ---------------------------------------------------------------- content
+def test_en_and_he_have_the_same_keys():
+    en = flatten(json.loads((CONTENT / "en.json").read_text(encoding="utf-8")))
+    he = flatten(json.loads((CONTENT / "he.json").read_text(encoding="utf-8")))
+    assert set(en) == set(he)
+
+
+def test_form_vocabulary_is_translated_in_both_languages():
     import content as C
-    assert list(C.LABELS["event_type"]) == list(vocab.EVENT_TYPES) and len(vocab.EVENT_TYPES) == 8
-    assert C.EVENT_TYPE_TODO == "[סוג אירוע]"
-    for e in C.EVENTS:
-        assert e["type"] is None or e["type"] in vocab.EVENT_TYPES
-    shown = {e["slug"]: e for e in C.EVENTS}
-    assert shown["bailey-motel"]["type"] is None and shown["shaindel-meir"]["type"] is None
-    assert C.display_name(shown["avigail-nuri"]) == "Avigail & Nuri · Wedding"
+    for lang in ("en", "he"):
+        for code in vocab.EVENT_TYPES:
+            assert C.t(f"event_types.{code}", lang) != f"event_types.{code}"
+        for field, codes in (("region", vocab.REGIONS), ("venue_type", vocab.VENUE_TYPES),
+                             ("catering_level", vocab.CATERING_LEVELS), ("design_package", vocab.DESIGN_PACKAGES),
+                             ("lead_source", vocab.LEAD_SOURCES)):
+            for code in codes:
+                assert C.t(f"options.{field}.{code}", lang) != f"options.{field}.{code}"
+        for code in vocab.EXTRAS:
+            assert C.t(f"extras.{code}", lang) != f"extras.{code}"
+    assert C.t("errors.guests", "he", min=10, max="1,500").count("10") == 1
 
 
-def test_ui_renders_todo_and_escapes():
+def test_hebrew_falls_back_to_english(monkeypatch):
+    import content as C
+    monkeypatch.setattr(C, "strings", lambda lang: {"en": {"a": {"b": "hello"}}, "he": {}}[lang])
+    assert C.t("a.b", "he") == "hello"
+    assert C.t("missing.key", "he") == "missing.key"
+
+
+def test_projects_use_folder_spelling_and_shared_codes():
+    import content as C
+    names = {p["slug"]: p["name"]["en"] for p in C.projects()}
+    assert names == {"evyatar-rivka": "Evyatar & Rivka", "avigail-nuri": "Avigail & Nuri", "aaron-bar-mitzvah": "Aaron",
+                     "eden-binyamin": "Eden & Binyamin", "bailey-motel": "Bailey & Motel", "david-bar-mitzvah": "David",
+                     "shaindel-meir": "Shaindel & Meir"}
+    for p in C.projects():
+        assert p["event_type"] in vocab.EVENT_TYPES
+        assert p["text"]["en"] and p["text"]["he"]
+        assert 35 <= len(p["text"]["en"].split()) <= 75
+        assert p["cover"]["photo"]
+
+
+def test_ui_escapes_and_marks_todo():
     import ui
-    assert 'class="todo"' in ui.txt("[מיקום]")
+    assert 'class="todo"' in ui.txt("[phone]")
     assert "&lt;script&gt;" in ui.txt("<script>")
-    assert "est-pending" in ui.estimate_box(None, estimate_budget({}))
+    ctx = ui.Ctx("he", "projects")
+    assert ctx.href("contact") == "/contact?lang=he"
+    assert ui.Ctx("en", "").href("projects") == "/projects"
+    assert ui.Ctx("he", "about").href("about", lang="en") == "/about?lang=en"
+    assert "est-pending" in ui.estimate_box(ui.Ctx(), None, estimate_budget({}))
 
 
-def test_home_renders_without_exceptions():
+def test_language_switch_keeps_the_page():
+    import ui
+    html = ui.masthead(ui.Ctx("en", "project-evyatar-rivka"), "projects")
+    assert 'href="/project-evyatar-rivka?lang=he"' in html
+    html = ui.masthead(ui.Ctx("he", "contact"), "contact")
+    assert 'href="/contact?lang=en"' in html and 'aria-current="page"' in html
+
+
+# ---------------------------------------------------------------- pages render in both languages
+PAGES = ["home.render()", "projects.render_index()", "projects.render_project('evyatar-rivka')",
+         "projects.render_project('aaron-bar-mitzvah')", "about.render()", "services.render()", "contact.render()",
+         "ml_lab.render()"]
+
+
+@pytest.mark.parametrize("lang", ["en", "he"])
+@pytest.mark.parametrize("call", PAGES)
+def test_every_page_renders_in_both_languages(call, lang):
+    from streamlit.testing.v1 import AppTest
+    script = (f"import sys; sys.path[:0] = [{str(APP)!r}, {str(ROOT / 'src')!r}]\n"
+              "import streamlit as st\n"
+              f"st.query_params['lang'] = {lang!r}\n"
+              "import theme\nfrom views import home, projects, about, services, contact, ml_lab\n"
+              "theme.inject()\n" + call)
+    at = AppTest.from_string(script, default_timeout=60)
+    at.run()
+    assert not at.exception
+    html = " ".join(str(h.proto.body) for h in at.get("html"))
+    assert f'lang="{lang}"' in html
+    if lang == "he":
+        assert 'dir="rtl"' in html
+
+
+def test_full_app_runs():
     from streamlit.testing.v1 import AppTest
     at = AppTest.from_file(str(APP / "streamlit_app.py"), default_timeout=60)
     at.run()
     assert not at.exception
-    assert at.button  # the form submit button exists
-    # empty submit -> validation messages, no exception
-    at.button[0].click().run()
-    assert not at.exception
 
 
-@pytest.mark.parametrize("call", ["gallery.render('avigail-nuri')", "ml_lab.render()"])
-def test_subpages_render_without_exceptions(call):
+def test_contact_empty_submit_shows_errors_and_saves_nothing(tmp_path, monkeypatch):
     from streamlit.testing.v1 import AppTest
     script = (f"import sys; sys.path[:0] = [{str(APP)!r}, {str(ROOT / 'src')!r}]\n"
-              "import theme\nfrom views import gallery, ml_lab\ntheme.inject()\n" + call)
+              "from rivatar import config\n"
+              f"config.LEADS_CSV = __import__('pathlib').Path({str(tmp_path / 'leads.csv')!r})\n"
+              "import theme\nfrom views import contact\ntheme.inject()\ncontact.render()")
     at = AppTest.from_string(script, default_timeout=60)
     at.run()
+    at.button[0].click().run()
     assert not at.exception
+    html = " ".join(str(h.proto.body) for h in at.get("html"))
+    assert "form-errors" in html
+    assert not (tmp_path / "leads.csv").exists()
 
 
+# ---------------------------------------------------------------- form logic (unchanged from phase 1)
 def _lead(**kw):
     base = dict(event_type="wedding", event_date=date.today() + timedelta(days=200), guest_count=250,
                 region="jerusalem", venue_type="hall", catering_level="premium", design_package="standard",

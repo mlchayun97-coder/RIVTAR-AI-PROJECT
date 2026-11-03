@@ -1,0 +1,470 @@
+<title>RIVATAR Productions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..500&family=Frank+Ruhl+Libre:wght@300;400;500&display=swap">
+<style>
+/* Layout: an editorial "issue" — asymmetric spreads on a 12-col grid, each event pairs a wide mood frame with a detail close-up; ivory margins carry the rhythm */
+:root{
+  --bg:#F2EDE4; --bg-2:#E9E2D6; --fg:#1E1C1A; --fg-2:#625B52; --rule:#CFC6B8;
+  --on-photo:#F6F1E9; --todo:#8A6A4F;
+  --ph-sand:#B5A288; --ph-olive:#6D7162; --ph-rose:#94766B; --ph-dusk:#444B58; --ph-linen:#CBBDA8; --ph-wine:#5F3D3C;
+  --f-display:"Frank Ruhl Libre","David",Georgia,serif;
+  --f-latin:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --f-body:"Assistant","Segoe UI",Arial,sans-serif;
+  --gutter:clamp(16px,4.5vw,64px);
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#161513; --bg-2:#201E1B; --fg:#ECE5D9; --fg-2:#A69E91; --rule:#38342F; --todo:#C9A784; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#161513; --bg-2:#201E1B; --fg:#ECE5D9; --fg-2:#A69E91; --rule:#38342F; --todo:#C9A784; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:17px;line-height:1.7;font-weight:400;-webkit-font-smoothing:antialiased}
+.site{padding-inline:var(--gutter);overflow-x:clip}
+a{color:inherit}
+:focus-visible{outline:1.5px solid var(--fg);outline-offset:4px}
+h1,h2,h3{font-family:var(--f-display);font-weight:300;line-height:1.08;margin:0;text-wrap:balance}
+p{margin:0}
+.lat{font-family:var(--f-latin);font-style:italic;font-weight:400;letter-spacing:.01em}
+.label{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--fg-2)}
+.todo{color:var(--todo);border-bottom:1px dashed currentColor}
+
+/* draft strip */
+.draft{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;padding-block:.5rem;font-size:.78rem;color:var(--fg-2);border-bottom:1px solid var(--rule);text-align:center}
+
+/* masthead */
+.mast{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding-block:1rem;border-bottom:1px solid transparent;transition:border-color .4s}
+.mast.scrolled{border-bottom-color:var(--rule)}
+.mast nav{display:flex;gap:1.6rem;font-size:.92rem}
+.mast nav a{text-decoration:none;position:relative}
+.mast nav a::after{content:"";position:absolute;inset-inline:0;bottom:-3px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .5s var(--ease)}
+.mast nav a:hover::after{transform:scaleX(1)}
+.wordmark{display:grid;justify-items:center;gap:.45rem;text-decoration:none;color:var(--fg);direction:ltr}
+.wordmark .logo{width:clamp(110px,11vw,150px);height:auto;display:block}
+.wordmark small{font-family:var(--f-body);font-size:.52rem;letter-spacing:.62em;font-weight:600;padding-inline-start:.62em;line-height:1}
+.mast .cta{justify-self:end;font-size:.88rem;text-decoration:none;border:1px solid var(--fg);padding:.45rem 1.1rem;border-radius:999px;transition:background .3s,color .3s}
+.mast .cta:hover{background:var(--fg);color:var(--bg)}
+.menu-btn{display:none;justify-self:start;background:none;border:0;color:var(--fg);font:inherit;font-size:.9rem;padding:.4rem 0;cursor:pointer}
+
+/* photo placeholders */
+.ph{position:relative;margin:0;overflow:hidden;aspect-ratio:var(--ar,4/3);max-width:100%;background:var(--tone,var(--ph-sand))}
+.ph-img{position:absolute;inset:0;background:
+  radial-gradient(120% 80% at 30% 20%,rgb(255 255 255 / .22),transparent 60%),
+  radial-gradient(90% 70% at 80% 90%,rgb(0 0 0 / .28),transparent 65%),
+  var(--tone,var(--ph-sand));transform:scale(1.001);transition:transform 1.6s var(--ease)}
+.ph-tag{position:absolute;inset-block-end:.8rem;inset-inline-start:.9rem;color:var(--on-photo);font-size:.68rem;letter-spacing:.18em;font-weight:600;text-transform:uppercase;opacity:.92}
+.ph-tag::before{content:"";display:inline-block;width:1.4em;height:1px;background:currentColor;vertical-align:middle;margin-inline-end:.5em}
+.sand{--tone:var(--ph-sand)} .olive{--tone:var(--ph-olive)} .rose{--tone:var(--ph-rose)} .dusk{--tone:var(--ph-dusk)} .linen{--tone:var(--ph-linen)} .wine{--tone:var(--ph-wine)}
+
+/* hero */
+.hero{padding-block:clamp(1.5rem,4vw,3rem) 0;display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,36px)}
+.hero-main{grid-column:1/-1;--ar:16/8.5}
+.hero-word{position:absolute;inset-inline:6%;bottom:6%;color:var(--on-photo);pointer-events:none;animation:unveil 1.8s var(--ease) both}
+.hero-word .logo{display:block;width:100%;height:auto}
+@keyframes unveil{from{clip-path:inset(0 0 100% 0);transform:translateY(12%)}to{clip-path:inset(0);transform:none}}
+.hero-main .ph-img{animation:breathe 2.4s var(--ease) both}
+@keyframes breathe{from{transform:scale(1.06)}to{transform:scale(1.001)}}
+.hero-main .ph-tag{inset-block-start:.9rem;inset-block-end:auto}
+.hero-copy{grid-column:1/span 7;padding-block:clamp(1.5rem,3vw,2.5rem)}
+.hero-copy h1{font-size:clamp(2rem,4.6vw,4.2rem);max-width:15ch}
+.hero-copy .lede{margin-top:1.4rem;max-width:44ch;color:var(--fg-2);font-size:1.08rem}
+.hero-side{grid-column:9/-1;margin-top:clamp(-9rem,-9vw,-3rem);display:grid;gap:.9rem;align-content:start}
+.hero-side .ph{--ar:4/5;width:78%;justify-self:end;box-shadow:0 0 0 clamp(8px,1vw,14px) var(--bg)}
+.hero-side .cap{font-size:.82rem;color:var(--fg-2);max-width:28ch;justify-self:end;text-align:end}
+.disciplines{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:.4rem 2.2rem;align-items:baseline;border-top:1px solid var(--rule);padding-block:1rem;font-family:var(--f-display);font-size:clamp(1.05rem,1.6vw,1.3rem)}
+.disciplines .lat{font-size:.95em;color:var(--fg-2);margin-inline-start:auto}
+
+/* section heads */
+section{padding-block:clamp(4.5rem,10vw,9rem) 0}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem 1.4rem;margin-bottom:clamp(2.5rem,6vw,5rem)}
+.sec-head h2{font-size:clamp(2.4rem,6vw,5.4rem)}
+.sec-head .lat{font-size:clamp(1.1rem,1.8vw,1.5rem);color:var(--fg-2)}
+.sec-head .note{margin-inline-start:auto;max-width:34ch;color:var(--fg-2);font-size:.95rem}
+
+/* event stories */
+.stories{display:grid;gap:clamp(5rem,12vw,11rem)}
+.story{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,36px);align-items:start}
+.story-text{display:grid;gap:.9rem;align-content:start;min-width:0}
+.story-text .kicker{display:flex;gap:.7rem;flex-wrap:wrap}
+.story-text h3{font-size:clamp(1.9rem,3.4vw,3.1rem)}
+.story-text .desc{color:var(--fg-2);max-width:40ch}
+.more{justify-self:start;display:inline-flex;gap:.6rem;align-items:center;text-decoration:none;font-weight:600;font-size:.92rem;margin-top:.4rem;padding-bottom:.2rem;border-bottom:1px solid var(--fg)}
+.more span{transition:transform .5s var(--ease)}
+.more:hover span{transform:translateX(-6px)}
+.gal-count{font-size:.8rem;color:var(--fg-2)}
+/* A: wide mood + side column */
+.s-a .wide{grid-column:1/span 8;--ar:4/3}
+.s-a .side{grid-column:9/-1;display:grid;gap:clamp(1.5rem,3vw,2.5rem);padding-top:clamp(2rem,10vw,9rem)}
+.s-a .side .ph{--ar:3/4;width:72%}
+/* B: text first, tall portrait, low detail */
+.s-b .story-text{grid-column:1/span 4;padding-top:clamp(1rem,6vw,6rem)}
+.s-b .tall{grid-column:5/span 5;--ar:4/5.4}
+.s-b .low{grid-column:10/-1;--ar:1/1;margin-top:clamp(6rem,24vw,22rem)}
+/* C: panorama + edited strip */
+.s-c .pano{grid-column:1/-1;--ar:21/8}
+.s-c .story-text{grid-column:1/span 5}
+.s-c .strip{grid-column:7/-1;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:clamp(10px,1.4vw,18px);align-items:end;margin-top:clamp(-6rem,-7vw,-2rem)}
+.s-c .strip .ph:nth-child(1){--ar:4/5}
+.s-c .strip .ph:nth-child(2){--ar:1/1}
+.s-c .strip .ph:nth-child(3){--ar:3/4.4}
+.s-c .strip .ph{box-shadow:0 0 0 clamp(6px,.8vw,12px) var(--bg)}
+
+/* approach */
+.approach{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,36px)}
+.approach .statement{grid-column:1/span 10;font-family:var(--f-display);font-weight:300;font-size:clamp(1.9rem,4.4vw,3.9rem);line-height:1.2;text-wrap:balance}
+.approach .statement em{font-style:normal;color:var(--fg-2)}
+.pillars{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(2rem,5vw,5rem);margin-top:clamp(2.5rem,5vw,4.5rem);border-top:1px solid var(--rule);padding-top:2rem}
+.pillar{display:grid;gap:.7rem;align-content:start}
+.pillar h3{font-size:clamp(1.5rem,2.4vw,2rem)}
+.pillar p{color:var(--fg-2);max-width:46ch}
+.pillar .lat{color:var(--fg-2);font-size:1.05rem}
+
+/* services */
+.svc-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--fg)}
+.svc{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) auto;gap:1rem 2.5rem;align-items:center;padding-block:clamp(1.4rem,3vw,2.4rem);border-bottom:1px solid var(--rule);position:relative}
+.svc h3{font-size:clamp(2rem,5vw,4.4rem);transition:transform .7s var(--ease)}
+.svc h3 .lat{display:block;font-size:.3em;color:var(--fg-2);margin-top:.5rem}
+.svc p{color:var(--fg-2);max-width:40ch}
+.svc .swatch{width:clamp(70px,9vw,130px);aspect-ratio:3/4;background:var(--tone);opacity:0;transform:translateY(10px) rotate(-2deg);transition:opacity .6s var(--ease),transform .7s var(--ease)}
+.svc:hover h3{transform:translateX(-14px)}
+.svc:hover .swatch{opacity:1;transform:none}
+
+/* about */
+.about{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,36px);align-items:end}
+.about .portrait{grid-column:1/span 5;--ar:3/4}
+.about .bio{grid-column:7/-1;display:grid;gap:1.2rem;padding-bottom:clamp(0rem,3vw,3rem);min-width:0}
+.about .name{font-size:clamp(4rem,12vw,10rem);line-height:.9}
+.about .bio p{color:var(--fg-2);max-width:48ch}
+
+/* contact */
+.contact{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.4vw,36px);background:var(--bg-2);margin-inline:calc(var(--gutter) * -1);padding:clamp(3rem,8vw,7rem) var(--gutter)}
+.contact-head{grid-column:1/span 4;display:grid;gap:1.4rem;align-content:start}
+.contact-head h2{font-size:clamp(2.2rem,5vw,4.4rem)}
+.contact-head dl{display:grid;grid-template-columns:auto 1fr;gap:.5rem 1.4rem;margin:1rem 0 0;font-size:.95rem}
+.contact-head dt{color:var(--fg-2)}
+.contact-head dd{margin:0}
+form{grid-column:6/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.6rem 1.8rem;align-content:start}
+.field{display:grid;gap:.35rem;min-width:0}
+.field.full{grid-column:1/-1}
+.field label{font-size:.8rem;color:var(--fg-2);letter-spacing:.04em}
+.field input,.field select,.field textarea{font:inherit;color:var(--fg);background:transparent;border:0;border-bottom:1px solid var(--fg-2);padding:.45rem 0;border-radius:0;width:100%}
+.field textarea{resize:vertical;min-height:5.5rem}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-bottom-color:var(--fg)}
+.send{grid-column:1/-1;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap}
+.send button{font:inherit;font-weight:600;background:var(--fg);color:var(--bg);border:0;border-radius:999px;padding:.85rem 2rem;cursor:pointer;transition:transform .3s var(--ease)}
+.send button:hover{transform:translateY(-2px)}
+.send output{font-size:.88rem;color:var(--fg-2)}
+
+.addons{display:flex;flex-wrap:wrap;gap:.4rem 1.6rem;align-items:baseline;margin-top:1.6rem;color:var(--fg-2)}
+.addons .label{margin-inline-end:.6rem}
+fieldset{grid-column:1/-1;border:0;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.4rem 1.8rem;min-width:0}
+legend{font-family:var(--f-display);font-size:1.35rem;padding:0;margin-bottom:.4rem}
+.flabel{font-size:.8rem;color:var(--fg-2);letter-spacing:.04em}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.3rem}
+.chips label{position:relative;cursor:pointer}
+.chips input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chips span{display:inline-block;border:1px solid var(--fg-2);border-radius:999px;padding:.35rem 1rem;font-size:.9rem;transition:background .25s,color .25s,border-color .25s}
+.chips input:checked+span{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chips input:focus-visible+span{outline:1.5px solid var(--fg);outline-offset:3px}
+.estimate{grid-column:1/-1;background:var(--bg);padding:clamp(1.4rem,3vw,2.4rem);display:grid;gap:.6rem;margin-top:.6rem}
+.est-top{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.est-tag{font-size:.72rem;border:1px solid var(--todo);color:var(--todo);border-radius:999px;padding:.1rem .7rem}
+.est-case{font-family:var(--f-display);font-size:1.15rem}
+.est-num{font-family:var(--f-latin);font-size:clamp(2.8rem,6vw,4.6rem);line-height:1;text-align:right;font-variant-numeric:lining-nums tabular-nums;margin-block:.3rem .8rem}
+.est-range{direction:ltr}
+.est-track{position:relative;height:1px;background:var(--fg-2)}
+.est-track::before,.est-track::after{content:"";position:absolute;top:-5px;width:1px;height:11px;background:var(--fg-2)}
+.est-track::before{left:0}.est-track::after{right:0}
+.est-mark{position:absolute;top:-7px;left:var(--pos);width:15px;height:15px;margin-left:-7px;border-radius:50%;background:var(--fg)}
+.est-ends{display:flex;justify-content:space-between;font-size:.85rem;color:var(--fg-2);margin-top:.7rem;font-variant-numeric:tabular-nums}
+.est-fine{font-size:.85rem;color:var(--fg-2);max-width:52ch;margin-top:.4rem}
+/* footer */
+footer{padding-block:clamp(3rem,7vw,6rem) 2rem;display:grid;gap:1.5rem}
+.foot-word{color:var(--fg);padding-inline:2%}
+.foot-word .logo{display:block;width:100%;height:auto}
+.foot-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;font-size:.85rem;color:var(--fg-2);border-top:1px solid var(--rule);padding-top:1.2rem}
+.foot-row nav{display:flex;gap:1.4rem;flex-wrap:wrap}
+.foot-row a{text-decoration:none}
+
+/* scroll motion: content rests visible; only position eases in */
+.js .rise{transform:translateY(28px);transition:transform 1.1s var(--ease)}
+.js .rise.in{transform:none}
+.js .ph.rise .ph-img{transform:scale(1.07)}
+.js .ph.rise.in .ph-img{transform:scale(1.001)}
+
+/* tablet */
+@media (max-width:980px){
+  .mast nav{display:none}
+  .menu-btn{display:block}
+  .mast.open nav{display:flex;flex-direction:column;gap:1rem;grid-column:1/-1;grid-row:2;padding-block:1.4rem .6rem;font-family:var(--f-display);font-size:1.6rem}
+  .hero-copy{grid-column:1/-1}
+  .hero-side{grid-column:1/-1;margin-top:0;grid-template-columns:1fr 1fr;align-items:end}
+  .hero-side .ph{width:100%}
+  .hero-side .cap{justify-self:start;text-align:start}
+}
+/* phone */
+@media (max-width:720px){
+  body{font-size:16px}
+  .wordmark .logo{width:96px}
+  .mast .cta{padding:.35rem .9rem;font-size:.8rem}
+  .hero-main{--ar:4/5}
+  .hero-word{inset-inline:7%;bottom:5%}
+  .story,.approach,.about,.contact{grid-template-columns:1fr}
+  .story>*,.approach>*,.about>*,.contact>*{grid-column:1/-1 !important}
+  .s-a .side{padding-top:0}
+  .s-a .side .ph{width:62%;justify-self:end;margin-top:-4.5rem;box-shadow:0 0 0 10px var(--bg)}
+  .s-b .story-text{padding-top:0;order:3}
+  .s-b .tall{width:86%}
+  .s-b .low{width:52%;justify-self:end;margin-top:-6rem;box-shadow:0 0 0 10px var(--bg)}
+  .s-c .pano{--ar:4/3}
+  .s-c .strip{margin-top:0}
+  .pillars{grid-template-columns:1fr}
+  .svc{grid-template-columns:1fr}
+  .svc .swatch{display:none}
+  .about .portrait{width:82%}
+  form,fieldset{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .js .rise,.js .ph.rise .ph-img{transform:none}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="rv-logo" viewBox="0 0 331 60"><path fill="currentColor" fill-rule="evenodd" d="M29.38 37.38L29.50 38.00L39.25 53.88L41.50 57.00L51.50 57.12L52.25 56.75L52.00 55.75L40.62 38.00L39.75 37.12L30.00 37.00ZM285.88 3.00L285.50 3.50L285.62 56.62L286.62 57.12L295.25 57.12L296.12 56.25L296.12 8.38L296.50 7.88L297.62 7.62L309.38 7.62L312.00 8.00L314.00 9.00L315.75 10.50L317.50 13.12L318.50 16.75L318.50 20.50L317.88 23.00L316.38 25.38L313.12 27.88L309.12 28.88L301.00 29.00L299.75 28.75L299.12 29.50L314.62 56.62L315.62 57.12L324.75 57.00L325.12 56.62L324.88 55.62L312.12 33.75L312.00 32.88L312.88 32.12L317.12 31.50L319.62 30.75L321.62 29.75L324.62 27.62L326.62 25.12L327.75 22.38L328.38 17.12L327.75 12.50L325.75 8.38L324.75 7.12L322.38 5.25L320.12 4.12L315.88 3.00L313.25 2.75L286.62 2.75ZM243.38 2.88L242.25 5.00L238.88 15.50L238.25 16.50L231.88 35.75L231.12 37.12L229.75 41.88L229.25 42.62L227.88 47.25L226.12 51.62L224.75 56.62L225.62 57.12L230.25 57.12L231.50 55.88L235.00 45.25L238.62 35.88L240.00 31.12L240.75 29.75L247.00 10.75L247.62 10.38L248.75 12.00L264.38 56.38L265.62 57.12L274.62 57.00L275.00 56.62L275.00 55.88L273.75 52.12L273.00 50.75L272.62 49.00L271.12 45.38L270.75 43.62L270.00 42.25L269.62 40.50L268.12 36.88L267.62 34.75L265.12 28.38L264.75 26.62L263.00 22.25L262.62 20.50L262.00 19.50L261.62 17.75L260.12 14.12L259.75 12.38L259.00 11.00L256.50 3.38L255.25 2.75ZM183.12 2.88L182.50 3.50L182.50 6.75L183.12 7.62L197.12 7.62L198.00 8.38L198.00 56.50L198.75 57.12L208.50 57.00L208.88 56.50L208.88 8.38L209.75 7.62L223.75 7.62L224.38 6.75L224.38 3.50L224.00 3.00L223.25 2.75ZM149.38 3.00L148.12 5.62L146.75 10.38L146.12 11.50L139.88 30.25L136.25 40.00L134.88 44.62L134.25 45.75L132.75 50.88L130.88 55.75L131.00 56.88L131.62 57.12L136.25 57.12L137.25 56.62L137.75 55.75L140.00 48.38L140.62 47.38L142.00 42.75L143.75 38.62L153.38 10.50L153.88 10.50L154.75 11.62L157.25 19.38L157.88 20.38L158.25 22.12L160.75 28.50L161.12 30.25L170.50 56.38L171.62 57.12L180.25 57.12L180.88 56.88L181.12 56.00L177.12 45.12L174.75 37.62L174.00 36.25L173.62 34.50L169.12 22.38L166.62 14.62L166.12 13.88L162.75 3.62L162.38 3.12L161.25 2.75L150.12 2.75ZM86.62 2.75L86.12 3.12L86.12 4.00L86.75 4.75L87.12 6.12L103.88 41.25L104.12 42.38L105.88 45.50L106.12 46.62L108.88 52.00L110.25 55.38L110.75 55.50L111.75 54.25L113.00 50.50L118.75 36.62L119.00 35.38L125.62 19.38L127.00 15.25L131.00 5.25L131.75 4.00L131.75 3.12L131.12 2.75L127.12 2.75L126.12 3.25L115.25 31.62L113.88 35.88L113.50 36.38L113.12 36.38L112.12 35.38L111.75 34.00L110.12 31.12L109.75 29.75L108.00 26.62L104.88 19.50L103.00 16.12L102.75 15.00L97.12 3.50L96.12 2.75ZM65.62 2.75L64.75 3.62L64.75 56.25L65.62 57.12L74.25 57.12L75.00 56.88L75.38 56.38L75.38 3.50L75.00 3.00L74.25 2.75ZM45.25 5.12L43.25 4.12L40.38 3.25L36.50 2.75L3.75 2.75L3.25 3.00L3.25 3.88L15.12 22.75L16.25 23.62L25.62 23.75L26.25 23.62L26.50 23.25L25.75 21.62L17.38 8.88L17.25 8.12L17.62 7.75L32.38 7.62L35.00 8.00L37.00 9.00L39.88 11.88L40.88 13.75L41.75 17.88L41.62 20.00L40.75 23.38L39.75 25.00L38.00 26.75L35.75 28.00L32.12 28.88L4.62 28.75L4.00 29.12L3.75 29.62L3.75 56.25L4.12 56.88L4.62 57.12L14.12 57.00L14.62 56.50L14.62 33.62L15.12 32.25L15.75 32.00L35.25 32.12L39.62 31.62L44.62 29.75L48.62 26.62L49.75 24.88L51.00 21.25L51.38 16.25L50.88 12.88L49.88 10.12L48.62 8.12Z"/></symbol></svg>
+
+<div class="site" dir="rtl" lang="he">
+
+  <p class="draft"><span>טיוטת עיצוב לעמוד הבית</span><span>·</span><span>משטחי הצבע מסמנים צילומים, והטקסט <span class="todo">המקווקו</span> ממתין לחומרים ממך</span></p>
+
+  <header class="mast" id="mast">
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">תפריט</button>
+    <nav id="mainNav" aria-label="ניווט ראשי">
+      <a href="#stories">אירועים</a>
+      <a href="#approach">הגישה</a>
+      <a href="#services">שירותים</a>
+      <a href="#about">רבקה</a>
+    </nav>
+    <a class="wordmark" href="#top" aria-label="RIVATAR Productions"><svg class="logo" viewBox="0 0 331 60" aria-hidden="true" focusable="false"><use href="#rv-logo"/></svg><small>PRODUCTIONS</small></a>
+    <a class="cta" href="#contact">צרו קשר</a>
+  </header>
+
+  <!-- HERO: cover image with the wordmark set into the photograph -->
+  <div class="hero" id="top">
+    <figure class="ph hero-main sand">
+      <div class="ph-img"></div>
+      <span class="ph-tag">צילום פתיחה · אווירה רחבה</span>
+      <div class="hero-word"><svg class="logo" viewBox="0 0 331 60" aria-hidden="true" focusable="false"><use href="#rv-logo"/></svg></div>
+    </figure>
+
+    <div class="hero-copy">
+      <h1>כל אירוע הוא סיפור שמתחיל בפרט אחד</h1>
+      <p class="lede">הפקת אירועי בוטיק ויוקרה, מחתונות ובר ובת מצווה ועד כנסים, השקות מוצר ואירועי חברה. קונספט, עיצוב וניהול מלא תחת יד אחת.</p>
+    </div>
+
+    <div class="hero-side">
+      <figure class="ph rose"><div class="ph-img"></div><span class="ph-tag">תקריב פרט</span></figure>
+      <p class="cap"><span class="todo">[כיתוב לתמונה: שם האירוע · מיקום]</span></p>
+    </div>
+
+    <div class="disciplines">
+      <span>חתונות</span><span>בר ובת מצווה</span><span>כנסים</span><span>השקות מוצר</span><span>אירועי חברה</span>
+      <span class="lat">Boutique &amp; Luxury Events</span>
+    </div>
+  </div>
+
+  <!-- SELECTED EVENTS: each one a photographed story, three spread layouts in rotation -->
+  <section id="stories" aria-labelledby="stories-h">
+    <div class="sec-head">
+      <h2 id="stories-h">אירועים נבחרים</h2>
+      <span class="lat">Selected Stories</span>
+      <p class="note">כל אירוע מוצג כסיפור מצולם: שם, מיקום, כמה משפטים, וגלריה ערוכה שמחליפה בין מבט רחב לפרט.</p>
+    </div>
+
+    <div class="stories">
+      <article class="story s-a">
+        <figure class="ph wide olive rise"><div class="ph-img"></div><span class="ph-tag">אווירה רחבה</span></figure>
+        <div class="side">
+          <figure class="ph linen rise"><div class="ph-img"></div><span class="ph-tag">פרט</span></figure>
+          <div class="story-text rise">
+            <p class="kicker"><span class="label">חתונה</span><span class="label todo">[מיקום]</span></p>
+            <h3 class="todo">[שמות בני הזוג]</h3>
+            <p class="desc todo">[2–3 משפטים: הקונספט, האווירה, והאתגר ההפקתי שנפתר]</p>
+            <a class="more" href="#stories">לסיפור המלא <span>←</span></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="story s-b">
+        <div class="story-text rise">
+          <p class="kicker"><span class="label">בר / בת מצווה</span><span class="label todo">[מיקום]</span></p>
+          <h3 class="todo">[שם האירוע]</h3>
+          <p class="desc todo">[2–3 משפטים על האירוע ועל מה שהפך אותו לשלכם]</p>
+          <a class="more" href="#stories">לסיפור המלא <span>←</span></a>
+        </div>
+        <figure class="ph tall wine rise"><div class="ph-img"></div><span class="ph-tag">דיוקן / רגע</span></figure>
+        <figure class="ph low sand rise"><div class="ph-img"></div><span class="ph-tag">פרט</span></figure>
+      </article>
+
+      <article class="story s-c">
+        <figure class="ph pano dusk rise"><div class="ph-img"></div><span class="ph-tag">פנורמה · חלל האירוע</span></figure>
+        <div class="story-text rise">
+          <p class="kicker"><span class="label">אירוע חברה</span><span class="label todo">[מיקום]</span></p>
+          <h3 class="todo">[שם החברה או האירוע]</h3>
+          <p class="desc todo">[2–3 משפטים: היקף, לוגיסטיקה, ואיך השפה החזותית שירתה את המותג]</p>
+          <a class="more" href="#stories">לסיפור המלא <span>←</span></a>
+        </div>
+        <div class="strip">
+          <figure class="ph rose rise"><div class="ph-img"></div><span class="ph-tag">פרט</span></figure>
+          <figure class="ph linen rise"><div class="ph-img"></div><span class="ph-tag">פרט</span></figure>
+          <figure class="ph olive rise"><div class="ph-img"></div><span class="ph-tag">רגע</span></figure>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section id="approach" aria-labelledby="approach-h">
+    <div class="sec-head">
+      <h2 id="approach-h">הגישה שלנו</h2>
+      <span class="lat">Taste &amp; Precision</span>
+    </div>
+    <div class="approach">
+      <p class="statement rise">אסתטיקה והפקה הן אותה עבודה. <em>כל החלטה עיצובית צריכה להיראות נכון, וגם לעבוד ביום עצמו.</em></p>
+      <div class="pillars">
+        <div class="pillar rise">
+          <span class="lat">The Eye</span>
+          <h3>המבט</h3>
+          <p>קונספט, צבע, חומר ואור. בונים לכל אירוע שפה חזותית אחת שעוברת מהרושם הראשון ועד הפרט האחרון על השולחן.</p>
+        </div>
+        <div class="pillar rise">
+          <span class="lat">The Hand</span>
+          <h3>הביצוע</h3>
+          <p>לוחות זמנים, ספקים, לוגיסטיקה וצוות בשטח. ניהול של כל השלבים, כדי שביום האירוע תוכלו להיות אורחים בו.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" aria-labelledby="services-h">
+    <div class="sec-head">
+      <h2 id="services-h">שירותים</h2>
+      <span class="lat">Services</span>
+    </div>
+    <ul class="svc-list">
+      <li class="svc"><h3>חתונות<span class="lat">Weddings</span></h3><p>מהקונספט ועד הריקוד האחרון. עיצוב, תכנון והפקה מלאה של יום אחד שמספר את הסיפור שלכם.</p><span class="swatch" style="--tone:var(--ph-rose)"></span></li>
+      <li class="svc"><h3>בר ובת מצווה<span class="lat">Bar &amp; Bat Mitzvah</span></h3><p>בהפקה אישית, עם שפה עיצובית שנבנית סביב המשפחה ובקנה מידה שמתאים לכם.</p><span class="swatch" style="--tone:var(--ph-olive)"></span></li>
+      <li class="svc"><h3>אירועי חברות<span class="lat">Corporate</span></h3><p>כנסים, השקות מוצר, אירועי חברה ודינרים עסקיים. שפה חזותית שמשרתת את המותג, וניהול שעומד בלוחות זמנים מורכבים.</p><span class="swatch" style="--tone:var(--ph-dusk)"></span></li>
+    </ul>
+    <p class="addons"><span class="label">שירותים נלווים</span><span>תאורה</span><span>צלמים</span><span>מוסיקה וטאלנטים</span><span>הסעות</span><span>קידום ברשתות</span></p>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" aria-labelledby="about-h">
+    <div class="about">
+      <figure class="ph portrait linen rise"><div class="ph-img"></div><span class="ph-tag">דיוקן של רבקה</span></figure>
+      <div class="bio rise">
+        <span class="label">אודות</span>
+        <h2 class="name" id="about-h">רבקה</h2>
+        <p class="todo">[תפקיד / תואר]</p>
+        <p class="todo">[פסקת אודות: הרקע של רבקה, מה הביא אותה להפקת אירועים, ומה מייחד את העבודה שלה. אכתוב אותה מתוך החומר שתשלחי]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" aria-labelledby="contact-h">
+    <div class="contact">
+      <div class="contact-head">
+        <span class="lat">Begin Your Story</span>
+        <h2 id="contact-h">ספרו לנו על האירוע שלכם</h2>
+        <dl>
+          <dt>טלפון</dt><dd class="todo">[להשלמה]</dd>
+          <dt>אימייל</dt><dd class="todo">[להשלמה]</dd>
+          <dt>אינסטגרם</dt><dd class="todo">[להשלמה]</dd>
+        </dl>
+      </div>
+      <form id="inquiry" novalidate>
+        <fieldset>
+          <legend>האירוע</legend>
+          <div class="field"><label for="f-type">סוג האירוע</label>
+            <select id="f-type" name="type"><option>חתונה</option><option>בר מצווה</option><option>בת מצווה</option><option>כנס</option><option>השקת מוצר</option><option>אירוע חברה</option><option>דינר עסקי</option><option disabled>[סוג נוסף מהאפיון]</option></select></div>
+          <div class="field"><label for="f-date">תאריך משוער</label><input id="f-date" name="date" type="date"></div>
+          <div class="field"><label for="f-guests">מספר אורחים</label><input id="f-guests" name="guests" type="number" min="10" max="1500" placeholder="10–1,500"></div>
+          <div class="field"><label for="f-region">אזור</label>
+            <select id="f-region" name="region"><option>ירושלים</option><option>תל אביב</option><option disabled>[שאר האזורים מהאפיון]</option></select></div>
+          <div class="field full"><label for="f-venue">סוג מקום</label>
+            <select id="f-venue" name="venue"><option disabled selected>[ערכים מהאפיון]</option></select></div>
+        </fieldset>
+        <fieldset>
+          <legend>אירוח ועיצוב</legend>
+          <div class="field"><label for="f-catering">רמת קייטרינג</label>
+            <select id="f-catering" name="catering"><option disabled selected>[ערכים מהאפיון]</option></select></div>
+          <div class="field"><label for="f-design">חבילת עיצוב</label>
+            <select id="f-design" name="design"><option disabled selected>[ערכים מהאפיון]</option></select></div>
+          <div class="field full"><span class="flabel" id="extras-l">שירותים נוספים</span>
+            <div class="chips" role="group" aria-labelledby="extras-l">
+              <label><input type="checkbox" id="x-light" name="x" value="lighting"><span>תאורה</span></label>
+              <label><input type="checkbox" id="x-photo" name="x" value="photo"><span>צלמים</span></label>
+              <label><input type="checkbox" id="x-music" name="x" value="music"><span>מוסיקה וטאלנטים</span></label>
+              <label><input type="checkbox" id="x-shuttle" name="x" value="shuttle"><span>הסעות</span></label>
+              <label><input type="checkbox" id="x-social" name="x" value="social"><span>קידום ברשתות</span></label>
+            </div></div>
+        </fieldset>
+        <fieldset>
+          <legend>פרטים ליצירת קשר</legend>
+          <div class="field"><label for="f-name">שם מלא</label><input id="f-name" name="name" autocomplete="name"></div>
+          <div class="field"><label for="f-phone">טלפון</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+          <div class="field"><label for="f-email">אימייל</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+          <div class="field"><label for="f-source">איך הגעתם אלינו</label>
+            <select id="f-source" name="source"><option disabled selected>[ערכים מהאפיון]</option></select></div>
+          <div class="field full"><label for="f-msg">כמה מילים על מה שאתם מדמיינים</label><textarea id="f-msg" name="msg"></textarea></div>
+        </fieldset>
+        <div class="send"><button type="submit">שליחה וקבלת הערכה</button><output id="formNote" for="inquiry"></output></div>
+
+        <aside class="estimate" aria-labelledby="est-h">
+          <div class="est-top"><span class="label" id="est-h">הערכת תקציב ראשונית</span><span class="est-tag">דוגמה</span></div>
+          <p class="est-case">חתונה · 250 אורחים · ירושלים</p>
+          <p class="est-num" dir="ltr">₪118,100</p>
+          <div class="est-range" style="--pos:43.9%">
+            <div class="est-track"><span class="est-mark"></span></div>
+            <div class="est-ends"><span>₪102,400</span><span>₪138,200</span></div>
+          </div>
+          <p class="est-fine">טווח משוער לפי הפרטים שמילאתם. נקודת פתיחה לשיחה עם המפיקה, ולא הצעת מחיר.</p>
+        </aside>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-word"><svg class="logo" viewBox="0 0 331 60" aria-hidden="true" focusable="false"><use href="#rv-logo"/></svg></div>
+    <div class="foot-row">
+      <span>RIVATAR Productions · הפקת חתונות, אירועים פרטיים ואירועי חברות</span>
+      <nav aria-label="ניווט תחתון"><a href="#stories">אירועים</a><a href="#services">שירותים</a><a href="#about">רבקה</a><a href="#contact">צרו קשר</a></nav>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  document.documentElement.classList.add('js');
+  var mast=document.getElementById('mast'), btn=document.getElementById('menuBtn');
+  btn.addEventListener('click',function(){
+    var open=mast.classList.toggle('open'); btn.setAttribute('aria-expanded',open); btn.textContent=open?'סגירה':'תפריט';
+  });
+  document.querySelectorAll('#mainNav a').forEach(function(a){a.addEventListener('click',function(){mast.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.textContent='תפריט';});});
+  addEventListener('scroll',function(){mast.classList.toggle('scrolled',scrollY>20)},{passive:true});
+
+  // Only elements below the first screen get the entrance offset; everything stays visible.
+  var items=[].slice.call(document.querySelectorAll('.rise'));
+  if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px'});
+    items.forEach(function(el){ if(el.getBoundingClientRect().top<innerHeight){el.classList.add('in');} else io.observe(el); });
+  } else items.forEach(function(el){el.classList.add('in')});
+
+  document.getElementById('inquiry').addEventListener('submit',function(e){
+    e.preventDefault();
+    document.getElementById('formNote').textContent='באב-טיפוס מוצגת דוגמה. באתר עצמו המודל יחשב את ההערכה מהפרטים שמילאתם.';
+  });
+})();
+</script>

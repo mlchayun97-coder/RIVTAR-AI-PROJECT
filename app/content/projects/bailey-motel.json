@@ -1,0 +1,31 @@
+{
+  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops.",
+  "slug": "bailey-motel",
+  "show": true,
+  "event_type": "wedding",
+  "name": {
+    "en": "Bailey & Motel",
+    "he": "ביילי ומוטל"
+  },
+  "location": {
+    "en": "Olmaya, Jerusalem",
+    "he": "עולמיה, ירושלים"
+  },
+  "text": {
+    "en": "Bailey and Motel came from California, and both served as lone soldiers. They wanted an authentic Jerusalem view for their wedding and found it at Olmaya. Bailey asked for a green-and-white design, carried through the chuppah, the tables and the seating corners in white flowers and fresh greenery.",
+    "he": "ביילי ומוטל הגיעו מקליפורניה, ושניהם שירתו כחיילים בודדים. הם רצו נוף ירושלמי אמיתי לחתונה שלהם, ומצאו אותו בעולמיה. ביילי ביקשה עיצוב בירוק ולבן, שעבר דרך החופה, השולחנות ופינות הישיבה בפרחים לבנים ובירק רענן."
+  },
+  "cover": {
+    "photo": "2C553153-8BE4-4B7A-A5C5-A08C2E62E6BA.jpeg",
+    "focus": "40% 45%",
+    "why": "A human moment, the bride with a young girl among white flowers: sets this Olmaya wedding apart from the view-led Avigail & Nuri cover."
+  },
+  "hero": {
+    "photo": "2C553153-8BE4-4B7A-A5C5-A08C2E62E6BA.jpeg",
+    "focus": "40% 45%",
+    "why": "Placeholder until the gallery is curated."
+  },
+  "chapters": [],
+  "videos": [],
+  "credits": []
+}

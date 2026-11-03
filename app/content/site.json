@@ -1,0 +1,42 @@
+{
+  "_help": "Site settings. Edit, save, then run: python scripts/prepare_media.py  (only needed when a photo file changes). See README > Editing content.",
+  "hero_background": "courtyard",
+  "home": {
+    "courtyard": {"source": "design-reference/17-home-left-dcity-courtyard-bw.jpg", "focus": "50% 60%", "bw": true},
+    "card": {"source": "LOGO/cd3b8b46-685f-41ed-a683-6968ddb2ba57.jfif", "focus": "50% 50%"},
+    "bride": {"source": "design-reference/18-home-bride-original-bw.jpg", "focus": "50% 45%", "rotate_desktop": true},
+    "sea": {"video": null, "poster": null, "_note": "No sea footage we may use yet. Add a muted loop + poster here and set hero_background to \"sea\"."},
+    "crossfade": [
+      {"project": "evyatar-rivka", "photo": "IMG_6398.jpg"},
+      {"project": "avigail-nuri", "photo": "2H3A2264.jpeg"},
+      {"project": "aaron-bar-mitzvah", "photo": "IMG_2193.JPEG"},
+      {"project": "shaindel-meir", "photo": "untitled-2074.JPG"}
+    ]
+  },
+  "about_photos": [
+    {"project": "evyatar-rivka", "photo": "Lavi_Pgotography-2033.jpg"},
+    {"project": "bailey-motel", "photo": "2C553153-8BE4-4B7A-A5C5-A08C2E62E6BA.jpeg"},
+    {"project": "david-bar-mitzvah", "photo": "alon ankonina -2702.jpg"}
+  ],
+  "tiles": {
+    "about": {"project": "evyatar-rivka", "photo": "Lavi_Pgotography-2050.jpg"},
+    "projects": {"project": "evyatar-rivka", "photo": "IMG_6273.jpg"},
+    "contact": {"project": "evyatar-rivka", "photo": "IMG_5968.jpg"}
+  },
+  "contact_background": {"project": "evyatar-rivka", "photo": "Lavi_Pgotography-2033.jpg"},
+  "project_order": [
+    "evyatar-rivka",
+    "avigail-nuri",
+    "aaron-bar-mitzvah",
+    "eden-binyamin",
+    "bailey-motel",
+    "david-bar-mitzvah",
+    "shaindel-meir"
+  ],
+  "contact": {
+    "whatsapp": "972507777555",
+    "phone": "[phone]",
+    "email": "[email]",
+    "instagram": "[Instagram URL]"
+  }
+}

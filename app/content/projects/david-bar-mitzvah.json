@@ -1,0 +1,31 @@
+{
+  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops.",
+  "slug": "david-bar-mitzvah",
+  "show": true,
+  "event_type": "bar_mitzvah",
+  "name": {
+    "en": "David",
+    "he": "דוד"
+  },
+  "location": {
+    "en": "Psagot Winery · Emil Botta, Jerusalem",
+    "he": "יקב פסגות · אמיל בוטא, ירושלים"
+  },
+  "text": {
+    "en": "A family from Manhattan celebrated David's bar mitzvah over several occasions: a celebration at Psagot Winery, a henna in the evening, and a Shabbat at Emil Botta in Jerusalem, with kiddush and a festive meal. Each part had its own setting and its own table.",
+    "he": "משפחה ממנהטן חגגה את בר המצווה של דוד בכמה מפגשים: חגיגה ביקב פסגות, חינה בערב, ושבת באמיל בוטא בירושלים, עם קידוש וסעודה. לכל חלק היו מקום ושולחן משלו."
+  },
+  "cover": {
+    "photo": "alon ankonina -2702.jpg",
+    "focus": "50% 60%",
+    "why": "Arched window, stone and blue glassware on a long table: shows the character of the space; the only cool-blue cover. (Location of this photo to be confirmed.)"
+  },
+  "hero": {
+    "photo": "alon ankonina -2702.jpg",
+    "focus": "50% 60%",
+    "why": "Placeholder until the gallery is curated."
+  },
+  "chapters": [],
+  "videos": [],
+  "credits": []
+}

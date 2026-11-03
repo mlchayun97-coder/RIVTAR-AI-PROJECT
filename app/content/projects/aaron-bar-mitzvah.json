@@ -1,0 +1,44 @@
+{
+  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops.",
+  "slug": "aaron-bar-mitzvah",
+  "show": true,
+  "event_type": "bar_mitzvah",
+  "name": {
+    "en": "Aaron",
+    "he": "אהרן"
+  },
+  "location": {
+    "en": "Olmaya & Terasa, Jerusalem",
+    "he": "עולמיה וטרסה, ירושלים"
+  },
+  "text": {
+    "en": "A family from Manhattan came to Jerusalem to celebrate Aaron's bar mitzvah around Sukkot. The celebration had several parts: an evening party at Olmaya; a Shabbat celebration and Aaron's aliyah to the Torah in a sukkah at Terasa, facing the walls of Jerusalem; and a Simchat Beit HaShoeivah with a henna on the Ushpizin day of Aaron the Kohen.",
+    "he": "משפחה ממנהטן הגיעה לירושלים לחגוג את בר המצווה של אהרן סביב חג הסוכות. החגיגה כללה כמה חלקים: מסיבת ערב בעולמיה; חגיגת שבת ועלייה לתורה בסוכה בטרסה, מול חומות ירושלים; ושמחת בית השואבה עם חינה ביום האושפיזין של אהרן הכהן."
+  },
+  "cover": {
+    "photo": "IMG_2193.JPEG",
+    "focus": "50% 45%",
+    "why": "Long tables under fringed lampshades and a sukkah roof, with the view behind: the strongest design photo, warm terracotta tones unlike any other cover."
+  },
+  "hero": {
+    "photo": "IMG_2193.JPEG",
+    "focus": "50% 45%",
+    "why": "Placeholder until the gallery is curated."
+  },
+  "chapters": [],
+  "videos": [
+    {
+      "video": "IMG_1966.MOV"
+    },
+    {
+      "video": "IMG_2184.MOV"
+    },
+    {
+      "video": "IMG_2039.MP4"
+    },
+    {
+      "video": "IMG_2047.MOV"
+    }
+  ],
+  "credits": []
+}

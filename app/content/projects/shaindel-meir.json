@@ -1,0 +1,35 @@
+{
+  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops.",
+  "slug": "shaindel-meir",
+  "show": true,
+  "event_type": "wedding",
+  "name": {
+    "en": "Shaindel & Meir",
+    "he": "שיינדל ומאיר"
+  },
+  "location": {
+    "en": "Kadma",
+    "he": "קדמא"
+  },
+  "text": {
+    "en": "Shaindel, from New York, and Meir, from Miami, both served as lone soldiers. Their wedding took place at Kadma. Shaindel's love of pink and green led the colour choice: soft pink and peach flowers with greenery, crystal candelabra and candlelight across the tables.",
+    "he": "שיינדל מניו יורק ומאיר ממיאמי שירתו שניהם כחיילים בודדים. החתונה שלהם נערכה בקדמא. האהבה של שיינדל לוורוד ולירוק הובילה את בחירת הצבעים: פרחים בוורוד עדין ובאפרסק עם ירק, פמוטי קריסטל ואור נרות על השולחנות."
+  },
+  "cover": {
+    "photo": "untitled-2074.JPG",
+    "focus": "50% 45%",
+    "why": "A tall arrangement in pink, peach and green against a dark room: the colours that led the design, a close-up to balance the space shots."
+  },
+  "hero": {
+    "photo": "untitled-2074.JPG",
+    "focus": "50% 45%",
+    "why": "Placeholder until the gallery is curated."
+  },
+  "chapters": [],
+  "videos": [
+    {
+      "video": "WhatsApp Video 2026-10-18 at 17.02.08.mp4"
+    }
+  ],
+  "credits": []
+}

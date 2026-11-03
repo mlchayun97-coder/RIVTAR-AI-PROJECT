@@ -1,0 +1,31 @@
+{
+  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops.",
+  "slug": "avigail-nuri",
+  "show": true,
+  "event_type": "wedding",
+  "name": {
+    "en": "Avigail & Nuri",
+    "he": "אביגיל ונורי"
+  },
+  "location": {
+    "en": "Olmaya, Jerusalem",
+    "he": "עולמיה, ירושלים"
+  },
+  "text": {
+    "en": "Nuri is from Argentina, and Avigail is from Israel, with Argentinian roots of her own. It mattered to them to marry facing the view of Jerusalem, so the wedding took place at Olmaya, overlooking the city. The design was a timeless green and white: white flowers and greenery on the chuppah, set against the open sky and the hills.",
+    "he": "נורי מארגנטינה, ואביגיל מישראל, גם היא עם שורשים ארגנטינאיים. היה להם חשוב להתחתן מול הנוף של ירושלים, ולכן החתונה נערכה בעולמיה, הצופה אל העיר. העיצוב היה ירוק ולבן על־זמני: פרחים לבנים וירק על החופה, מול השמיים הפתוחים וההרים."
+  },
+  "cover": {
+    "photo": "2H3A2264.jpeg",
+    "focus": "50% 55%",
+    "why": "The bride at the chuppah with Jerusalem behind her: the view that defined the wedding, in green and white."
+  },
+  "hero": {
+    "photo": "2H3A2264.jpeg",
+    "focus": "50% 55%",
+    "why": "Placeholder until the gallery is curated."
+  },
+  "chapters": [],
+  "videos": [],
+  "credits": []
+}

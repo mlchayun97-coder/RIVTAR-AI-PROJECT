@@ -1,0 +1,227 @@
+{
+  "meta": {
+    "brand": "RIVATAR",
+    "site_title": "RIVATAR | Event Production",
+    "lang_name": "English"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "services": "Services",
+    "contact": "Contact",
+    "menu": "Menu",
+    "lab": "ML Lab",
+    "skip": "Skip to content"
+  },
+  "intro": {
+    "line": "Where Visions Come to Life",
+    "skip": "Skip intro"
+  },
+  "home": {
+    "title": "Where Visions Come to Life",
+    "text": "From celebrations in Israel to events abroad, we bring people, places and ideas together through thoughtful planning and a personal approach to every detail.",
+    "cta": "Explore our projects",
+    "card_alt": "RIVATAR embossed on ivory paper",
+    "bride_alt": "A bride holding her bouquet, black and white",
+    "courtyard_alt": "A dinner set in the DCity courtyard, black and white",
+    "crossfade_label": "Selected productions",
+    "selected": "Selected projects",
+    "all_projects": "All projects"
+  },
+  "projects": {
+    "title": "Projects",
+    "intro": "Weddings, bar mitzvahs and family celebrations in Israel and abroad. Each one designed around its people and its place.",
+    "open": "View project",
+    "count": "{n} projects"
+  },
+  "project": {
+    "gallery": "Gallery",
+    "type": "Event",
+    "location": "Location",
+    "credits": "Credits",
+    "next": "Next project",
+    "back": "All projects",
+    "films": "Moments in motion",
+    "invite_title": "Planning something of your own?",
+    "invite_text": "Tell us about the people, the place and the date. We will take it from there.",
+    "invite_cta": "Get in touch",
+    "pending": "[Gallery being curated]"
+  },
+  "event_types": {
+    "wedding": "Wedding",
+    "bar_mitzvah": "Bar Mitzvah",
+    "bat_mitzvah": "Bat Mitzvah",
+    "family_event": "Family Event",
+    "product_launch": "Product Launch",
+    "conference": "Conference",
+    "corporate_event": "Corporate Event",
+    "business_dinner": "Business Dinner"
+  },
+  "about": {
+    "title": "About RIVATAR",
+    "text": "Aesthetics and production are the same work. Every design decision has to look right, and also work on the day itself. RIVATAR began with one wedding at DCity: the founder's own.",
+    "eye_title": "The Eye",
+    "eye_text": "Concept, colour, material and light. Each event gets one visual language, from the first impression to the last detail on the table.",
+    "hand_title": "The Hand",
+    "hand_text": "Timelines, suppliers, logistics and the team on site. Every stage is managed, so that on the day you can be guests at your own event.",
+    "founder": "Rivka",
+    "founder_role": "[Role / title]",
+    "founder_bio": "[About Rivka: her background, what brought her to event production, and what sets her work apart.]"
+  },
+  "services": {
+    "title": "Services",
+    "intro": "Full design and production under one hand, from the first concept to the last dance.",
+    "weddings_title": "Weddings",
+    "weddings_text": "From the concept to the last dance. Design, planning and full production of one day that tells your story.",
+    "mitzvah_title": "Bar & Bat Mitzvah",
+    "mitzvah_text": "Personal production, with a design language built around the family and a scale that suits you.",
+    "corporate_title": "Corporate Events",
+    "corporate_text": "Conferences, product launches, company events and business dinners. A visual language that serves the brand, and management that holds complex timelines.",
+    "addons_title": "Additional Services",
+    "addons_text": "Services that can be added to any production.",
+    "chips_weddings": "Concept|Design|Planning|Full production",
+    "chips_mitzvah": "Bar Mitzvah|Bat Mitzvah|Family Event",
+    "chips_corporate": "Conference|Product Launch|Corporate Event|Business Dinner"
+  },
+  "extras": {
+    "extra_lighting": "Lighting design",
+    "extra_photography": "Photography & video",
+    "extra_music_talent": "Music & talent",
+    "extra_shuttles": "Guest shuttles",
+    "extra_social_promo": "Social media coverage"
+  },
+  "tiles": {
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "contact": {
+    "side_left": "Contact",
+    "side_right": "Us",
+    "title": "We would love to hear from you",
+    "intro": "Tell us about the event you have in mind. Fill in what you know; we will help with the rest.",
+    "phone": "Phone",
+    "email": "Email",
+    "instagram": "Instagram",
+    "whatsapp": "WhatsApp",
+    "whatsapp_aria": "Message RIVATAR on WhatsApp",
+    "sent_title": "Thank you",
+    "sent_text": "Your message is on its way. We will get back to you soon.",
+    "again": "Send another inquiry"
+  },
+  "form": {
+    "legend_event": "The event",
+    "legend_hosting": "Hosting & design",
+    "legend_contact": "Your details",
+    "event_type": "Type of event",
+    "event_date": "Estimated date",
+    "guests": "Number of guests",
+    "guests_placeholder": "10–1,500",
+    "region": "Region",
+    "venue_type": "Type of venue",
+    "catering_level": "Catering level",
+    "design_package": "Design package",
+    "extras": "Additional services",
+    "full_name": "Full name",
+    "phone": "Phone",
+    "email": "Email",
+    "lead_source": "How did you hear about us?",
+    "notes": "A few words about what you imagine",
+    "choose": "Choose",
+    "submit": "Send",
+    "business_only": " (business events only)",
+    "fix_errors": "A few details need fixing:",
+    "save_failed": "Sorry, your message could not be saved. Please try again, or contact us on WhatsApp."
+  },
+  "options": {
+    "region": {
+      "jerusalem": "Jerusalem",
+      "tel_aviv": "Tel Aviv",
+      "center": "Center",
+      "north": "North",
+      "south": "South",
+      "abroad": "Abroad"
+    },
+    "venue_type": {
+      "hall": "Event hall",
+      "garden": "Event garden",
+      "hotel": "Hotel",
+      "outdoor": "Outdoor location",
+      "company_office": "Company offices"
+    },
+    "catering_level": {
+      "basic": "Basic",
+      "premium": "Premium",
+      "luxury": "Luxury"
+    },
+    "design_package": {
+      "standard": "Standard",
+      "premium": "Premium",
+      "luxury": "Luxury"
+    },
+    "lead_source": {
+      "instagram": "Instagram",
+      "referral": "Recommendation",
+      "google": "Google",
+      "facebook": "Facebook",
+      "returning_client": "Returning client",
+      "vendor_venue": "Supplier / venue"
+    }
+  },
+  "errors": {
+    "event_type": "Please choose a type of event.",
+    "event_date": "Please choose a future date, up to 3 years from today.",
+    "guests": "The number of guests should be between {min} and {max}.",
+    "region": "Please choose a region.",
+    "venue_type": "Please choose a type of venue.",
+    "venue_business_only": "Company offices are available for business events only.",
+    "catering_level": "Please choose a catering level.",
+    "design_package": "Please choose a design package.",
+    "full_name": "Please enter your full name (2–80 characters).",
+    "phone": "The phone number is not valid (for example 050-1234567 or +972 50 123 4567).",
+    "email": "The email address is not valid.",
+    "lead_source": "Unknown value.",
+    "notes": "The message is too long (up to 1,000 characters)."
+  },
+  "estimate": {
+    "label": "Initial budget estimate",
+    "tag": "Coming soon",
+    "case_empty": "Fill in the form to see your event details",
+    "unavailable": "Estimate available after the ML phase",
+    "fine": "An estimated range based on your details. A starting point for a conversation, not a quote.",
+    "guests_unit": "guests"
+  },
+  "footer": {
+    "menu": "Menu",
+    "contact": "Contact",
+    "info": "Info",
+    "privacy": "[Privacy policy]",
+    "terms": "[Terms & conditions]",
+    "rights": "© 2026 RIVATAR PRODUCTIONS"
+  },
+  "lab": {
+    "title": "ML Lab",
+    "intro": "Behind the budget estimate. In the next phases this page will show the Flow run, the status of each step, EDA charts, insights, the data contract, the model comparison and the Model Card.",
+    "synthetic": "The data is synthetic: the numbers demonstrate the method and are not RIVATAR's real prices.",
+    "ready": "ready · {n} rows",
+    "run_generator": "run data_generator",
+    "phase": "phase {n}",
+    "llm": "LLM: {model} · OpenAI key {state}",
+    "key_set": "configured",
+    "key_unset": "not set (offline mode)",
+    "stage1_t": "Synthetic data",
+    "stage1_d": "1,500 events with deliberate quality issues, seed 42",
+    "stage2_t": "Crew 1 · Data",
+    "stage2_d": "Cleaning, EDA, insights, JSON data contract",
+    "stage3_t": "Gate · Data contract",
+    "stage3_d": "Crew 2 runs only if the contract passes",
+    "stage4_t": "Crew 2 · ML",
+    "stage4_d": "Features, 3 model versions, CV selection, Model Card",
+    "stage5_t": "Gate · Quality & reproducibility",
+    "stage5_d": "MAPE, reproducibility, unchanged data",
+    "stage6_t": "Publish",
+    "stage6_d": "The model is connected to the website form"
+  },
+  "todo": "[to be completed]"
+}

@@ -20,6 +20,8 @@
  "contact.title": "9e782f930a7f7eec",
  "contact.whatsapp": "b336fc558722224b",
  "contact.whatsapp_aria": "01ddc902de1333da",
+ "cta.button": "b37456c4530be810",
+ "cta.title": "7f8bc8d2831e19a8",
  "errors.catering_level": "c745a0952f074b92",
  "errors.design_package": "f045bb6aff854e2d",
  "errors.email": "6cf7d55e71d2d7d3",
@@ -212,8 +214,5 @@
  "services.title": "5cbd584046863bc7",
  "services.weddings_text": "cc0fb18d913f9db1",
  "services.weddings_title": "e8f6e50e0af877e7",
- "tiles.about": "6b21fb791ac05170",
- "tiles.contact": "b37456c4530be810",
- "tiles.projects": "53e890d5f0fffe09",
  "todo": "d7c483c880d33a94"
 }

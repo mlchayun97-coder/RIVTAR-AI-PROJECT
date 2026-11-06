@@ -1,4 +1,4 @@
-"""Home: split-screen opening, selected projects, tiles, footer."""
+"""Home: split-screen opening, selected projects, contact band, footer."""
 
 from __future__ import annotations
 

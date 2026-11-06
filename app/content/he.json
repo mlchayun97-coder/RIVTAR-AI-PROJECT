@@ -91,10 +91,9 @@
     "extra_shuttles": "הסעות",
     "extra_social_promo": "קידום ברשתות"
   },
-  "tiles": {
-    "about": "אודות",
-    "projects": "פרויקטים",
-    "contact": "צרו קשר"
+  "cta": {
+    "title": "בואו ניצור את האירוע הבא שלכם",
+    "button": "צרו קשר"
   },
   "contact": {
     "side_left": "צרו",

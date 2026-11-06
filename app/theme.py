@@ -167,16 +167,14 @@ header[data-testid="stHeader"]{display:none}
 .p-invite p{color:var(--fg-2)}
 .pending{text-align:center;padding:4rem 0}
 
-/* ---------- bottom tiles ---------- */
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(100px,12vw,180px)}
-.tile{position:relative;display:block;aspect-ratio:4/5;overflow:hidden}
-.tile .ph{position:absolute;inset:0}
-.tile .ph::after{content:"";position:absolute;inset:0;background:rgb(0 0 0 / .32);transition:background .8s var(--ease)}
-.tile img{transition:transform 2.4s var(--ease)}
-.tile:hover img,.tile:focus-visible img{transform:scale(1.06)}
-.tile:hover .ph::after{background:rgb(0 0 0 / .45)}
-.tile span{position:absolute;inset:0;z-index:2;display:grid;place-content:center;font-family:var(--f-title);font-size:clamp(1.3rem,2vw,1.9rem);letter-spacing:.14em;text-transform:uppercase}
-.site[lang="he"] .tile span{letter-spacing:0}
+/* ---------- contact band (bottom of every page) ---------- */
+.cta-band{position:relative;margin-top:clamp(100px,12vw,180px);height:clamp(380px,62vh,640px);overflow:hidden;color:#fff}
+.cta-band .ph{position:absolute;inset:0}
+.cta-band .ph::after{content:"";position:absolute;inset:0;background:rgb(0 0 0 / .42)}
+.cta-copy{position:absolute;inset:0;z-index:2;display:grid;place-content:center;justify-items:center;gap:2rem;text-align:center;padding:0 var(--gutter)}
+.cta-copy h2{font-size:clamp(2rem,4.4vw,3.8rem);max-width:18ch}
+.cta-copy .btn-line{color:#fff}
+.cta-copy .btn-line:hover{background:#fff;color:#111}
 
 /* ---------- footer ---------- */
 .foot{padding:clamp(80px,10vw,140px) var(--gutter) clamp(28px,3vw,40px);display:grid;gap:clamp(60px,8vw,120px)}
@@ -345,8 +343,7 @@ html body .stApp .st-key-letter [data-testid="stSelectbox"] div[class]{border:0 
   .g-pair{grid-template-columns:1fr}
   .g-wide{aspect-ratio:4/5}
   .g-detail{width:100%;margin-block:0}
-  .tiles{grid-template-columns:1fr}
-  .tile{aspect-ratio:16/9}
+  .cta-band{height:70svh}
   .pillars{grid-template-columns:1fr}
   .foot-top{grid-template-columns:1fr}
   .foot-bottom{flex-direction:column-reverse;align-items:flex-start}

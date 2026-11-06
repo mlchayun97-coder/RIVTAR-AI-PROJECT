@@ -91,10 +91,9 @@
     "extra_shuttles": "Guest shuttles",
     "extra_social_promo": "Social media coverage"
   },
-  "tiles": {
-    "about": "About",
-    "projects": "Projects",
-    "contact": "Contact"
+  "cta": {
+    "title": "Let's create your next event",
+    "button": "Contact"
   },
   "contact": {
     "side_left": "Contact",

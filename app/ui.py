@@ -163,15 +163,17 @@ def masthead(ctx: Ctx, current: str, solid: bool = False) -> str:
 </header>"""
 
 
-def tiles(ctx: Ctx) -> str:
-    refs = C.site().get("tiles", {})
-    out = []
-    for key in ("about", "projects", "contact"):
-        ref = refs.get(key, {})
-        out.append(f'<a class="tile" href="{ctx.href(page_path(key))}" target="_self">'
-                   f'{figure(ref_img(ref, sizes="(max-width:700px) 100vw, 34vw"))}'
-                   f'<span>{escape(ctx.t("tiles." + key))}</span></a>')
-    return f'<nav class="tiles" aria-label="{escape(ctx.t("nav.menu"))}">{"".join(out)}</nav>'
+def cta_band(ctx: Ctx) -> str:
+    """Full-width black-and-white photo band with an invitation and a CONTACT button.
+    Left out on the contact page itself."""
+    if ctx.path == page_path("contact"):
+        return ""
+    ref = C.site().get("cta_band", {})
+    photo = project_img(ref.get("project", ""), ref, sizes="100vw")
+    return (f'<section class="cta-band">{figure(photo, "bw")}'
+            f'<div class="cta-copy">{txt(ctx.t("cta.title"), tag="h2")}'
+            f'<a class="btn-line" href="{ctx.href(page_path("contact"))}" target="_self">'
+            f'{escape(ctx.t("cta.button"))}</a></div></section>')
 
 
 def _contact_item(value: str, href: str | None) -> str:
@@ -209,7 +211,7 @@ def footer(ctx: Ctx) -> str:
 
 
 def page_end(ctx: Ctx) -> str:
-    return tiles(ctx) + footer(ctx)
+    return cta_band(ctx) + footer(ctx)
 
 
 def intro(ctx: Ctx) -> str:

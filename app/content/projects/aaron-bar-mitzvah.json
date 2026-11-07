@@ -12,8 +12,8 @@
     "he": "עולמיה וטרסה, ירושלים"
   },
   "text": {
-    "en": "A family from Manhattan came to Jerusalem to celebrate Aaron's bar mitzvah around Sukkot. The celebration had several parts: an evening party at Olmaya; a Shabbat celebration and Aaron's aliyah to the Torah in a sukkah at Terasa, facing the walls of Jerusalem; and a Simchat Beit HaShoeivah with a henna on the Ushpizin day of Aaron the Kohen.",
-    "he": "משפחה ממנהטן הגיעה לירושלים לחגוג את בר המצווה של אהרן סביב חג הסוכות. החגיגה כללה כמה חלקים: מסיבת ערב בעולמיה; חגיגת שבת ועלייה לתורה בסוכה בטרסה, מול חומות ירושלים; ושמחת בית השואבה עם חינה ביום האושפיזין של אהרן הכהן."
+    "en": "A family from Manhattan came to Jerusalem to celebrate Aaron's bar mitzvah around Sukkot. The celebration moved between two settings: a Shabbat celebration with Aaron's aliyah to the Torah in a sukkah at Terasa, facing the walls of Jerusalem, and an evening party at Olmaya.",
+    "he": "משפחה ממנהטן הגיעה לירושלים לחגוג את בר המצווה של אהרן סביב חג הסוכות. החגיגה עברה בין שני מקומות: חגיגת שבת ועלייה לתורה בסוכה בטרסה, מול חומות ירושלים, ומסיבת ערב בעולמיה."
   },
   "cover": {
     "photo": "IMG_2193.JPEG",
@@ -21,9 +21,9 @@
     "why": "Long tables under fringed lampshades and a sukkah roof, with the view behind: the strongest design photo, warm terracotta tones unlike any other cover."
   },
   "hero": {
-    "photo": "IMG_2193.JPEG",
-    "focus": "50% 45%",
-    "why": "Long tables under fringed lampshades and a sukkah roof, with the view behind."
+    "photo": "WhatsApp Image 2026-11-02 at 14.14.14 (2).jpeg",
+    "focus": "50% 50%",
+    "why": "Wide establishing frame from the approved shortlist."
   },
   "palette": {
     "colors": [
@@ -40,79 +40,9 @@
   "chapters": [
     {
       "title": {
-        "en": "Olmaya",
-        "he": "עולמיה"
-      },
-      "why": "Evening party: dark orange flowers, the sofa, the lighting.",
-      "photos": [
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.13.35 (3).jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.13.32.jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.13.33.jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.13.34.jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.13.35.jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.13.35 (1).jpeg",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.13.35 (2).jpeg",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.13.37 (1).jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.13.36.jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.13.36 (2).jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.13.36 (3).jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.13.37 (3).jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        }
-      ]
-    },
-    {
-      "title": {
         "en": "Terasa",
         "he": "טרסה"
       },
-      "why": "Shabbat in the sukkah with the orange orchids.",
       "photos": [
         {
           "photo": "WhatsApp Image 2026-11-02 at 14.14.14 (2).jpeg",
@@ -120,32 +50,7 @@
           "focus": "50% 50%"
         },
         {
-          "photo": "IMG_2166.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.14.12 (4).jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
           "photo": "IMG_2006.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "IMG_2193.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "IMG_2137.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "IMG_2054.JPEG",
           "layout": "pair",
           "focus": "50% 50%"
         },
@@ -160,78 +65,8 @@
           "focus": "50% 50%"
         },
         {
-          "photo": "IMG_2131.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "IMG_2130.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "IMG_2053.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "IMG_2116.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "IMG_2117.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
           "photo": "WhatsApp Image 2026-11-02 at 14.14.12 (1).jpeg",
           "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "IMG_2198.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "IMG_2200.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.14.12.jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.14.13 (1).jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.14.14.jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "IMG_1968.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "IMG_2055.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "IMG_2109.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "IMG_2111.JPEG",
-          "layout": "pair",
           "focus": "50% 50%"
         },
         {
@@ -240,57 +75,7 @@
           "focus": "50% 50%"
         },
         {
-          "photo": "IMG_2204.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "IMG_2199.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "IMG_2189.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "IMG_2139.JPEG",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.14.12 (3).jpeg",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.14.12 (2).jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.14.14 (1).jpeg",
-          "layout": "pair",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.13.37.jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.14.11.jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.14.13 (3).jpeg",
-          "layout": "wide",
-          "focus": "50% 50%"
-        },
-        {
-          "photo": "WhatsApp Image 2026-11-02 at 14.14.13 (2).jpeg",
+          "photo": "WhatsApp Image 2026-11-02 at 14.14.13.jpeg",
           "layout": "wide",
           "focus": "50% 50%"
         },
@@ -298,30 +83,53 @@
           "photo": "WhatsApp Image 2026-11-02 at 14.13.37 (2).jpeg",
           "layout": "wide",
           "focus": "50% 50%"
-        },
+        }
+      ]
+    },
+    {
+      "title": {
+        "en": "Olmaya",
+        "he": "עולמיה"
+      },
+      "photos": [
         {
-          "photo": "WhatsApp Image 2026-11-02 at 14.14.13.jpeg",
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.35 (3).jpeg",
           "layout": "wide",
           "focus": "50% 50%"
         },
         {
-          "photo": "WhatsApp Image 2026-11-02 at 14.14.11 (1).jpeg",
-          "layout": "pair",
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.32.jpeg",
+          "layout": "wide",
           "focus": "50% 50%"
         },
         {
-          "photo": "IMG_2092.JPEG",
-          "layout": "pair",
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.34.jpeg",
+          "layout": "wide",
           "focus": "50% 50%"
         },
         {
-          "photo": "IMG_2250.JPEG",
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.35 (1).jpeg",
           "layout": "pair",
+          "focus": "50% 100%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.37 (1).jpeg",
+          "layout": "wide",
           "focus": "50% 50%"
         },
         {
-          "photo": "IMG_2065.JPEG",
-          "layout": "pair",
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.36.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.36 (3).jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.37 (3).jpeg",
+          "layout": "wide",
           "focus": "50% 50%"
         }
       ]

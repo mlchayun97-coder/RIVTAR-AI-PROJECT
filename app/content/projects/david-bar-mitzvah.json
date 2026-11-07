@@ -8,31 +8,162 @@
     "he": "דוד"
   },
   "location": [
-    {"en": "Psagot Winery", "he": "יקב פסגות"},
-    {"en": "Emil Botta, Jerusalem", "he": "אמיל בוטא, ירושלים"}
+    {
+      "en": "Psagot Winery",
+      "he": "יקב פסגות"
+    },
+    {
+      "en": "Emil Botta, Jerusalem",
+      "he": "אמיל בוטא, ירושלים"
+    }
   ],
   "text": {
     "en": "A family from Manhattan celebrated David's bar mitzvah over several occasions: a celebration at Psagot Winery, a henna in the evening, and a Shabbat at Emil Botta in Jerusalem, with kiddush and a festive meal. Each part had its own setting and its own table.",
     "he": "משפחה ממנהטן חגגה את בר המצווה של דוד בכמה מפגשים: חגיגה ביקב פסגות, חינה בערב, ושבת באמיל בוטא בירושלים, עם קידוש וסעודה. לכל חלק היו מקום ושולחן משלו."
   },
   "cover": {
-    "photo": "alon ankonina -2702.jpg",
-    "focus": "50% 60%",
-    "why": "Arched window, stone and blue glassware on a long table: shows the character of the space; the only cool-blue cover. (Location of this photo to be confirmed.)"
+    "photo": "alon ankonina -714.jpg",
+    "focus": "50% 50%",
+    "why": "Carrying the Torah to the carved arch at Psagot, the main venue (chosen by the client)."
   },
   "hero": {
-    "photo": "alon ankonina -2702.jpg",
-    "focus": "50% 60%",
-    "why": "Placeholder until the gallery is curated."
+    "photo": "alon ankonina -888.jpg",
+    "focus": "50% 50%",
+    "why": "Wide establishing frame from the approved shortlist."
   },
   "palette": {
-    "colors": ["#C0AD89", "#84885E", "#E1DACF", "#BF7D55"],
+    "colors": [
+      "#C0AD89",
+      "#84885E",
+      "#E1DACF",
+      "#BF7D55"
+    ],
     "photo": "alon ankonina -683.jpg",
     "focus": "40% 50%",
     "why": "Green-white flowers, wooden candlestick, rattan: closest match to the photo in the designer's palette tile."
   },
   "palette_source": "designer",
-  "chapters": [],
+  "chapters": [
+    {
+      "title": {
+        "en": "Psagot Winery",
+        "he": "יקב פסגות"
+      },
+      "photos": [
+        {
+          "photo": "alon ankonina -599.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "alon ankonina -525.jpg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "alon ankonina -714.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "alon ankonina -117.jpg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "alon ankonina -888.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "alon ankonina -33.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "alon ankonina -917.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "alon ankonina -77.jpg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "alon ankonina -912.jpg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "alon ankonina -916.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "alon ankonina -876.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "alon ankonina -889.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        }
+      ]
+    },
+    {
+      "title": {
+        "en": "Henna evening",
+        "he": "ערב חינה"
+      },
+      "photos": [
+        {
+          "photo": "alon ankonina -1667.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "alon ankonina -1641.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "alon ankonina -1593.jpg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "alon ankonina -1662.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        }
+      ]
+    },
+    {
+      "title": {
+        "en": "Shabbat at Emil Botta",
+        "he": "שבת באמיל בוטא"
+      },
+      "photos": [
+        {
+          "photo": "alon ankonina -2678.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "alon ankonina -2681.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "alon ankonina -2693.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        }
+      ]
+    }
+  ],
   "videos": [],
   "credits": []
 }

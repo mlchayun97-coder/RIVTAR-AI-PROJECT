@@ -21,18 +21,119 @@
     "why": "A tall arrangement in pink, peach and green against a dark room: the colours that led the design, a close-up to balance the space shots."
   },
   "hero": {
-    "photo": "untitled-2074.JPG",
-    "focus": "50% 45%",
-    "why": "Placeholder until the gallery is curated."
+    "photo": "untitled-2051.JPG",
+    "focus": "50% 50%",
+    "why": "Wide establishing frame from the approved shortlist."
   },
   "palette": {
-    "colors": ["#070506", "#68614A", "#A89269", "#BBB4B0"],
+    "colors": [
+      "#070506",
+      "#68614A",
+      "#A89269",
+      "#BBB4B0"
+    ],
     "photo": "untitled-2074.JPG",
     "focus": "50% 45%",
     "why": "Extracted from the curated cover (version A, approved)."
   },
   "palette_source": "extracted",
-  "chapters": [],
+  "chapters": [
+    {
+      "title": null,
+      "photos": [
+        {
+          "photo": "untitled-126.JPG",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "untitled-2051.JPG",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-10-18 at 17.01.52.jpeg",
+          "layout": "pair",
+          "focus": "50% 100%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-10-18 at 17.01.53 (2).jpeg",
+          "layout": "pair",
+          "focus": "50% 100%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-10-18 at 17.01.53 (1).jpeg",
+          "layout": "pair",
+          "focus": "50% 100%"
+        },
+        {
+          "photo": "untitled-2053.JPG",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "untitled-2056.JPG",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "untitled-2063.JPG",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "untitled-2068.JPG",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "untitled-2058.JPG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "untitled-2078.JPG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "untitled-2081.JPG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "untitled-2082.JPG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "untitled-2124.JPG",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "untitled-2129.JPG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "untitled-2154.JPG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "untitled-2639.JPG",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "untitled-2657.JPG",
+          "layout": "wide",
+          "focus": "50% 50%"
+        }
+      ]
+    }
+  ],
   "videos": [
     {
       "video": "WhatsApp Video 2026-10-18 at 17.02.08.mp4"

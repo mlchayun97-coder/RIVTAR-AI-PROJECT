@@ -2,6 +2,7 @@
 
 import importlib
 import json
+import re
 import sys
 from datetime import date, timedelta
 from pathlib import Path
@@ -92,6 +93,29 @@ def test_project_with_two_venues_lists_both():
     assert ">מקומות<" in ui.project_body(ui.Ctx("he"), david)
 
 
+def test_every_referenced_photo_is_exported():
+    import content as C
+    import ui
+    for proj in C.projects():
+        refs = [proj["cover"], proj["hero"], proj.get("palette") or {}] + [p for c in proj["chapters"] for p in c["photos"]]
+        for ref in refs:
+            if not ref.get("photo"):
+                continue
+            entry = ui.photo_entry(proj["slug"], ref["photo"])
+            assert entry, (proj["slug"], ref["photo"])
+            for w in entry["sizes"]:
+                assert (APP / "static" / "projects" / proj["slug"] / f"{entry['base']}-{w}.jpg").exists()
+
+
+def test_gallery_never_repeats_the_hero_photo():
+    import content as C
+    import ui
+    for proj in C.projects():
+        hero = ui.media()["projects"][proj["slug"]][proj["hero"]["photo"]]["base"]
+        body = ui.project_body(ui.Ctx("en"), proj)
+        assert f"/{hero}-" not in body.split('id="gallery"', 1)[-1].split("</section>", 1)[0], proj["slug"]
+
+
 def test_palette_block_shows_swatches_without_hex_labels():
     import ui
     proj = {"slug": "x", "palette": {"colors": ["#1E1A24", "#2F2548", "#B69785", "red;}</style>"], "photo": None}}
@@ -99,6 +123,21 @@ def test_palette_block_shows_swatches_without_hex_labels():
     assert html.count('<span style="background:#') == 3  # the invalid value is skipped
     assert ">#" not in html  # colours are never printed as text
     assert ui.palette_block(ui.Ctx("en"), {"slug": "x"}) == ""
+
+
+def test_contact_details_everywhere():
+    import ui
+    from views import contact
+    for lang, address in (("en", "3 Raoul Wallenberg St, Jerusalem"), ("he", "ראול ולנברג 3, ירושלים")):
+        ctx = ui.Ctx(lang)
+        for html in (ui.footer(ctx), contact.letter_head(ctx)):
+            assert 'href="mailto:rivka@rivatar-pro.com"' in html
+            assert 'href="tel:+972586968388"' in html and ">058-696-8388<" in html
+            assert 'href="https://wa.me/972586968388"' in html
+            assert address in html
+        foot = ui.footer(ctx)
+        assert foot.count("https://wa.me/972586968388") == 3  # footer link, footer icon, floating button
+        assert ctx.t("footer.privacy") not in foot and ctx.t("footer.terms") not in foot
 
 
 def test_ui_escapes_and_marks_todo():
@@ -121,9 +160,10 @@ def test_language_switch_keeps_the_page():
 
 
 # ---------------------------------------------------------------- pages render in both languages
-PAGES = ["home.render()", "projects.render_index()", "projects.render_project('evyatar-rivka')",
-         "projects.render_project('aaron-bar-mitzvah')", "about.render()", "services.render()", "contact.render()",
-         "ml_lab.render()"]
+SLUGS = [p.stem for p in sorted((CONTENT / "projects").glob("*.json"))]
+PAGES = (["home.render()", "projects.render_index()", "about.render()", "services.render()", "contact.render()",
+          "ml_lab.render()"] + [f"projects.render_project({slug!r})" for slug in SLUGS])
+PLACEHOLDER = re.compile(r">\s*\[[^<\]]*\]\s*<")
 
 
 @pytest.mark.parametrize("lang", ["en", "he"])
@@ -140,6 +180,7 @@ def test_every_page_renders_in_both_languages(call, lang):
     assert not at.exception
     html = " ".join(str(h.proto.body) for h in at.get("html"))
     assert f'lang="{lang}"' in html
+    assert 'class="todo"' not in html and not PLACEHOLDER.search(html), PLACEHOLDER.search(html)
     if lang == "he":
         assert 'dir="rtl"' in html
 

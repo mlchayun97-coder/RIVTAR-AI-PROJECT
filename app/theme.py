@@ -153,6 +153,8 @@ header[data-testid="stHeader"]{display:none}
 .palette-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1vw,14px);width:min(560px,100%);aspect-ratio:2/1.25}
 .swatches{display:grid;grid-template-rows:repeat(4,1fr);outline:1px solid var(--rule);outline-offset:-1px}
 .palette .ph{height:100%}
+.palette + .gallery{padding-top:clamp(36px,4.5vw,64px)}
+.palette + .gallery > .chapter-title:first-child{padding-top:0}
 .gallery{display:grid;gap:clamp(10px,1.2vw,18px);padding:clamp(80px,10vw,140px) var(--gutter) 0;max-width:1500px;margin:0 auto;scroll-margin-top:24px}
 .chapter-title{text-align:center;font-size:clamp(1.4rem,2.4vw,2rem);text-transform:uppercase;padding:clamp(40px,6vw,80px) 0 clamp(10px,2vw,24px)}
 .g-wide{aspect-ratio:3/2}

@@ -11,6 +11,16 @@ import ui
 from views import common
 
 
+def founder(ctx) -> str:
+    """The founder section, shown once the role and bio are written (placeholders are never shown)."""
+    role, bio = ctx.t("about.founder_role"), ctx.t("about.founder_bio")
+    if C.is_todo(bio):
+        return ""
+    role_html = "" if C.is_todo(role) else ui.txt(role, tag="p", cls="label")
+    return (f'<section class="sec"><div class="founder"><h3>{escape(ctx.t("about.founder"))}</h3>'
+            f'{role_html}{ui.txt(bio, tag="p")}</div></section>')
+
+
 def render() -> None:
     ctx = common.ctx_for("about")
     common.start(ctx)
@@ -28,10 +38,7 @@ def render() -> None:
   <div><h3>{escape(ctx.t("about.eye_title"))}</h3><p>{escape(ctx.t("about.eye_text"))}</p></div>
   <div><h3>{escape(ctx.t("about.hand_title"))}</h3><p>{escape(ctx.t("about.hand_text"))}</p></div>
 </div></section>
-<section class="sec"><div class="founder">
-  <h3>{escape(ctx.t("about.founder"))}</h3>
-  {ui.txt(ctx.t("about.founder_role"), tag="p", cls="label")}
-  {ui.txt(ctx.t("about.founder_bio"), tag="p")}
-</div></section>"""
+"""
+    top += founder(ctx)
     st.html(ui.wrap(ctx, ui.masthead(ctx, "about") + top))
     common.end(ctx)

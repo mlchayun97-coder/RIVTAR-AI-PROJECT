@@ -30,9 +30,12 @@
     "shaindel-meir"
   ],
   "contact": {
-    "whatsapp": "972507777555",
-    "phone": "[phone]",
-    "email": "[email]",
-    "instagram": "[Instagram URL]"
+    "_help": "Shown in the footer, on the Contact page and on the WhatsApp buttons. Leave instagram empty to hide the icon.",
+    "phone": "058-696-8388",
+    "phone_href": "tel:+972586968388",
+    "email": "rivka@rivatar-pro.com",
+    "whatsapp": "https://wa.me/972586968388",
+    "address": {"en": "3 Raoul Wallenberg St, Jerusalem", "he": "ראול ולנברג 3, ירושלים"},
+    "instagram": ""
   }
 }

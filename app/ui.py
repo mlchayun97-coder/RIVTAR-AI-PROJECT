@@ -96,7 +96,30 @@ def logo() -> str:
 
 
 def whatsapp_url() -> str:
-    return WHATSAPP_BASE + C.site().get("contact", {}).get("whatsapp", "")
+    """site.json contact.whatsapp: a full https://wa.me/... link, or just the number."""
+    wa = C.site().get("contact", {}).get("whatsapp", "")
+    return wa if wa.startswith("http") else WHATSAPP_BASE + wa
+
+
+def contact_links(ctx: Ctx) -> list[tuple[str, str, str | None]]:
+    """(label key, text, href) for each real contact detail in site.json; placeholders and empty values are
+    left out. href None = plain text (the address)."""
+    info = C.site().get("contact", {})
+    phone, email = info.get("phone", ""), info.get("email", "")
+    address = ctx.loc(info.get("address"))
+    items = [("contact.phone", phone, info.get("phone_href") or f"tel:{phone}"),
+             ("contact.email", email, f"mailto:{email}"),
+             ("contact.whatsapp", ctx.t("contact.whatsapp"), whatsapp_url() if info.get("whatsapp") else ""),
+             ("contact.address", address, None)]
+    return [(k, v, h) for k, v, h in items if v and not C.is_todo(v) and h != ""]
+
+
+def link(text: str, href: str | None) -> str:
+    """Escaped link; tel:/mailto: open in place, web links in a new tab. href None = plain text."""
+    if href is None:
+        return f"<span>{escape(text)}</span>"
+    new_tab = ' target="_blank" rel="noopener"' if href.startswith("http") else ""
+    return f'<a href="{escape(href)}"{new_tab}>{escape(text)}</a>'
 
 
 # ------------------------------------------------------------------ media
@@ -176,24 +199,15 @@ def cta_band(ctx: Ctx) -> str:
             f'{escape(ctx.t("cta.button"))}</a></div></section>')
 
 
-def _contact_item(value: str, href: str | None) -> str:
-    if C.is_todo(value) or not href:
-        return f"<li>{txt(value)}</li>"
-    return f'<li><a href="{escape(href)}" target="_blank" rel="noopener">{escape(value)}</a></li>'
-
-
 def footer(ctx: Ctx) -> str:
-    info = C.site().get("contact", {})
+    insta = C.site().get("contact", {}).get("instagram", "")
     menu = "".join(f'<li><a href="{ctx.href(page_path(p))}" target="_self">{escape(ctx.t("nav." + p))}</a></li>'
                    for p in NAV)
-    phone, email, insta = info.get("phone", ""), info.get("email", ""), info.get("instagram", "")
-    contact = (_contact_item(phone, f"tel:{phone}") + _contact_item(email, f"mailto:{email}")
-               + f'<li><a href="{whatsapp_url()}" target="_blank" rel="noopener">{escape(ctx.t("contact.whatsapp"))}</a></li>')
-    infos = (f"<li>{txt(ctx.t('footer.privacy'))}</li><li>{txt(ctx.t('footer.terms'))}</li>"
-             f'<li><a href="{ctx.href(page_path("lab"))}" target="_self">{escape(ctx.t("nav.lab"))}</a></li>')
+    contact = "".join(f"<li>{link(text, href)}</li>" for _, text, href in contact_links(ctx))
+    # Privacy policy / terms stay hidden until the real pages exist.
+    infos = f'<li><a href="{ctx.href(page_path("lab"))}" target="_self">{escape(ctx.t("nav.lab"))}</a></li>'
     ig = (f'<a href="{escape(insta)}" target="_blank" rel="noopener" aria-label="Instagram"><span class="ico ico-ig"></span></a>'
-          if insta and not C.is_todo(insta) else
-          f'<span title="{escape(insta)}" aria-label="Instagram"><span class="ico ico-ig" style="opacity:.45"></span></span>')
+          if insta.startswith("http") else "")
     return f"""
 <footer class="foot">
   <div class="foot-top">
@@ -312,6 +326,10 @@ def _gallery_rows(ctx: Ctx, slug: str, photos: list[dict]) -> str:
     return "".join(rows)
 
 
+def has_gallery(proj: dict) -> bool:
+    return any(ch.get("photos") for ch in proj.get("chapters", []))
+
+
 def project_hero(ctx: Ctx, proj: dict) -> str:
     slug = proj["slug"]
     name = ctx.loc(proj.get("name"))
@@ -323,7 +341,7 @@ def project_hero(ctx: Ctx, proj: dict) -> str:
   <div class="p-hero-copy">
     <span class="label">{escape(kind)} · {escape(where)}</span>
     <h1>{escape(name)}</h1>
-    <a class="btn-line" href="#gallery">{escape(ctx.t("project.gallery"))}</a>
+    {f'<a class="btn-line" href="#gallery">{escape(ctx.t("project.gallery"))}</a>' if has_gallery(proj) else ""}
   </div>
 </section>"""
 
@@ -348,6 +366,9 @@ def palette_block(ctx: Ctx, proj: dict) -> str:
 
 def project_body(ctx: Ctx, proj: dict) -> str:
     slug = proj["slug"]
+    text = ctx.loc(proj.get("text"))
+    if C.is_todo(text):
+        text = ""
     places = C.venues(proj.get("location"), ctx.lang)
     facts = [("project.type", [C.event_type_label(proj.get("event_type"), ctx.lang)]),
              ("project.venues" if len(places) > 1 else "project.location", places)]
@@ -356,16 +377,20 @@ def project_body(ctx: Ctx, proj: dict) -> str:
                          for k, vs in facts if vs)
     intro = f"""
 <section class="p-intro">
-  {txt(ctx.loc(proj.get("text")) or ctx.t("todo"), "lead", "p")}
-  <span class="rule"></span>
+  {txt(text, "lead", "p") + '<span class="rule"></span>' if text else ""}
   <dl class="p-facts">{facts_html}</dl>
 </section>"""
     chapters = []
+    hero_photo = (proj.get("hero") or {}).get("photo")
     for ch in proj.get("chapters", []):
+        photos = [p for p in ch.get("photos", []) if p.get("photo") != hero_photo]  # never show the hero twice
+        if not photos:
+            continue
         title = ctx.loc(ch.get("title")) if ch.get("title") else ""
         head = f'<h2 class="chapter-title">{escape(title)}</h2>' if title else ""
-        chapters.append(head + _gallery_rows(ctx, slug, ch.get("photos", [])))
-    gallery = "".join(chapters) or f'<p class="pending">{txt(ctx.t("project.pending"))}</p>'
+        chapters.append(head + _gallery_rows(ctx, slug, photos))
+    # No "[gallery being curated]" placeholder: a project without photos simply has no gallery section yet.
+    gallery = f'<section class="gallery" id="gallery">{"".join(chapters)}</section>' if chapters else ""
     films = ""
     vids = media().get("videos", {}).get(slug, [])
     if vids:
@@ -394,7 +419,7 @@ def project_body(ctx: Ctx, proj: dict) -> str:
   <p>{escape(ctx.t("project.invite_text"))}</p>
   <a class="link-line" href="{ctx.href("contact")}" target="_self">{escape(ctx.t("project.invite_cta"))}</a>
 </section>"""
-    return (intro + palette_block(ctx, proj) + f'<section class="gallery" id="gallery">{gallery}</section>'
+    return (intro + palette_block(ctx, proj) + gallery
             + films + credit_html
             + next_html + invite)
 

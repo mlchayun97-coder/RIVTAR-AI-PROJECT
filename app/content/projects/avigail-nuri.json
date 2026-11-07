@@ -21,18 +21,89 @@
     "why": "The bride at the chuppah with Jerusalem behind her: the view that defined the wedding, in green and white."
   },
   "hero": {
-    "photo": "2H3A2264.jpeg",
-    "focus": "50% 55%",
-    "why": "Placeholder until the gallery is curated."
+    "photo": "2H3A2184.jpeg",
+    "focus": "50% 50%",
+    "why": "Wide establishing frame from the approved shortlist."
   },
   "palette": {
-    "colors": ["#0A0A08", "#535334", "#94AAC0", "#DDD7CF"],
+    "colors": [
+      "#0A0A08",
+      "#535334",
+      "#94AAC0",
+      "#DDD7CF"
+    ],
     "photo": "2H3A2264.jpeg",
     "focus": "50% 55%",
     "why": "Extracted from the curated cover (version A, approved)."
   },
   "palette_source": "extracted",
-  "chapters": [],
+  "chapters": [
+    {
+      "title": null,
+      "photos": [
+        {
+          "photo": "2H3A2184.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "2H3A2172.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "2H3A2228.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "2H3A2234.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "2H3A2221.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "2H3A2201.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "2H3A2212.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "2H3A2235.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "2H3A2238.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "2H3A2242.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "2H3A2261.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "2H3A2270.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        }
+      ]
+    }
+  ],
   "videos": [],
   "credits": []
 }

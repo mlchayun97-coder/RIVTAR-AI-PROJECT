@@ -21,18 +21,114 @@
     "why": "A human moment, the bride with a young girl among white flowers: sets this Olmaya wedding apart from the view-led Avigail & Nuri cover."
   },
   "hero": {
-    "photo": "2C553153-8BE4-4B7A-A5C5-A08C2E62E6BA.jpeg",
-    "focus": "40% 45%",
-    "why": "Placeholder until the gallery is curated."
+    "photo": "16242809-3C90-4E5C-981F-CD102D918A93.jpeg",
+    "focus": "50% 50%",
+    "why": "Wide establishing frame from the approved shortlist."
   },
   "palette": {
-    "colors": ["#201E17", "#818E48", "#B3B99D", "#CFCFD6"],
+    "colors": [
+      "#201E17",
+      "#818E48",
+      "#B3B99D",
+      "#CFCFD6"
+    ],
     "photo": "2C553153-8BE4-4B7A-A5C5-A08C2E62E6BA.jpeg",
     "focus": "40% 45%",
     "why": "Extracted from the curated cover (version A, approved)."
   },
   "palette_source": "extracted",
-  "chapters": [],
+  "chapters": [
+    {
+      "title": null,
+      "photos": [
+        {
+          "photo": "1B8DE473-B692-489D-924D-DEEA3FC17FB9.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "7B0A350A-BEAD-466F-85D8-47968A4D666F.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "441A191C-0488-4A73-B351-BCC80AA438A3.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "5AF16265-6423-46E2-8909-73A2EA22C070.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "9DA094F7-9876-4059-9925-90F20ADA9F38.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "B4349FCB-9A40-42D6-8381-8EA942D5B870.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "2B70D06B-6907-4A00-954A-FA1E27C47D50.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "517B8B40-27BF-441B-A2F8-EEF08E511BDE.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "51BDCD7A-8775-4C7C-B0E3-DB36A1744F17.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "16242809-3C90-4E5C-981F-CD102D918A93.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "A2020A11-F9E2-4318-A145-621C9CB44F50.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "047DCC16-93C0-437E-93CF-231022F5BE15.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "B5E0860B-DF50-489E-81F7-00FCA50AE1F0.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "D2E9D436-9C19-4845-A7C6-067FBB8CAE73.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "7017073B-CED0-436D-9193-7FDDD7634827.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "568CD3BE-A83E-4CB1-99A2-7A0D52FFA103.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "D07D052B-ECFD-4DFC-AE2D-AA63B77674FC.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        }
+      ]
+    }
+  ],
   "videos": [],
   "credits": []
 }

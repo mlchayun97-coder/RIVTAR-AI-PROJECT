@@ -21,18 +21,109 @@
     "why": "The couple beside the carriage at night: confirms the carriage entrance from the brief and gives the set its darkest, most dramatic frame."
   },
   "hero": {
-    "photo": "PINL3469.jpg",
-    "focus": "45% 55%",
-    "why": "Placeholder until the gallery is curated."
+    "photo": "MAD_6660.jpg",
+    "focus": "50% 50%",
+    "why": "Wide establishing frame from the approved shortlist."
   },
   "palette": {
-    "colors": ["#1E1A24", "#2F2548", "#B69785", "#7C2718"],
+    "colors": [
+      "#1E1A24",
+      "#2F2548",
+      "#B69785",
+      "#7C2718"
+    ],
     "photo": "DSC_8808.jpg",
     "focus": "50% 50%",
     "why": "Candlelit table under the purple light; the photo the designer paired with this palette."
   },
   "palette_source": "designer",
-  "chapters": [],
+  "chapters": [
+    {
+      "title": null,
+      "photos": [
+        {
+          "photo": "MAD_6660.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "PINL3472.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "MAD_4879.jpg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "MAD_4778.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "DSC_6361.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "MAD_6015.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "PINL3436.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "DSC_8793.jpg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "DSC_8819.jpg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IBP_3879.jpg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "PINL3440.jpg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "PINL3447.jpg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "DSC_8811.jpg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "MAD_6009.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "DSC_0523.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "MAD_6687.jpg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        }
+      ]
+    }
+  ],
   "videos": [],
   "credits": []
 }

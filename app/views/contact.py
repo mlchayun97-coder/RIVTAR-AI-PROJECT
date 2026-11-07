@@ -39,12 +39,12 @@ def _error_text(ctx: ui.Ctx, key: str) -> str:
 
 
 def letter_head(ctx: ui.Ctx) -> str:
-    info = C.site().get("contact", {})
     parts = []
-    for k in ("phone", "email"):
-        v = info.get(k, "")
-        parts.append(f'<span>{escape(ctx.t("contact." + k))}: {ui.txt(v)}</span>')
-    parts.append(f'<a href="{ui.whatsapp_url()}" target="_blank" rel="noopener">{escape(ctx.t("contact.whatsapp"))}</a>')
+    for key, text, href in ui.contact_links(ctx):
+        if key == "contact.whatsapp":
+            parts.append(ui.link(text, href))
+        else:
+            parts.append(f'<span>{escape(ctx.t(key))}: {ui.link(text, href)}</span>')
     return (f'<div class="letter-head"><h1>{escape(ctx.t("contact.title"))}</h1>'
             f'<p>{escape(ctx.t("contact.intro"))}</p><div class="details">{"".join(parts)}</div></div>')
 

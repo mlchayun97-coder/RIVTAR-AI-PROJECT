@@ -1,5 +1,5 @@
 {
-  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops.",
+  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops. location: one {en, he} or a list of them, main venue first. palette: 4 colours (#RRGGBB, top to bottom) + one photo; palette_source: designer | extracted.",
   "slug": "bailey-motel",
   "show": true,
   "event_type": "wedding",
@@ -25,6 +25,13 @@
     "focus": "40% 45%",
     "why": "Placeholder until the gallery is curated."
   },
+  "palette": {
+    "colors": ["#201E17", "#818E48", "#B3B99D", "#CFCFD6"],
+    "photo": "2C553153-8BE4-4B7A-A5C5-A08C2E62E6BA.jpeg",
+    "focus": "40% 45%",
+    "why": "Extracted from the curated cover (version A, approved)."
+  },
+  "palette_source": "extracted",
   "chapters": [],
   "videos": [],
   "credits": []

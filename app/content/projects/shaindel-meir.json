@@ -1,5 +1,5 @@
 {
-  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops.",
+  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops. location: one {en, he} or a list of them, main venue first. palette: 4 colours (#RRGGBB, top to bottom) + one photo; palette_source: designer | extracted.",
   "slug": "shaindel-meir",
   "show": true,
   "event_type": "wedding",
@@ -25,6 +25,13 @@
     "focus": "50% 45%",
     "why": "Placeholder until the gallery is curated."
   },
+  "palette": {
+    "colors": ["#070506", "#68614A", "#A89269", "#BBB4B0"],
+    "photo": "untitled-2074.JPG",
+    "focus": "50% 45%",
+    "why": "Extracted from the curated cover (version A, approved)."
+  },
+  "palette_source": "extracted",
   "chapters": [],
   "videos": [
     {

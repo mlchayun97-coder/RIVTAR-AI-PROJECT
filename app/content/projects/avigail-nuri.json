@@ -1,5 +1,5 @@
 {
-  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops.",
+  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops. location: one {en, he} or a list of them, main venue first. palette: 4 colours (#RRGGBB, top to bottom) + one photo; palette_source: designer | extracted.",
   "slug": "avigail-nuri",
   "show": true,
   "event_type": "wedding",
@@ -25,6 +25,13 @@
     "focus": "50% 55%",
     "why": "Placeholder until the gallery is curated."
   },
+  "palette": {
+    "colors": ["#0A0A08", "#535334", "#94AAC0", "#DDD7CF"],
+    "photo": "2H3A2264.jpeg",
+    "focus": "50% 55%",
+    "why": "Extracted from the curated cover (version A, approved)."
+  },
+  "palette_source": "extracted",
   "chapters": [],
   "videos": [],
   "credits": []

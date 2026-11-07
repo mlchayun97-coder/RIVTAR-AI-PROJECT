@@ -69,6 +69,38 @@ def test_projects_use_folder_spelling_and_shared_codes():
         assert p["cover"]["photo"]
 
 
+def test_palettes_are_valid_and_marked_with_their_source():
+    import content as C
+    import ui
+    for p in C.projects():
+        pal = p.get("palette")
+        if not pal:
+            continue
+        assert len(pal["colors"]) == 4 and all(ui.HEX.fullmatch(c) for c in pal["colors"]), p["slug"]
+        assert pal["photo"], p["slug"]
+        assert p.get("palette_source") in ("designer", "extracted"), p["slug"]
+
+
+def test_project_with_two_venues_lists_both():
+    import content as C
+    import ui
+    david = C.project("david-bar-mitzvah")
+    assert C.venues(david["location"], "en") == ["Psagot Winery", "Emil Botta, Jerusalem"]
+    body = ui.project_body(ui.Ctx("en"), david)
+    assert ">Venues<" in body and ">Psagot Winery<" in body and ">Emil Botta, Jerusalem<" in body
+    assert "Psagot Winery" in ui.cover(ui.Ctx("en"), david) and "Emil Botta" not in ui.cover(ui.Ctx("en"), david)
+    assert ">מקומות<" in ui.project_body(ui.Ctx("he"), david)
+
+
+def test_palette_block_shows_swatches_without_hex_labels():
+    import ui
+    proj = {"slug": "x", "palette": {"colors": ["#1E1A24", "#2F2548", "#B69785", "red;}</style>"], "photo": None}}
+    html = ui.palette_block(ui.Ctx("en"), proj)
+    assert html.count('<span style="background:#') == 3  # the invalid value is skipped
+    assert ">#" not in html  # colours are never printed as text
+    assert ui.palette_block(ui.Ctx("en"), {"slug": "x"}) == ""
+
+
 def test_ui_escapes_and_marks_todo():
     import ui
     assert 'class="todo"' in ui.txt("[phone]")

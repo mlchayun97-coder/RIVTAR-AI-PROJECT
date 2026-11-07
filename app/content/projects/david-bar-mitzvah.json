@@ -1,5 +1,5 @@
 {
-  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops.",
+  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops. location: one {en, he} or a list of them, main venue first. palette: 4 colours (#RRGGBB, top to bottom) + one photo; palette_source: designer | extracted.",
   "slug": "david-bar-mitzvah",
   "show": true,
   "event_type": "bar_mitzvah",
@@ -7,10 +7,10 @@
     "en": "David",
     "he": "דוד"
   },
-  "location": {
-    "en": "Psagot Winery · Emil Botta, Jerusalem",
-    "he": "יקב פסגות · אמיל בוטא, ירושלים"
-  },
+  "location": [
+    {"en": "Psagot Winery", "he": "יקב פסגות"},
+    {"en": "Emil Botta, Jerusalem", "he": "אמיל בוטא, ירושלים"}
+  ],
   "text": {
     "en": "A family from Manhattan celebrated David's bar mitzvah over several occasions: a celebration at Psagot Winery, a henna in the evening, and a Shabbat at Emil Botta in Jerusalem, with kiddush and a festive meal. Each part had its own setting and its own table.",
     "he": "משפחה ממנהטן חגגה את בר המצווה של דוד בכמה מפגשים: חגיגה ביקב פסגות, חינה בערב, ושבת באמיל בוטא בירושלים, עם קידוש וסעודה. לכל חלק היו מקום ושולחן משלו."
@@ -25,6 +25,13 @@
     "focus": "50% 60%",
     "why": "Placeholder until the gallery is curated."
   },
+  "palette": {
+    "colors": ["#C0AD89", "#84885E", "#E1DACF", "#BF7D55"],
+    "photo": "alon ankonina -683.jpg",
+    "focus": "40% 50%",
+    "why": "Green-white flowers, wooden candlestick, rattan: closest match to the photo in the designer's palette tile."
+  },
+  "palette_source": "designer",
   "chapters": [],
   "videos": [],
   "credits": []

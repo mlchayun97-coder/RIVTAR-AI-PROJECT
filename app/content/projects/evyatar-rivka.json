@@ -1,5 +1,5 @@
 {
-  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops.",
+  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops. location: one {en, he} or a list of them, main venue first. palette: 4 colours (#RRGGBB, top to bottom) + one photo; palette_source: designer | extracted.",
   "slug": "evyatar-rivka",
   "show": true,
   "event_type": "wedding",
@@ -25,6 +25,13 @@
     "focus": "50% 60%",
     "why": "Symmetrical view of the dinner courtyard: shows the scale of the production and the architecture at once."
   },
+  "palette": {
+    "colors": ["#EB9562", "#A14A0C", "#F4D5CA", "#CC6A4E"],
+    "photo": "Lavi_Pgotography-1133.jpg",
+    "focus": "70% 60%",
+    "why": "Long table with orange flowers and rust napkins: closest match to the photo in the designer's palette tile."
+  },
+  "palette_source": "designer",
   "chapters": [
     {
       "title": null,

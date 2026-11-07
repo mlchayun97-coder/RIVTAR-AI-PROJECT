@@ -1,5 +1,5 @@
 {
-  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops.",
+  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops. location: one {en, he} or a list of them, main venue first. palette: 4 colours (#RRGGBB, top to bottom) + one photo; palette_source: designer | extracted.",
   "slug": "aaron-bar-mitzvah",
   "show": true,
   "event_type": "bar_mitzvah",
@@ -23,9 +23,310 @@
   "hero": {
     "photo": "IMG_2193.JPEG",
     "focus": "50% 45%",
-    "why": "Placeholder until the gallery is curated."
+    "why": "Long tables under fringed lampshades and a sukkah roof, with the view behind."
   },
-  "chapters": [],
+  "palette": {
+    "colors": [
+      "#703A1E",
+      "#9C7657",
+      "#BA7240",
+      "#D6B787"
+    ],
+    "photo": "IMG_2127.JPEG",
+    "focus": "50% 50%",
+    "why": "Extracted from the chapter photos; paired with the orange orchids (approved)."
+  },
+  "palette_source": "extracted",
+  "chapters": [
+    {
+      "title": {
+        "en": "Olmaya",
+        "he": "עולמיה"
+      },
+      "why": "Evening party: dark orange flowers, the sofa, the lighting.",
+      "photos": [
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.35 (3).jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.32.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.33.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.34.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.35.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.35 (1).jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.35 (2).jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.37 (1).jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.36.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.36 (2).jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.36 (3).jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.37 (3).jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        }
+      ]
+    },
+    {
+      "title": {
+        "en": "Terasa",
+        "he": "טרסה"
+      },
+      "why": "Shabbat in the sukkah with the orange orchids.",
+      "photos": [
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.14.14 (2).jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2166.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.14.12 (4).jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2006.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2193.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2137.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2054.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2127.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2062.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2131.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2130.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2053.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2116.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2117.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.14.12 (1).jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2198.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2200.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.14.12.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.14.13 (1).jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.14.14.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_1968.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2055.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2109.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2111.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2132.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2204.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2199.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2189.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2139.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.14.12 (3).jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.14.12 (2).jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.14.14 (1).jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.37.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.14.11.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.14.13 (3).jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.14.13 (2).jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.13.37 (2).jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.14.13.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "WhatsApp Image 2026-11-02 at 14.14.11 (1).jpeg",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2092.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2250.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        },
+        {
+          "photo": "IMG_2065.JPEG",
+          "layout": "pair",
+          "focus": "50% 50%"
+        }
+      ]
+    }
+  ],
   "videos": [
     {
       "video": "IMG_1966.MOV"

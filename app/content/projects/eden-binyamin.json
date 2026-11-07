@@ -1,5 +1,5 @@
 {
-  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops.",
+  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops. location: one {en, he} or a list of them, main venue first. palette: 4 colours (#RRGGBB, top to bottom) + one photo; palette_source: designer | extracted.",
   "slug": "eden-binyamin",
   "show": true,
   "event_type": "wedding",
@@ -12,8 +12,8 @@
     "he": "מונטריאול, קנדה"
   },
   "text": {
-    "en": "Eden and Binyamin, a couple from Canada, were married in Montreal. They arrived in a horse-drawn carriage, and the colours of the wedding included pink and green. The evening moved from the carriage arrival outside to a reception hall set with flowers and candlelight.",
-    "he": "עדן ובנימין, זוג מקנדה, התחתנו במונטריאול. הם הגיעו בכרכרה רתומה לסוסים, וצבעי החתונה כללו ורוד וירוק. הערב עבר מההגעה בכרכרה בחוץ אל אולם קבלת הפנים, ערוך בפרחים ובאור נרות."
+    "en": "Eden and Binyamin, a couple from Canada, were married in Montreal. They arrived in a horse-drawn carriage, and the colours of the wedding were deep purple and plum, with warm tan and rust accents. The evening moved from the carriage arrival outside to a reception hall set with flowers and candlelight.",
+    "he": "עדן ובנימין, זוג מקנדה, התחתנו במונטריאול. הם הגיעו בכרכרה רתומה לסוסים, וצבעי החתונה היו סגול עמוק ושזיף, עם נגיעות של חום-בז' חם וחלודה. הערב עבר מההגעה בכרכרה בחוץ אל אולם קבלת הפנים, ערוך בפרחים ובאור נרות."
   },
   "cover": {
     "photo": "PINL3469.jpg",
@@ -25,6 +25,13 @@
     "focus": "45% 55%",
     "why": "Placeholder until the gallery is curated."
   },
+  "palette": {
+    "colors": ["#1E1A24", "#2F2548", "#B69785", "#7C2718"],
+    "photo": "DSC_8808.jpg",
+    "focus": "50% 50%",
+    "why": "Candlelit table under the purple light; the photo the designer paired with this palette."
+  },
+  "palette_source": "designer",
   "chapters": [],
   "videos": [],
   "credits": []

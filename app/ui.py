@@ -268,7 +268,7 @@ def cover(ctx: Ctx, proj: dict, eager: bool = False) -> str:
     slug = proj["slug"]
     name = ctx.loc(proj.get("name"))
     kind = C.event_type_label(proj.get("event_type"), ctx.lang)
-    where = ctx.loc(proj.get("location"))
+    where = (C.venues(proj.get("location"), ctx.lang) or [""])[0]  # main venue
     image = project_img(slug, proj.get("cover"), alt=name, eager=eager,
                         sizes="(max-width:700px) 100vw, (max-width:1000px) 50vw, 33vw")
     return f"""
@@ -316,7 +316,7 @@ def project_hero(ctx: Ctx, proj: dict) -> str:
     slug = proj["slug"]
     name = ctx.loc(proj.get("name"))
     kind = C.event_type_label(proj.get("event_type"), ctx.lang)
-    where = ctx.loc(proj.get("location"))
+    where = (C.venues(proj.get("location"), ctx.lang) or [""])[0]  # main venue
     return f"""
 <section class="p-hero">
   {figure(project_img(slug, proj.get("hero") or proj.get("cover"), name, "100vw", eager=True))}
@@ -328,12 +328,32 @@ def project_hero(ctx: Ctx, proj: dict) -> str:
 </section>"""
 
 
+HEX = re.compile(r"#[0-9A-Fa-f]{6}")
+
+
+def palette_block(ctx: Ctx, proj: dict) -> str:
+    """COLOR PALETTE: four stacked swatches beside one photo from the event. No hex labels on the site;
+    invalid colour values are skipped. Empty when the project has no palette yet."""
+    pal = proj.get("palette") or {}
+    colors = [c for c in pal.get("colors", []) if isinstance(c, str) and HEX.fullmatch(c)][:4]
+    if not colors:
+        return ""
+    swatches = "".join(f'<span style="background:{c}"></span>' for c in colors)
+    photo = project_img(proj["slug"], pal, "", "(max-width:700px) 50vw, 300px")
+    return (f'<section class="palette"><span class="label">{escape(ctx.t("project.palette"))}</span>'
+            f'<div class="palette-row"><div class="swatches" role="img" '
+            f'aria-label="{escape(ctx.t("project.palette"))}">{swatches}</div>'
+            f'{figure(photo) if photo else ""}</div></section>')
+
+
 def project_body(ctx: Ctx, proj: dict) -> str:
     slug = proj["slug"]
-    facts = [("project.type", C.event_type_label(proj.get("event_type"), ctx.lang)),
-             ("project.location", ctx.loc(proj.get("location")))]
+    places = C.venues(proj.get("location"), ctx.lang)
+    facts = [("project.type", [C.event_type_label(proj.get("event_type"), ctx.lang)]),
+             ("project.venues" if len(places) > 1 else "project.location", places)]
     credits = [c for c in proj.get("credits", []) if c]
-    facts_html = "".join(f'<div><dt class="label">{escape(ctx.t(k))}</dt>{txt(v, tag="dd")}</div>' for k, v in facts)
+    facts_html = "".join(f'<div><dt class="label">{escape(ctx.t(k))}</dt>{"".join(txt(v, tag="dd") for v in vs)}</div>'
+                         for k, vs in facts if vs)
     intro = f"""
 <section class="p-intro">
   {txt(ctx.loc(proj.get("text")) or ctx.t("todo"), "lead", "p")}
@@ -374,7 +394,8 @@ def project_body(ctx: Ctx, proj: dict) -> str:
   <p>{escape(ctx.t("project.invite_text"))}</p>
   <a class="link-line" href="{ctx.href("contact")}" target="_self">{escape(ctx.t("project.invite_cta"))}</a>
 </section>"""
-    return (intro + f'<section class="gallery" id="gallery">{gallery}</section>' + films + credit_html
+    return (intro + palette_block(ctx, proj) + f'<section class="gallery" id="gallery">{gallery}</section>'
+            + films + credit_html
             + next_html + invite)
 
 

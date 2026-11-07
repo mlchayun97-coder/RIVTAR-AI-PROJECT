@@ -149,6 +149,10 @@ header[data-testid="stHeader"]{display:none}
 .p-facts{display:flex;justify-content:center;flex-wrap:wrap;gap:1rem 3.5rem;border-block:1px solid var(--rule);padding:1.3rem 0;margin-top:.6rem}
 .p-facts div{display:grid;gap:.25rem}
 .p-facts dt{color:var(--fg-2)} .p-facts dd{margin:0;font-family:var(--f-title);font-size:1.2rem}
+.palette{display:grid;justify-items:center;gap:1.6rem;padding:clamp(80px,10vw,140px) var(--gutter) 0}
+.palette-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1vw,14px);width:min(560px,100%);aspect-ratio:2/1.25}
+.swatches{display:grid;grid-template-rows:repeat(4,1fr);outline:1px solid var(--rule);outline-offset:-1px}
+.palette .ph{height:100%}
 .gallery{display:grid;gap:clamp(10px,1.2vw,18px);padding:clamp(80px,10vw,140px) var(--gutter) 0;max-width:1500px;margin:0 auto;scroll-margin-top:24px}
 .chapter-title{text-align:center;font-size:clamp(1.4rem,2.4vw,2rem);text-transform:uppercase;padding:clamp(40px,6vw,80px) 0 clamp(10px,2vw,24px)}
 .g-wide{aspect-ratio:3/2}

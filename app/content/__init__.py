@@ -64,6 +64,13 @@ def loc(field: dict | str | None, lang: str = DEFAULT_LANG) -> str:
     return field or ""
 
 
+def venues(field: dict | list | str | None, lang: str = DEFAULT_LANG) -> list[str]:
+    """A project's location as a list of venues (main venue first). The field is one {"en", "he"} value
+    or a list of them."""
+    items = field if isinstance(field, list) else [field]
+    return [v for v in (loc(i, lang) for i in items) if v]
+
+
 def is_todo(text: str | None) -> bool:
     return bool(text) and text.strip().startswith("[") and text.strip().endswith("]")
 

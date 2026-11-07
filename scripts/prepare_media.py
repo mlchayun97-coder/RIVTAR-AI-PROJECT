@@ -464,6 +464,7 @@ def curated_jobs(content_dir: Path) -> tuple[list[dict], list[dict]]:
         jobs: dict[str, dict] = {}
         items = [(proj.get("cover"), "cover"), (proj.get("hero"), "hero")]
         items += [(ph, ph.get("layout", "wide")) for ch in proj.get("chapters", []) for ph in ch.get("photos", [])]
+        items.append((proj.get("palette"), "pair"))  # the photo beside the colour swatches
         for item, role in items:
             if item and item.get("photo"):
                 job = jobs.setdefault(item["photo"], {"group": slug, "folder": folder_for_slug(slug),

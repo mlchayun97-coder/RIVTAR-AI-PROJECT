@@ -44,62 +44,110 @@
         {
           "photo": "2H3A2184.jpeg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A chuppah of white flowers and greenery with white fabric, overlooking Jerusalem under a blue sky.",
+            "he": "חופה של פרחים לבנים וירק עם בד לבן, הצופה אל ירושלים תחת שמיים כחולים."
+          }
         },
         {
           "photo": "2H3A2172.jpeg",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "White roses and greenery wound around a chuppah post against a blue sky.",
+            "he": "ורדים לבנים וירק כרוכים סביב עמוד החופה מול שמיים כחולים."
+          }
         },
         {
           "photo": "2H3A2228.jpeg",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A white aisle between rows of white chairs leads to the chuppah, with Jerusalem on the hills behind.",
+            "he": "שביל לבן בין שורות כיסאות לבנים מוביל לחופה, ומאחוריה ירושלים על הגבעות."
+          }
         },
         {
           "photo": "2H3A2234.jpeg",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The chuppah at the end of the aisle, white chairs on both sides and the city below.",
+            "he": "החופה בקצה השביל, כיסאות לבנים משני הצדדים והעיר למטה."
+          }
         },
         {
           "photo": "2H3A2221.jpeg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A cream sofa on the lawn framed by white flowers, a stone wall behind.",
+            "he": "ספה בצבע שמנת על הדשא ממוסגרת בפרחים לבנים, וקיר אבן מאחור."
+          }
         },
         {
           "photo": "2H3A2201.jpeg",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "White flowers and greenery around the sofa, olive trees beyond.",
+            "he": "פרחים לבנים וירק סביב הספה, ועצי זית מאחור."
+          }
         },
         {
           "photo": "2H3A2212.jpeg",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Delicate white flowers and grasses, with the garden softly blurred behind.",
+            "he": "פרחים לבנים עדינים ועשבים, והגן מטושטש ברכות מאחור."
+          }
         },
         {
           "photo": "2H3A2235.jpeg",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The bride in a white gown on the sofa among white flowers, against a stone wall.",
+            "he": "הכלה בשמלה לבנה על הספה בין פרחים לבנים, מול קיר אבן."
+          }
         },
         {
           "photo": "2H3A2238.jpeg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The bride's long white train spread on the grass beside white flowers.",
+            "he": "השובל הלבן הארוך של שמלת הכלה פרוש על הדשא לצד פרחים לבנים."
+          }
         },
         {
           "photo": "2H3A2242.jpeg",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "White flowers in the foreground, the bride in her gown behind them.",
+            "he": "פרחים לבנים בחזית, והכלה בשמלתה מאחוריהם."
+          }
         },
         {
           "photo": "2H3A2261.jpeg",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The bride walks under the chuppah, holding her gown, with Jerusalem behind.",
+            "he": "הכלה הולכת מתחת לחופה, אוחזת בשמלתה, ומאחוריה ירושלים."
+          }
         },
         {
           "photo": "2H3A2270.jpeg",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The bride lifts her gown as she steps onto the chuppah platform.",
+            "he": "הכלה מרימה את שמלתה כשהיא עולה על במת החופה."
+          }
         }
       ]
     }

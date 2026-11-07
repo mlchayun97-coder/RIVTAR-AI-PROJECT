@@ -44,92 +44,164 @@
         {
           "photo": "untitled-126.JPG",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A bride in a long white gown holding a bouquet, standing alone in a vaulted stone hall.",
+            "he": "כלה בשמלה לבנה ארוכה עם זר, עומדת לבדה באולם אבן מקומר."
+          }
         },
         {
           "photo": "untitled-2051.JPG",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A white tent with a flower-covered chuppah at the end of a white aisle lined with chairs, at Kadma.",
+            "he": "אוהל לבן עם חופה מכוסה פרחים בקצה שביל לבן שלצידיו כיסאות, בקדמה."
+          }
         },
         {
           "photo": "WhatsApp Image 2026-10-18 at 17.01.52.jpeg",
           "layout": "pair",
-          "focus": "50% 100%"
+          "focus": "50% 100%",
+          "alt": {
+            "en": "Hands arranging a pale pink hydrangea in a glass vase.",
+            "he": "ידיים מסדרות הידרנגאה בוורוד חיוור באגרטל זכוכית."
+          }
         },
         {
           "photo": "WhatsApp Image 2026-10-18 at 17.01.53 (2).jpeg",
           "layout": "pair",
-          "focus": "50% 100%"
+          "focus": "50% 100%",
+          "alt": {
+            "en": "A woman arranges flowers beneath a crystal candelabra on a set table.",
+            "he": "אישה מסדרת פרחים מתחת לפמוט קריסטל על שולחן ערוך."
+          }
         },
         {
           "photo": "WhatsApp Image 2026-10-18 at 17.01.53 (1).jpeg",
           "layout": "pair",
-          "focus": "50% 100%"
+          "focus": "50% 100%",
+          "alt": {
+            "en": "A crystal candelabra with lit candles above pink and peach flowers.",
+            "he": "פמוט קריסטל עם נרות דולקים מעל פרחים בוורוד ובאפרסק."
+          }
         },
         {
           "photo": "untitled-2053.JPG",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Round tables with lampshade lamps and flowers in a darkened hall.",
+            "he": "שולחנות עגולים עם מנורות אהיל ופרחים באולם מוחשך."
+          }
         },
         {
           "photo": "untitled-2056.JPG",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Crystal candelabras and pastel flowers on round tables.",
+            "he": "פמוטי קריסטל ופרחים בגווני פסטל על שולחנות עגולים."
+          }
         },
         {
           "photo": "untitled-2063.JPG",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A round table with pastel flowers and gold cane-back chairs.",
+            "he": "שולחן עגול עם פרחים בגווני פסטל וכיסאות זהב עם גב קלוע."
+          }
         },
         {
           "photo": "untitled-2068.JPG",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Rows of gold chairs and candles on white-clothed tables.",
+            "he": "שורות של כיסאות זהב ונרות על שולחנות במפות לבנות."
+          }
         },
         {
           "photo": "untitled-2058.JPG",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Peach and pink roses with blue flowers and greenery.",
+            "he": "ורדים באפרסק ובוורוד עם פרחים כחולים וירק."
+          }
         },
         {
           "photo": "untitled-2078.JPG",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Pink roses and blue flowers in soft focus.",
+            "he": "ורדים ורודים ופרחים כחולים בפוקוס רך."
+          }
         },
         {
           "photo": "untitled-2081.JPG",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A tall arrangement of pastel flowers in a white urn on a table.",
+            "he": "סידור גבוה של פרחים בגווני פסטל בכד לבן על שולחן."
+          }
         },
         {
           "photo": "untitled-2082.JPG",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A crystal candelabra with lit candles above pastel flowers.",
+            "he": "פמוט קריסטל עם נרות דולקים מעל פרחים בגווני פסטל."
+          }
         },
         {
           "photo": "untitled-2124.JPG",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Black and white: a long table lined with crystal candelabras and flowers.",
+            "he": "בשחור־לבן: שולחן ארוך ולאורכו פמוטי קריסטל ופרחים."
+          }
         },
         {
           "photo": "untitled-2129.JPG",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Black and white: tall candles in a crystal candelabra.",
+            "he": "בשחור־לבן: נרות גבוהים בפמוט קריסטל."
+          }
         },
         {
           "photo": "untitled-2154.JPG",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Black and white: vintage binoculars on a stand beside a silver bell and teapot.",
+            "he": "בשחור־לבן: משקפת וינטג' על חצובה ליד פעמון וקומקום מכסף."
+          }
         },
         {
           "photo": "untitled-2639.JPG",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Guests dancing on a checkered dance floor under coloured lights.",
+            "he": "אורחים רוקדים על רחבת ריקודים משובצת באורות צבעוניים."
+          }
         },
         {
           "photo": "untitled-2657.JPG",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Black and white: the bride and groom dance among guests under beams of light.",
+            "he": "בשחור־לבן: החתן והכלה רוקדים בין האורחים תחת אלומות אור."
+          }
         }
       ]
     }

@@ -107,6 +107,20 @@ def test_every_referenced_photo_is_exported():
                 assert (APP / "static" / "projects" / proj["slug"] / f"{entry['base']}-{w}.jpg").exists()
 
 
+def test_every_gallery_photo_has_alt_text_without_names():
+    import content as C
+    import ui
+    for proj in C.projects():
+        names = {w for lang in ("en", "he") for w in re.split(r"\W+", proj["name"][lang]) if len(w) > 2}
+        for photo in (p for c in proj["chapters"] for p in c["photos"]):
+            alt = photo.get("alt") or {}
+            assert alt.get("en") and alt.get("he"), (proj["slug"], photo["photo"])
+            words = set(re.split(r"\W+", alt["en"] + " " + alt["he"]))
+            assert not names & words, (proj["slug"], photo["photo"], names & words)
+        body = ui.project_body(ui.Ctx("he"), proj)
+        assert 'alt=""' not in body.split('id="gallery"', 1)[-1].split("</section>", 1)[0], proj["slug"]
+
+
 def test_gallery_never_repeats_the_hero_photo():
     import content as C
     import ui

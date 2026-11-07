@@ -26,7 +26,12 @@
     "why": "Symmetrical view of the dinner courtyard: shows the scale of the production and the architecture at once."
   },
   "palette": {
-    "colors": ["#EB9562", "#A14A0C", "#F4D5CA", "#CC6A4E"],
+    "colors": [
+      "#EB9562",
+      "#A14A0C",
+      "#F4D5CA",
+      "#CC6A4E"
+    ],
     "photo": "Lavi_Pgotography-1133.jpg",
     "focus": "70% 60%",
     "why": "Long table with orange flowers and rust napkins: closest match to the photo in the designer's palette tile."
@@ -51,8 +56,8 @@
           "layout": "wide",
           "focus": "50% 50%",
           "alt": {
-            "en": "The chuppah under an open canopy, chairs set for the ceremony",
-            "he": "החופה מתחת לחופת בד פתוחה, כיסאות ערוכים לטקס"
+            "en": "Looking out from under the flower-framed chuppah to the aisle and the DCity courtyard.",
+            "he": "מבט מתחת לחופה המעוטרת בפרחים אל המעבר ואל החצר ב־DCity."
           },
           "why": "Design: the ceremony set-up as a whole."
         },
@@ -101,8 +106,8 @@
           "layout": "pair",
           "focus": "50% 50%",
           "alt": {
-            "en": "The couple's hands",
-            "he": "הידיים של בני הזוג"
+            "en": "The bride and groom holding hands.",
+            "he": "החתן והכלה אוחזים ידיים."
           },
           "why": "A quiet ceremony moment that pairs with the bouquet."
         },
@@ -111,8 +116,8 @@
           "layout": "wide",
           "focus": "50% 40%",
           "alt": {
-            "en": "Evyatar and Rivka walking together, black and white",
-            "he": "אביתר ורבקה הולכים יחד, בשחור־לבן"
+            "en": "The bride and groom walking together, in black and white.",
+            "he": "החתן והכלה הולכים יחד, בשחור־לבן."
           },
           "why": "The couple: the photographer's own black-and-white frame, kept as delivered."
         },
@@ -131,8 +136,8 @@
           "layout": "pair",
           "focus": "50% 50%",
           "alt": {
-            "en": "Orchids in the table arrangements",
-            "he": "סחלבים בסידורי השולחן"
+            "en": "Red orchids in a table arrangement.",
+            "he": "סחלבים אדומים בסידור שולחן."
           },
           "why": "Flower detail in the same palette."
         },
@@ -161,8 +166,8 @@
           "layout": "pair",
           "focus": "50% 50%",
           "alt": {
-            "en": "The printed menu on a napkin",
-            "he": "התפריט המודפס על מפית"
+            "en": "A printed menu in Hebrew beside a rust-coloured napkin.",
+            "he": "תפריט מודפס בעברית לצד מפית בגוון חלודה."
           },
           "why": "Stationery detail."
         },

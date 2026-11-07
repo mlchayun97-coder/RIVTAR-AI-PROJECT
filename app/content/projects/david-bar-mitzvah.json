@@ -53,62 +53,110 @@
         {
           "photo": "alon ankonina -599.jpg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Men in prayer shawls and tefillin sit in rows of wooden chairs beneath a wall sign reading PSAGOT.",
+            "he": "גברים עטופים בטליתות ועם תפילין יושבים בשורות כיסאות עץ, מתחת לשלט על הקיר שכתוב בו PSAGOT."
+          }
         },
         {
           "photo": "alon ankonina -525.jpg",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A boy in a prayer shawl and black hat covers his eyes in prayer.",
+            "he": "ילד בטלית ובכובע שחור מכסה את עיניו בתפילה."
+          }
         },
         {
           "photo": "alon ankonina -714.jpg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A man in a prayer shawl carries a Torah scroll toward a carved wooden arch at Psagot Winery.",
+            "he": "גבר בטלית נושא ספר תורה אל קשת עץ מגולפת ביקב פסגות."
+          }
         },
         {
           "photo": "alon ankonina -117.jpg",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A woman in a white hat, a boy and a man in suits stand together under a stone arcade.",
+            "he": "אישה בכובע לבן, ילד וגבר בחליפות עומדים יחד תחת קמרון אבן."
+          }
         },
         {
           "photo": "alon ankonina -888.jpg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The stone courtyard at Psagot Winery with fringed white umbrellas and round tables.",
+            "he": "חצר האבן ביקב פסגות עם שמשיות לבנות עם פרנזים ושולחנות עגולים."
+          }
         },
         {
           "photo": "alon ankonina -33.jpg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A carved arch and a white carved stand, seen through a stone archway.",
+            "he": "קשת מגולפת ודוכן לבן מגולף, במבט דרך קשת אבן."
+          }
         },
         {
           "photo": "alon ankonina -917.jpg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The hall from above: long tables around an open centre, lights hanging overhead.",
+            "he": "האולם ממבט עליון: שולחנות ארוכים סביב מרכז פתוח, ומנורות תלויות מעל."
+          }
         },
         {
           "photo": "alon ankonina -77.jpg",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "White flowers in shallow bowls with nuts, a book and a candle on a table.",
+            "he": "פרחים לבנים בקערות שטוחות עם אגוזים, ספר ונר על שולחן."
+          }
         },
         {
           "photo": "alon ankonina -912.jpg",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Pale green flowers and a tall candle among glasses on a set table.",
+            "he": "פרחים בירוק חיוור ונר גבוה בין כוסות על שולחן ערוך."
+          }
         },
         {
           "photo": "alon ankonina -916.jpg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A place setting on a woven round placemat with a knotted napkin.",
+            "he": "עריכת מקום על פלייסמט עגול קלוע עם מפית קשורה."
+          }
         },
         {
           "photo": "alon ankonina -876.jpg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A food stall under stone arches, with crates of produce and baskets.",
+            "he": "דוכן אוכל תחת קשתות אבן, עם ארגזי תוצרת וסלים."
+          }
         },
         {
           "photo": "alon ankonina -889.jpg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A guitarist plays under a wooden canopy with speakers on either side, open hills behind.",
+            "he": "נגן גיטרה מנגן תחת חופה מעץ עם רמקולים משני הצדדים, וגבעות פתוחות מאחור."
+          }
         }
       ]
     },
@@ -121,22 +169,38 @@
         {
           "photo": "alon ankonina -1667.jpg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A long buffet by a lit swimming pool at night, framed by tall hedges and palms.",
+            "he": "מזנון ארוך ליד בריכה מוארת בלילה, בין משוכות גבוהות ודקלים."
+          }
         },
         {
           "photo": "alon ankonina -1641.jpg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A flame burning in a dark metal bowl.",
+            "he": "להבה בוערת בקערת מתכת כהה."
+          }
         },
         {
           "photo": "alon ankonina -1593.jpg",
           "layout": "pair",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Black and white: a singer in a hat and suit sings into a microphone.",
+            "he": "בשחור־לבן: זמר בכובע ובחליפה שר אל מיקרופון."
+          }
         },
         {
           "photo": "alon ankonina -1662.jpg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Bowls of salads and a pineapple on a dark buffet table against a blue backdrop.",
+            "he": "קערות סלטים ואננס על שולחן מזנון כהה מול רקע כחול."
+          }
         }
       ]
     },
@@ -149,17 +213,29 @@
         {
           "photo": "alon ankonina -2678.jpg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A vaulted white hall at Emil Botta, Jerusalem, with long tables set in blue and white.",
+            "he": "אולם לבן מקומר באמיל בוטא, ירושלים, עם שולחנות ארוכים ערוכים בכחול ולבן."
+          }
         },
         {
           "photo": "alon ankonina -2681.jpg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Blue glass vases with white flowers on a long table beneath an arched window.",
+            "he": "אגרטלי זכוכית כחולים עם פרחים לבנים על שולחן ארוך מתחת לחלון מקושת."
+          }
         },
         {
           "photo": "alon ankonina -2693.jpg",
           "layout": "wide",
-          "focus": "50% 50%"
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Blue glass vases, white roses and tall candles on a white tablecloth.",
+            "he": "אגרטלי זכוכית כחולים, ורדים לבנים ונרות גבוהים על מפה לבנה."
+          }
         }
       ]
     }

@@ -1,0 +1,158 @@
+{
+  "contract_name": "rivatar_events_clean",
+  "version": "1.0.0",
+  "owner": "Data Team (Crew 1)",
+  "consumer": "ML Team (Crew 2)",
+  "dataset_path": "data/processed/events_clean.csv",
+  "dataset_sha256": "bd3a0fc838e48cccb6848d0b55424a7e0ac5f2682641872c8844d514af5bae6c",
+  "row_count": 1472,
+  "min_rows": 1000,
+  "primary_key": "event_id",
+  "target": "total_budget_ils",
+  "columns": {
+    "event_id": {
+      "dtype": "string",
+      "nullable": false,
+      "unique": true,
+      "pattern": "^EVT-\\d{5}$"
+    },
+    "inquiry_date": {
+      "dtype": "date",
+      "nullable": false,
+      "format": "%Y-%m-%d"
+    },
+    "event_date": {
+      "dtype": "date",
+      "nullable": false,
+      "format": "%Y-%m-%d"
+    },
+    "event_type": {
+      "dtype": "category",
+      "nullable": false,
+      "allowed_values": [
+        "bar_mitzvah",
+        "bat_mitzvah",
+        "business_dinner",
+        "conference",
+        "corporate_event",
+        "family_event",
+        "product_launch",
+        "wedding"
+      ]
+    },
+    "client_type": {
+      "dtype": "category",
+      "nullable": false,
+      "allowed_values": [
+        "business",
+        "private"
+      ]
+    },
+    "guest_count": {
+      "dtype": "integer",
+      "nullable": false,
+      "min": 10,
+      "max": 1500
+    },
+    "region": {
+      "dtype": "category",
+      "nullable": false,
+      "allowed_values": [
+        "abroad",
+        "center",
+        "jerusalem",
+        "north",
+        "south",
+        "tel_aviv"
+      ]
+    },
+    "venue_type": {
+      "dtype": "category",
+      "nullable": false,
+      "allowed_values": [
+        "company_office",
+        "garden",
+        "hall",
+        "hotel",
+        "outdoor"
+      ]
+    },
+    "catering_level": {
+      "dtype": "category",
+      "nullable": false,
+      "allowed_values": [
+        "basic",
+        "luxury",
+        "premium"
+      ]
+    },
+    "design_package": {
+      "dtype": "category",
+      "nullable": false,
+      "allowed_values": [
+        "luxury",
+        "premium",
+        "standard"
+      ]
+    },
+    "extra_lighting": {
+      "dtype": "boolean",
+      "nullable": false
+    },
+    "extra_photography": {
+      "dtype": "boolean",
+      "nullable": false
+    },
+    "extra_music_talent": {
+      "dtype": "boolean",
+      "nullable": false
+    },
+    "extra_shuttles": {
+      "dtype": "boolean",
+      "nullable": false
+    },
+    "extra_social_promo": {
+      "dtype": "boolean",
+      "nullable": false
+    },
+    "lead_source": {
+      "dtype": "category",
+      "nullable": false,
+      "allowed_values": [
+        "facebook",
+        "google",
+        "instagram",
+        "referral",
+        "returning_client",
+        "unknown",
+        "vendor_venue"
+      ]
+    },
+    "total_budget_ils": {
+      "dtype": "float",
+      "nullable": false,
+      "min": 1000.0,
+      "max": 5000000.0
+    }
+  },
+  "rules": [
+    {
+      "name": "event_after_inquiry",
+      "expression": "event_date >= inquiry_date"
+    },
+    {
+      "name": "client_type_matches_event_type",
+      "expression": "client_type == client_type_for(event_type)"
+    }
+  ],
+  "event_client_type": {
+    "wedding": "private",
+    "bar_mitzvah": "private",
+    "bat_mitzvah": "private",
+    "family_event": "private",
+    "product_launch": "business",
+    "conference": "business",
+    "corporate_event": "business",
+    "business_dinner": "business"
+  }
+}

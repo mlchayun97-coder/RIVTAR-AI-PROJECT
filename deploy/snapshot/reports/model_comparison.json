@@ -1,0 +1,31 @@
+{
+  "seed": 42,
+  "n_train": 1177,
+  "n_test": 295,
+  "cv_folds": 5,
+  "results": {
+    "v1_ridge_baseline": {
+      "complexity": 1,
+      "cv_mae_mean": 10711.497346941822,
+      "cv_mae_std": 884.214255185124,
+      "cv_mape_mean": 0.07942397328190327,
+      "cv_r2_mean": 0.919553281029349
+    },
+    "v2_random_forest": {
+      "complexity": 2,
+      "cv_mae_mean": 16725.744085714257,
+      "cv_mae_std": 984.2070991626724,
+      "cv_mape_mean": 0.12593012779679813,
+      "cv_r2_mean": 0.8218322174333663
+    },
+    "v3_hist_gradient_boosting": {
+      "complexity": 3,
+      "cv_mae_mean": 13005.5088264727,
+      "cv_mae_std": 657.3098456417758,
+      "cv_mape_mean": 0.09738168266800615,
+      "cv_r2_mean": 0.8875863179509318
+    }
+  },
+  "lowest_cv_mae": "v1_ridge_baseline",
+  "selection_policy": "Only models with CV MAPE below 25% may be published. Among those, prefer the simpler model unless a more complex one lowers CV MAE by more than 5%: a simpler model is easier to explain to a producer and less likely to overfit."
+}

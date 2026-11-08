@@ -1,0 +1,5 @@
+- The selected model (v1_ridge_baseline) demonstrates a strong performance with a CV MAPE of 7.94%, indicating reliable predictions within the acceptable threshold of 25%.
+- Despite its overall effectiveness, the model shows higher MAE values for specific event types, particularly Weddings and Conferences, suggesting a need for further refinement in these areas.
+- Producers should utilize the model's predictions with caution for event types with high MAE, as these may lead to less accurate estimates.
+- Future iterations of the model could explore additional features or alternative modeling techniques to improve performance on weak segments.
+- Continuous monitoring of model performance is recommended, especially as new data becomes available, to ensure its predictions remain valid and reliable.

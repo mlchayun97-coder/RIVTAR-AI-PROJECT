@@ -1,0 +1,227 @@
+{
+  "n_rows": 1472,
+  "date_range": [
+    "2023-02-05",
+    "2027-07-21"
+  ],
+  "target_stats": {
+    "count": 1472.0,
+    "mean": 134121.3,
+    "std": 60647.1,
+    "min": 23700.0,
+    "25%": 91075.0,
+    "50%": 124300.0,
+    "75%": 165550.0,
+    "max": 439400.0
+  },
+  "target_skew": 1.234,
+  "log_target_skew": -0.17,
+  "correlation_with_target": {
+    "guest_count": 0.778,
+    "lead_days": 0.12
+  },
+  "budget_per_guest_median": 550.4,
+  "by_event_type": {
+    "bar_mitzvah": {
+      "count": 196.0,
+      "median": 123800.0,
+      "mean": 130147.0
+    },
+    "bat_mitzvah": {
+      "count": 154.0,
+      "median": 110650.0,
+      "mean": 117005.0
+    },
+    "business_dinner": {
+      "count": 101.0,
+      "median": 62800.0,
+      "mean": 65585.0
+    },
+    "conference": {
+      "count": 152.0,
+      "median": 124900.0,
+      "mean": 143048.0
+    },
+    "corporate_event": {
+      "count": 176.0,
+      "median": 124500.0,
+      "mean": 130591.0
+    },
+    "family_event": {
+      "count": 130.0,
+      "median": 73800.0,
+      "mean": 77213.0
+    },
+    "product_launch": {
+      "count": 141.0,
+      "median": 116200.0,
+      "mean": 124084.0
+    },
+    "wedding": {
+      "count": 422.0,
+      "median": 167600.0,
+      "mean": 177758.0
+    }
+  },
+  "by_region": {
+    "abroad": {
+      "count": 60.0,
+      "median": 182950.0,
+      "mean": 188687.0
+    },
+    "center": {
+      "count": 378.0,
+      "median": 121250.0,
+      "mean": 133968.0
+    },
+    "jerusalem": {
+      "count": 378.0,
+      "median": 123900.0,
+      "mean": 133157.0
+    },
+    "north": {
+      "count": 122.0,
+      "median": 125200.0,
+      "mean": 128857.0
+    },
+    "south": {
+      "count": 95.0,
+      "median": 112600.0,
+      "mean": 111787.0
+    },
+    "tel_aviv": {
+      "count": 439.0,
+      "median": 125000.0,
+      "mean": 133922.0
+    }
+  },
+  "by_catering_level": {
+    "basic": {
+      "count": 413.0,
+      "median": 101300.0,
+      "mean": 108776.0
+    },
+    "luxury": {
+      "count": 375.0,
+      "median": 154100.0,
+      "mean": 165577.0
+    },
+    "premium": {
+      "count": 684.0,
+      "median": 124650.0,
+      "mean": 132180.0
+    }
+  },
+  "by_design_package": {
+    "luxury": {
+      "count": 366.0,
+      "median": 153050.0,
+      "mean": 163251.0
+    },
+    "premium": {
+      "count": 583.0,
+      "median": 127200.0,
+      "mean": 134573.0
+    },
+    "standard": {
+      "count": 523.0,
+      "median": 103400.0,
+      "mean": 113233.0
+    }
+  },
+  "by_month": {
+    "1": {
+      "count": 106.0,
+      "median": 112050.0,
+      "mean": 123878.0
+    },
+    "2": {
+      "count": 110.0,
+      "median": 118950.0,
+      "mean": 129118.0
+    },
+    "3": {
+      "count": 126.0,
+      "median": 128100.0,
+      "mean": 137854.0
+    },
+    "4": {
+      "count": 110.0,
+      "median": 123950.0,
+      "mean": 135478.0
+    },
+    "5": {
+      "count": 144.0,
+      "median": 131350.0,
+      "mean": 140321.0
+    },
+    "6": {
+      "count": 129.0,
+      "median": 125400.0,
+      "mean": 139921.0
+    },
+    "7": {
+      "count": 116.0,
+      "median": 120650.0,
+      "mean": 129866.0
+    },
+    "8": {
+      "count": 124.0,
+      "median": 121750.0,
+      "mean": 131562.0
+    },
+    "9": {
+      "count": 114.0,
+      "median": 134900.0,
+      "mean": 140167.0
+    },
+    "10": {
+      "count": 123.0,
+      "median": 133000.0,
+      "mean": 145943.0
+    },
+    "11": {
+      "count": 138.0,
+      "median": 122500.0,
+      "mean": 129956.0
+    },
+    "12": {
+      "count": 132.0,
+      "median": 117750.0,
+      "mean": 123652.0
+    }
+  },
+  "service_lift": {
+    "extra_lighting": {
+      "median_with": 124950.0,
+      "median_without": 123200.0,
+      "lift_pct": 1.4
+    },
+    "extra_photography": {
+      "median_with": 127700.0,
+      "median_without": 110300.0,
+      "lift_pct": 15.8
+    },
+    "extra_music_talent": {
+      "median_with": 131300.0,
+      "median_without": 111500.0,
+      "lift_pct": 17.8
+    },
+    "extra_shuttles": {
+      "median_with": 124200.0,
+      "median_without": 124350.0,
+      "lift_pct": -0.1
+    },
+    "extra_social_promo": {
+      "median_with": 120200.0,
+      "median_without": 125400.0,
+      "lift_pct": -4.1
+    }
+  },
+  "plots": [
+    "budget_distribution.png",
+    "budget_by_event_type.png",
+    "guests_vs_budget.png",
+    "budget_per_guest_by_month.png"
+  ]
+}

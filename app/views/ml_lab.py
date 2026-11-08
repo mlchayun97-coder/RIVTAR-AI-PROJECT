@@ -1,6 +1,7 @@
 """ML LAB: the Flow run behind the budget estimate.
 
-Reads only the files the pipeline writes (reports/, artifacts/), so the page always shows the LAST run:
+Reads only the files the pipeline writes (reports/, artifacts/; or the committed deploy/snapshot/ when this
+machine has no run, see rivatar.published), so the page always shows the LAST run:
 its status (or where it stopped and why), each step, the agent's decision, the model comparison, the EDA
 charts, the insights, the data contract, the Model Card and the run log. Nothing here runs the pipeline.
 """
@@ -15,7 +16,7 @@ from html import escape
 import streamlit as st
 
 import ui
-from rivatar import config
+from rivatar import config, published
 from views import common
 
 STAGES = ("generate_raw_data", "run_data_team", "validate_data_contract", "run_ml_team",
@@ -148,10 +149,10 @@ def comparison_html(ctx: ui.Ctx, comp: dict | None, ev: dict | None, d: dict | N
 
 
 # ------------------------------------------------------------------ data team outputs
-def charts_html(ctx: ui.Ctx) -> str:
+def charts_html(ctx: ui.Ctx, run: published.PublishedRun) -> str:
     figs = []
     for name in CHARTS:
-        p = config.EDA_DIR / f"{name}.png"
+        p = run.eda_dir / f"{name}.png"
         if p.exists():
             data = base64.b64encode(p.read_bytes()).decode("ascii")
             label = ctx.t(f"lab.chart_{name}")
@@ -215,23 +216,25 @@ def _markdown_section(ctx: ui.Ctx, key: str, title_key: str, text: str) -> None:
 def render() -> None:
     ctx = common.ctx_for("ml-lab")
     common.start(ctx, intro=False)
-    status = _json(config.RUN_STATUS)
-    decision = _json(config.MODEL_DECISION) if status and status.get("status") == "SUCCEEDED" else None
-    comparison = _json(config.MODEL_COMPARISON) if decision else None
-    evaluation = _json(config.EVALUATION) if decision else None
+    run = published.current()
+    status = _json(run.run_status)
+    decision = _json(run.model_decision) if status and status.get("status") == "SUCCEEDED" else None
+    comparison = _json(run.model_comparison) if decision else None
+    evaluation = _json(run.evaluation) if decision else None
     state = ctx.t("lab.key_set") if config.has_openai_key() else ctx.t("lab.key_unset")
     head = f"""
 <section class="page-head"><h1>{escape(ctx.t("lab.title"))}</h1><p>{escape(ctx.t("lab.intro"))}</p>
 <p class="lab-run-meta">{t_bdi(ctx, "lab.llm", model=config.LLM_MODEL, state=state)}</p></section>"""
     top = (head + run_html(ctx, status) + steps_html(ctx, status) + decision_html(ctx, decision)
-           + comparison_html(ctx, comparison, evaluation, decision) + charts_html(ctx))
+           + comparison_html(ctx, comparison, evaluation, decision) + charts_html(ctx, run))
     st.html(ui.wrap(ctx, ui.masthead(ctx, "lab") + top))
     if status:
-        st.html(ui.wrap(ctx, f'<p class="lab-note">{escape(ctx.t("lab.reports_lang"))}</p>'))
-    _markdown_section(ctx, "labinsights", "lab.insights_title", _text(config.INSIGHTS_MD))
-    st.html(ui.wrap(ctx, contract_html(ctx, _json(config.DATA_CONTRACT) if status else None)))
+        note = ctx.t("lab.reports_lang") + (" " + ctx.t("lab.snapshot") if run.snapshot else "")
+        st.html(ui.wrap(ctx, f'<p class="lab-note">{escape(note)}</p>'))
+    _markdown_section(ctx, "labinsights", "lab.insights_title", _text(run.insights))
+    st.html(ui.wrap(ctx, contract_html(ctx, _json(run.data_contract) if status else None)))
     if decision:
-        _markdown_section(ctx, "labcard", "lab.card_title", _text(config.MODEL_CARD))
-    st.html(ui.wrap(ctx, log_html(ctx, _text(config.RUN_LOG) if status else "")
+        _markdown_section(ctx, "labcard", "lab.card_title", _text(run.model_card))
+    st.html(ui.wrap(ctx, log_html(ctx, _text(run.run_log) if status else "")
                     + f'<p class="lab-note">{escape(ctx.t("lab.synthetic"))}</p>'))
     common.end(ctx)

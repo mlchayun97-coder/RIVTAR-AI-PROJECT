@@ -6,6 +6,7 @@ set. A starting point for a conversation, not a quote.
 
 The estimate is only shown when the last Flow run SUCCEEDED (a stopped run deletes the model), and
 only when every field the model needs is filled in; otherwise the form shows "unavailable".
+Without a local run (e.g. on Streamlit Cloud) it uses the committed snapshot (rivatar.published).
 """
 
 from __future__ import annotations
@@ -14,7 +15,7 @@ import json
 from datetime import date
 from functools import lru_cache
 
-from rivatar import config, vocab
+from rivatar import published, vocab
 
 UNAVAILABLE_MESSAGE = "Estimate available after the ML phase"
 REQUIRED = ("event_type", "event_date", "guest_count", "region", "venue_type", "catering_level", "design_package")
@@ -25,21 +26,22 @@ def _unavailable(message: str = UNAVAILABLE_MESSAGE) -> dict:
             "model_version": None, "message": message}
 
 
-def model_ready() -> bool:
-    if not (config.MODEL_FILE.exists() and config.RUN_STATUS.exists() and config.EVALUATION.exists()):
+def model_ready(run: published.PublishedRun | None = None) -> bool:
+    run = run or published.current()
+    if not (run.model_file.exists() and run.run_status.exists() and run.evaluation.exists()):
         return False
     try:
-        return json.loads(config.RUN_STATUS.read_text(encoding="utf-8")).get("status") == "SUCCEEDED"
+        return json.loads(run.run_status.read_text(encoding="utf-8")).get("status") == "SUCCEEDED"
     except (OSError, ValueError):
         return False
 
 
-@lru_cache(maxsize=2)
-def _load(model_mtime: float):
+@lru_cache(maxsize=4)
+def _load(model_path: str, model_mtime: float, evaluation_path: str):
     """The model bundle and its 80% relative range; reloaded when a new run publishes a model."""
     import joblib
-    bundle = joblib.load(config.MODEL_FILE)
-    ev = json.loads(config.EVALUATION.read_text(encoding="utf-8"))
+    bundle = joblib.load(model_path)
+    ev = json.loads(open(evaluation_path, encoding="utf-8").read())
     return bundle, tuple(ev["prediction_interval_80pct_relative"])
 
 
@@ -59,13 +61,14 @@ def estimate_budget(event: dict, today: date | None = None) -> dict:
     """
     if any(event.get(k) in (None, "") for k in REQUIRED) or event.get("event_type") not in vocab.EVENT_TYPES:
         return _unavailable()
-    if not model_ready():
+    run = published.current()
+    if not model_ready(run):
         return _unavailable()
     import pandas as pd
 
     from rivatar.tools.ml_ops import build_features
 
-    bundle, (lo, hi) = _load(config.MODEL_FILE.stat().st_mtime)
+    bundle, (lo, hi) = _load(str(run.model_file), run.model_file.stat().st_mtime, str(run.evaluation))
     row = {k: event[k] for k in REQUIRED}
     row["inquiry_date"] = str(today or date.today())
     row["event_date"] = str(event["event_date"])

@@ -149,14 +149,21 @@ def comparison_html(ctx: ui.Ctx, comp: dict | None, ev: dict | None, d: dict | N
 
 
 # ------------------------------------------------------------------ data team outputs
+@st.cache_data(show_spinner=False, max_entries=16)
+def _png_data_uri(path: str, mtime: float) -> str:
+    """Base64 of an EDA chart, encoded once per file version instead of on every page run."""
+    with open(path, "rb") as f:
+        return "data:image/png;base64," + base64.b64encode(f.read()).decode("ascii")
+
+
 def charts_html(ctx: ui.Ctx, run: published.PublishedRun) -> str:
     figs = []
     for name in CHARTS:
         p = run.eda_dir / f"{name}.png"
         if p.exists():
-            data = base64.b64encode(p.read_bytes()).decode("ascii")
+            data = _png_data_uri(str(p), p.stat().st_mtime)
             label = ctx.t(f"lab.chart_{name}")
-            figs.append(f'<figure class="lab-chart"><img src="data:image/png;base64,{data}" alt="{escape(label)}" '
+            figs.append(f'<figure class="lab-chart"><img src="{data}" alt="{escape(label)}" '
                         f'loading="lazy"><figcaption>{escape(label)}</figcaption></figure>')
     if not figs:
         return ""

@@ -174,18 +174,18 @@ def test_ui_escapes_and_marks_todo():
     assert 'class="todo"' in ui.txt("[phone]")
     assert "&lt;script&gt;" in ui.txt("<script>")
     ctx = ui.Ctx("he", "projects")
-    assert ctx.href("contact") == "/contact?lang=he"
-    assert ui.Ctx("en", "").href("projects") == "/projects"
-    assert ui.Ctx("he", "about").href("about", lang="en") == "/about?lang=en"
+    assert ctx.href("contact") == "contact?lang=he&intro=0"
+    assert ui.Ctx("en", "").href("projects") == "projects?intro=0"
+    assert ui.Ctx("he", "about").href("about", lang="en") == "about?lang=en&intro=0"
     assert "est-pending" in ui.estimate_box(ui.Ctx(), None, estimate_budget({}))
 
 
 def test_language_switch_keeps_the_page():
     import ui
     html = ui.masthead(ui.Ctx("en", "project-evyatar-rivka"), "projects")
-    assert 'href="/project-evyatar-rivka?lang=he"' in html
+    assert 'href="project-evyatar-rivka?lang=he&amp;intro=0"' in html or 'href="project-evyatar-rivka?lang=he&intro=0"' in html
     html = ui.masthead(ui.Ctx("he", "contact"), "contact")
-    assert 'href="/contact?lang=en"' in html and 'aria-current="page"' in html
+    assert ('href="contact?lang=en&intro=0"' in html or 'href="contact?lang=en&amp;intro=0"' in html) and 'aria-current="page"' in html
 
 
 # ---------------------------------------------------------------- pages render in both languages

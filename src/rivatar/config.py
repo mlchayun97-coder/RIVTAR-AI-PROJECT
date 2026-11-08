@@ -35,10 +35,50 @@ MEDIA_EXPORT_GLOB = "RIVATAR WEBSITE-*"
 
 RAW_EVENTS_CSV = RAW_DIR / "events_raw.csv"
 
-# ---- LLM (used from phase 2) ------------------------------------------------
+# ---- ML pipeline (phases 2-4) -------------------------------------------------
+# Data stays synthetic and out of git (data/ is ignored). Every run regenerates it from SEED.
+RAW_DATA = RAW_EVENTS_CSV
+CLEAN_DATA = PROCESSED_DIR / "events_clean.csv"
+EDA_DIR = REPORTS_DIR / "eda"
+
+DATA_CONTRACT = ARTIFACTS_DIR / "data_contract.json"
+FEATURES_SPEC = ARTIFACTS_DIR / "features_spec.json"
+MODEL_FILE = ARTIFACTS_DIR / "model.joblib"
+CLEANING_REPORT = REPORTS_DIR / "cleaning_report.json"
+EDA_SUMMARY = REPORTS_DIR / "eda_summary.json"
+INSIGHTS_MD = REPORTS_DIR / "insights.md"
+MODEL_COMPARISON = REPORTS_DIR / "model_comparison.json"
+MODEL_DECISION = REPORTS_DIR / "model_decision.json"
+EVALUATION = REPORTS_DIR / "evaluation.json"
+MODEL_CARD = REPORTS_DIR / "model_card.md"
+RUN_STATUS = REPORTS_DIR / "run_status.json"
+RUN_LOG = REPORTS_DIR / "run_log.txt"
+
+TARGET = "total_budget_ils"
+ID_COLUMN = "event_id"
+
+N_ROWS = 1500
+TEST_SIZE = 0.2
+CV_FOLDS = 5
+
+# Gates. The flow stops if any of these are not met.
+MIN_ROWS_AFTER_CLEANING = 1000
+MAX_ALLOWED_MAPE = 0.25        # the published model must have hold-out MAPE below 25%
+REPRO_TOLERANCE = 1e-9         # a retrain with the same seed must give the same predictions
+
+# Model-selection policy the agent decides with (and the offline rule applies):
+# prefer the simpler model unless a more complex one lowers CV MAE by more than this share.
+SIMPLER_MODEL_MARGIN = 0.05
+
+# ---- LLM ----------------------------------------------------------------------------------
 LLM_MODEL = os.getenv("RIVATAR_LLM_MODEL", "gpt-4o-mini")
 
 
 def has_openai_key() -> bool:
     """True if an OpenAI key is configured. Never exposes the value."""
     return bool(os.getenv("OPENAI_API_KEY", "").strip())
+
+
+def ensure_dirs() -> None:
+    for d in (RAW_DIR, PROCESSED_DIR, ARTIFACTS_DIR, REPORTS_DIR, EDA_DIR):
+        d.mkdir(parents=True, exist_ok=True)

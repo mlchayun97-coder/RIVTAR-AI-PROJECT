@@ -313,6 +313,13 @@ def write(raw: pd.DataFrame, log: dict, out: Path) -> None:
                                                    encoding="utf-8")
 
 
+def generate_raw_dataset(path: Path = config.RAW_DATA, n: int = config.N_ROWS, seed: int = config.SEED) -> pd.DataFrame:
+    """Step 1 of the Flow: write the messy raw CSV (+ injection_log.json) and return it."""
+    raw, _, log = generate(n, seed)
+    write(raw, log, path)
+    return raw
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Generate the synthetic RIVATAR events dataset")
     ap.add_argument("--n", type=int, default=1500)

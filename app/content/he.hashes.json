@@ -2,8 +2,8 @@
  "about.eye_text": "3bed3effabd2c2b2",
  "about.eye_title": "bceb516f56e442d5",
  "about.founder": "0bc5f2460c61be7e",
- "about.founder_bio": "adaf3e722ca906d8",
- "about.founder_role": "c442df677de2d72e",
+ "about.founder_bio": "32d8740eb51d9bf6",
+ "about.founder_role": "4dc72b1b49c274b8",
  "about.hand_text": "efae95d359f947d0",
  "about.hand_title": "4bb7c2af8098b109",
  "about.text": "c8f02e7a30688a21",
@@ -59,9 +59,9 @@
  "footer.contact": "b37456c4530be810",
  "footer.info": "4b631f69842530d6",
  "footer.menu": "57f5f5efbc5990f5",
- "footer.privacy": "d7a17af2402e2404",
+ "footer.privacy": "7ceacdcaab4c898f",
  "footer.rights": "6969c29f734317e4",
- "footer.terms": "0ae22ad59994a04a",
+ "footer.terms": "01d5a15f026220ed",
  "form.business_only": "c290961fde5839b0",
  "form.catering_level": "a304bcdac29d239b",
  "form.choose": "78b7c9f6d6d7dfc0",
@@ -204,7 +204,6 @@
  "project.location": "d219c68101f532de",
  "project.next": "508fadca1ce16744",
  "project.palette": "c1c32ec261522860",
- "project.pending": "1afcca8d4ade1e8d",
  "project.type": "ad8919ace091b140",
  "project.venues": "7c4bceee0f32c8bb",
  "projects.count": "40ba4e5d2a7e0d86",
@@ -365,6 +364,5 @@
  "services.mitzvah_title": "cae45b8faa1a14fd",
  "services.title": "5cbd584046863bc7",
  "services.weddings_text": "cc0fb18d913f9db1",
- "services.weddings_title": "e8f6e50e0af877e7",
- "todo": "d7c483c880d33a94"
+ "services.weddings_title": "e8f6e50e0af877e7"
 }

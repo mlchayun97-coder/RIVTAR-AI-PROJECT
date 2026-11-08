@@ -47,8 +47,7 @@
     "films": "Moments in motion",
     "invite_title": "Planning something of your own?",
     "invite_text": "Tell us about the people, the place and the date. We will take it from there.",
-    "invite_cta": "Get in touch",
-    "pending": "[Gallery being curated]"
+    "invite_cta": "Get in touch"
   },
   "event_types": {
     "wedding": "Wedding",
@@ -68,8 +67,8 @@
     "hand_title": "The Hand",
     "hand_text": "Timelines, suppliers, logistics and the team on site. Every stage is managed, so that on the day you can be guests at your own event.",
     "founder": "Rivka",
-    "founder_role": "[Role / title]",
-    "founder_bio": "[About Rivka: her background, what brought her to event production, and what sets her work apart.]"
+    "founder_role": "Founder & CEO, RIVATAR PRODUCTIONS",
+    "founder_bio": "About eight years ago I started out as an event producer at an advertising agency that provided advertising services and event production for some of Israel's largest companies. In parallel, I worked independently, producing boutique events and designing tables for luxury events.\n\nOver the years I became the agency's lead producer, worked across the whole field of production in Israel and abroad, and built close relationships with leading suppliers. After hundreds of satisfied clients and exceptional events, I decided to follow my dream and do what I do best. That is how I founded RIVATAR.\n\nEvery event we create is personal, shaped around the character and identity of each client: a business conference, an elegant wedding or a moving bar mitzvah. Each one combines innovative design and current trends from around the world with carefully chosen cuisine that fits the atmosphere and the concept.\n\nThe RIVATAR team of producers and suppliers manages every detail with care and professionalism, so that your event matches exactly what you asked for, with the right balance between fair prices from leading suppliers and a meticulous, luxurious event. An event that takes your breath away."
   },
   "services": {
     "title": "Services",
@@ -199,8 +198,8 @@
     "menu": "Menu",
     "contact": "Contact",
     "info": "Info",
-    "privacy": "[Privacy policy]",
-    "terms": "[Terms & conditions]",
+    "privacy": "Privacy policy",
+    "terms": "Terms & conditions",
     "rights": "© 2026 RIVATAR PRODUCTIONS"
   },
   "lab": {
@@ -269,6 +268,5 @@
     "col_rule": "Rule",
     "card_title": "Model Card",
     "log_title": "Run log"
-  },
-  "todo": "[to be completed]"
+  }
 }

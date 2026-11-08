@@ -139,6 +139,21 @@ def test_palette_block_shows_swatches_without_hex_labels():
     assert ui.palette_block(ui.Ctx("en"), {"slug": "x"}) == ""
 
 
+def test_founder_section_first_name_only_with_paragraphs():
+    import ui
+    from views import about
+    for lang, name in (("en", "Rivka"), ("he", "רבקה")):
+        html = about.founder(ui.Ctx(lang))
+        assert f"<h3>{name}</h3>" in html and html.count("<p>") == 4  # the bio's four paragraphs
+        assert "Chayun" not in html and "חיון" not in html
+
+
+def test_no_placeholder_strings_in_content_files():
+    for f in [CONTENT / "en.json", CONTENT / "he.json", CONTENT / "site.json", *sorted((CONTENT / "projects").glob("*.json"))]:
+        text = f.read_text(encoding="utf-8")
+        assert not re.search(r'"\[[^"\]]*\]"', text), f.name
+
+
 def test_contact_details_everywhere():
     import ui
     from views import contact

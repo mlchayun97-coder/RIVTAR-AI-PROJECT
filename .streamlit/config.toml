@@ -1,0 +1,21 @@
+
+[server]
+# Serve app/static (self-hosted fonts and event photos) at /app/static/...
+enableStaticServing = true
+
+[client]
+toolbarMode = "minimal"
+showSidebarNavigation = false
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+# Dark palette from the design draft (rivatar-home.html, dark mode)
+base = "dark"
+primaryColor = "#ECE5D9"
+backgroundColor = "#161513"
+secondaryBackgroundColor = "#201E1B"
+textColor = "#ECE5D9"
+linkColor = "#ECE5D9"
+font = "Assistant, 'Segoe UI', Arial, sans-serif"

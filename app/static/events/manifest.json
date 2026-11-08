@@ -1,0 +1,717 @@
+{
+  "settings": {
+    "long_edge": 1400,
+    "quality": 70,
+    "thumb_edge": 600,
+    "per_event": 12
+  },
+  "events": {
+    "avigail-nuri": {
+      "count": 12,
+      "images": [
+        {
+          "file": "avigail-nuri/avigail-nuri-01.jpg",
+          "thumb": "avigail-nuri/thumbs/avigail-nuri-01.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.8012
+        },
+        {
+          "file": "avigail-nuri/avigail-nuri-02.jpg",
+          "thumb": "avigail-nuri/thumbs/avigail-nuri-02.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.772
+        },
+        {
+          "file": "avigail-nuri/avigail-nuri-03.jpg",
+          "thumb": "avigail-nuri/thumbs/avigail-nuri-03.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.6027
+        },
+        {
+          "file": "avigail-nuri/avigail-nuri-04.jpg",
+          "thumb": "avigail-nuri/thumbs/avigail-nuri-04.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.5881
+        },
+        {
+          "file": "avigail-nuri/avigail-nuri-05.jpg",
+          "thumb": "avigail-nuri/thumbs/avigail-nuri-05.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.7319
+        },
+        {
+          "file": "avigail-nuri/avigail-nuri-06.jpg",
+          "thumb": "avigail-nuri/thumbs/avigail-nuri-06.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.5033
+        },
+        {
+          "file": "avigail-nuri/avigail-nuri-07.jpg",
+          "thumb": "avigail-nuri/thumbs/avigail-nuri-07.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.5856
+        },
+        {
+          "file": "avigail-nuri/avigail-nuri-08.jpg",
+          "thumb": "avigail-nuri/thumbs/avigail-nuri-08.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.6405
+        },
+        {
+          "file": "avigail-nuri/avigail-nuri-09.jpg",
+          "thumb": "avigail-nuri/thumbs/avigail-nuri-09.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.5772
+        },
+        {
+          "file": "avigail-nuri/avigail-nuri-10.jpg",
+          "thumb": "avigail-nuri/thumbs/avigail-nuri-10.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.5307
+        },
+        {
+          "file": "avigail-nuri/avigail-nuri-11.jpg",
+          "thumb": "avigail-nuri/thumbs/avigail-nuri-11.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.4609
+        },
+        {
+          "file": "avigail-nuri/avigail-nuri-12.jpg",
+          "thumb": "avigail-nuri/thumbs/avigail-nuri-12.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.4054
+        }
+      ]
+    },
+    "bailey-motel": {
+      "count": 12,
+      "images": [
+        {
+          "file": "bailey-motel/bailey-motel-01.jpg",
+          "thumb": "bailey-motel/thumbs/bailey-motel-01.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.8012
+        },
+        {
+          "file": "bailey-motel/bailey-motel-02.jpg",
+          "thumb": "bailey-motel/thumbs/bailey-motel-02.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.7044
+        },
+        {
+          "file": "bailey-motel/bailey-motel-03.jpg",
+          "thumb": "bailey-motel/thumbs/bailey-motel-03.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.7109
+        },
+        {
+          "file": "bailey-motel/bailey-motel-04.jpg",
+          "thumb": "bailey-motel/thumbs/bailey-motel-04.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.7439
+        },
+        {
+          "file": "bailey-motel/bailey-motel-05.jpg",
+          "thumb": "bailey-motel/thumbs/bailey-motel-05.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.6414
+        },
+        {
+          "file": "bailey-motel/bailey-motel-06.jpg",
+          "thumb": "bailey-motel/thumbs/bailey-motel-06.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.6458
+        },
+        {
+          "file": "bailey-motel/bailey-motel-07.jpg",
+          "thumb": "bailey-motel/thumbs/bailey-motel-07.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.6692
+        },
+        {
+          "file": "bailey-motel/bailey-motel-08.jpg",
+          "thumb": "bailey-motel/thumbs/bailey-motel-08.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.6263
+        },
+        {
+          "file": "bailey-motel/bailey-motel-09.jpg",
+          "thumb": "bailey-motel/thumbs/bailey-motel-09.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.5994
+        },
+        {
+          "file": "bailey-motel/bailey-motel-10.jpg",
+          "thumb": "bailey-motel/thumbs/bailey-motel-10.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.5854
+        },
+        {
+          "file": "bailey-motel/bailey-motel-11.jpg",
+          "thumb": "bailey-motel/thumbs/bailey-motel-11.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.5902
+        },
+        {
+          "file": "bailey-motel/bailey-motel-12.jpg",
+          "thumb": "bailey-motel/thumbs/bailey-motel-12.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.6716
+        }
+      ]
+    },
+    "aaron-bar-mitzvah": {
+      "count": 12,
+      "images": [
+        {
+          "file": "aaron-bar-mitzvah/aaron-bar-mitzvah-01.jpg",
+          "thumb": "aaron-bar-mitzvah/thumbs/aaron-bar-mitzvah-01.jpg",
+          "width": 1050,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.8085
+        },
+        {
+          "file": "aaron-bar-mitzvah/aaron-bar-mitzvah-02.jpg",
+          "thumb": "aaron-bar-mitzvah/thumbs/aaron-bar-mitzvah-02.jpg",
+          "width": 1400,
+          "height": 937,
+          "orientation": "landscape",
+          "score": 0.7041
+        },
+        {
+          "file": "aaron-bar-mitzvah/aaron-bar-mitzvah-03.jpg",
+          "thumb": "aaron-bar-mitzvah/thumbs/aaron-bar-mitzvah-03.jpg",
+          "width": 1050,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.7985
+        },
+        {
+          "file": "aaron-bar-mitzvah/aaron-bar-mitzvah-04.jpg",
+          "thumb": "aaron-bar-mitzvah/thumbs/aaron-bar-mitzvah-04.jpg",
+          "width": 1400,
+          "height": 937,
+          "orientation": "landscape",
+          "score": 0.7857
+        },
+        {
+          "file": "aaron-bar-mitzvah/aaron-bar-mitzvah-05.jpg",
+          "thumb": "aaron-bar-mitzvah/thumbs/aaron-bar-mitzvah-05.jpg",
+          "width": 1400,
+          "height": 937,
+          "orientation": "landscape",
+          "score": 0.7749
+        },
+        {
+          "file": "aaron-bar-mitzvah/aaron-bar-mitzvah-06.jpg",
+          "thumb": "aaron-bar-mitzvah/thumbs/aaron-bar-mitzvah-06.jpg",
+          "width": 1050,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.7314
+        },
+        {
+          "file": "aaron-bar-mitzvah/aaron-bar-mitzvah-07.jpg",
+          "thumb": "aaron-bar-mitzvah/thumbs/aaron-bar-mitzvah-07.jpg",
+          "width": 1400,
+          "height": 937,
+          "orientation": "landscape",
+          "score": 0.7362
+        },
+        {
+          "file": "aaron-bar-mitzvah/aaron-bar-mitzvah-08.jpg",
+          "thumb": "aaron-bar-mitzvah/thumbs/aaron-bar-mitzvah-08.jpg",
+          "width": 1050,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.7709
+        },
+        {
+          "file": "aaron-bar-mitzvah/aaron-bar-mitzvah-09.jpg",
+          "thumb": "aaron-bar-mitzvah/thumbs/aaron-bar-mitzvah-09.jpg",
+          "width": 1050,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.6827
+        },
+        {
+          "file": "aaron-bar-mitzvah/aaron-bar-mitzvah-10.jpg",
+          "thumb": "aaron-bar-mitzvah/thumbs/aaron-bar-mitzvah-10.jpg",
+          "width": 1400,
+          "height": 937,
+          "orientation": "landscape",
+          "score": 0.6344
+        },
+        {
+          "file": "aaron-bar-mitzvah/aaron-bar-mitzvah-11.jpg",
+          "thumb": "aaron-bar-mitzvah/thumbs/aaron-bar-mitzvah-11.jpg",
+          "width": 1050,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.6961
+        },
+        {
+          "file": "aaron-bar-mitzvah/aaron-bar-mitzvah-12.jpg",
+          "thumb": "aaron-bar-mitzvah/thumbs/aaron-bar-mitzvah-12.jpg",
+          "width": 1050,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.7212
+        }
+      ]
+    },
+    "david-bar-mitzvah": {
+      "count": 12,
+      "images": [
+        {
+          "file": "david-bar-mitzvah/david-bar-mitzvah-01.jpg",
+          "thumb": "david-bar-mitzvah/thumbs/david-bar-mitzvah-01.jpg",
+          "width": 1400,
+          "height": 935,
+          "orientation": "landscape",
+          "score": 0.7856
+        },
+        {
+          "file": "david-bar-mitzvah/david-bar-mitzvah-02.jpg",
+          "thumb": "david-bar-mitzvah/thumbs/david-bar-mitzvah-02.jpg",
+          "width": 1400,
+          "height": 934,
+          "orientation": "landscape",
+          "score": 0.7629
+        },
+        {
+          "file": "david-bar-mitzvah/david-bar-mitzvah-03.jpg",
+          "thumb": "david-bar-mitzvah/thumbs/david-bar-mitzvah-03.jpg",
+          "width": 1400,
+          "height": 934,
+          "orientation": "landscape",
+          "score": 0.6973
+        },
+        {
+          "file": "david-bar-mitzvah/david-bar-mitzvah-04.jpg",
+          "thumb": "david-bar-mitzvah/thumbs/david-bar-mitzvah-04.jpg",
+          "width": 934,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.7119
+        },
+        {
+          "file": "david-bar-mitzvah/david-bar-mitzvah-05.jpg",
+          "thumb": "david-bar-mitzvah/thumbs/david-bar-mitzvah-05.jpg",
+          "width": 1400,
+          "height": 934,
+          "orientation": "landscape",
+          "score": 0.7438
+        },
+        {
+          "file": "david-bar-mitzvah/david-bar-mitzvah-06.jpg",
+          "thumb": "david-bar-mitzvah/thumbs/david-bar-mitzvah-06.jpg",
+          "width": 1400,
+          "height": 934,
+          "orientation": "landscape",
+          "score": 0.6838
+        },
+        {
+          "file": "david-bar-mitzvah/david-bar-mitzvah-07.jpg",
+          "thumb": "david-bar-mitzvah/thumbs/david-bar-mitzvah-07.jpg",
+          "width": 934,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.7207
+        },
+        {
+          "file": "david-bar-mitzvah/david-bar-mitzvah-08.jpg",
+          "thumb": "david-bar-mitzvah/thumbs/david-bar-mitzvah-08.jpg",
+          "width": 934,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.6624
+        },
+        {
+          "file": "david-bar-mitzvah/david-bar-mitzvah-09.jpg",
+          "thumb": "david-bar-mitzvah/thumbs/david-bar-mitzvah-09.jpg",
+          "width": 1400,
+          "height": 934,
+          "orientation": "landscape",
+          "score": 0.734
+        },
+        {
+          "file": "david-bar-mitzvah/david-bar-mitzvah-10.jpg",
+          "thumb": "david-bar-mitzvah/thumbs/david-bar-mitzvah-10.jpg",
+          "width": 1400,
+          "height": 934,
+          "orientation": "landscape",
+          "score": 0.6749
+        },
+        {
+          "file": "david-bar-mitzvah/david-bar-mitzvah-11.jpg",
+          "thumb": "david-bar-mitzvah/thumbs/david-bar-mitzvah-11.jpg",
+          "width": 1400,
+          "height": 934,
+          "orientation": "landscape",
+          "score": 0.7134
+        },
+        {
+          "file": "david-bar-mitzvah/david-bar-mitzvah-12.jpg",
+          "thumb": "david-bar-mitzvah/thumbs/david-bar-mitzvah-12.jpg",
+          "width": 934,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.7177
+        }
+      ]
+    },
+    "eden-binyamin": {
+      "count": 12,
+      "images": [
+        {
+          "file": "eden-binyamin/eden-binyamin-01.jpg",
+          "thumb": "eden-binyamin/thumbs/eden-binyamin-01.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 1.0
+        },
+        {
+          "file": "eden-binyamin/eden-binyamin-02.jpg",
+          "thumb": "eden-binyamin/thumbs/eden-binyamin-02.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.9854
+        },
+        {
+          "file": "eden-binyamin/eden-binyamin-03.jpg",
+          "thumb": "eden-binyamin/thumbs/eden-binyamin-03.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.9478
+        },
+        {
+          "file": "eden-binyamin/eden-binyamin-04.jpg",
+          "thumb": "eden-binyamin/thumbs/eden-binyamin-04.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.9543
+        },
+        {
+          "file": "eden-binyamin/eden-binyamin-05.jpg",
+          "thumb": "eden-binyamin/thumbs/eden-binyamin-05.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.9087
+        },
+        {
+          "file": "eden-binyamin/eden-binyamin-06.jpg",
+          "thumb": "eden-binyamin/thumbs/eden-binyamin-06.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.9206
+        },
+        {
+          "file": "eden-binyamin/eden-binyamin-07.jpg",
+          "thumb": "eden-binyamin/thumbs/eden-binyamin-07.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.8914
+        },
+        {
+          "file": "eden-binyamin/eden-binyamin-08.jpg",
+          "thumb": "eden-binyamin/thumbs/eden-binyamin-08.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.8826
+        },
+        {
+          "file": "eden-binyamin/eden-binyamin-09.jpg",
+          "thumb": "eden-binyamin/thumbs/eden-binyamin-09.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.8371
+        },
+        {
+          "file": "eden-binyamin/eden-binyamin-10.jpg",
+          "thumb": "eden-binyamin/thumbs/eden-binyamin-10.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.8864
+        },
+        {
+          "file": "eden-binyamin/eden-binyamin-11.jpg",
+          "thumb": "eden-binyamin/thumbs/eden-binyamin-11.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.7915
+        },
+        {
+          "file": "eden-binyamin/eden-binyamin-12.jpg",
+          "thumb": "eden-binyamin/thumbs/eden-binyamin-12.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.8319
+        }
+      ]
+    },
+    "evyatar-rivka": {
+      "count": 12,
+      "images": [
+        {
+          "file": "evyatar-rivka/evyatar-rivka-01.jpg",
+          "thumb": "evyatar-rivka/thumbs/evyatar-rivka-01.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 1.0
+        },
+        {
+          "file": "evyatar-rivka/evyatar-rivka-02.jpg",
+          "thumb": "evyatar-rivka/thumbs/evyatar-rivka-02.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.9437
+        },
+        {
+          "file": "evyatar-rivka/evyatar-rivka-03.jpg",
+          "thumb": "evyatar-rivka/thumbs/evyatar-rivka-03.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.9769
+        },
+        {
+          "file": "evyatar-rivka/evyatar-rivka-04.jpg",
+          "thumb": "evyatar-rivka/thumbs/evyatar-rivka-04.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.9175
+        },
+        {
+          "file": "evyatar-rivka/evyatar-rivka-05.jpg",
+          "thumb": "evyatar-rivka/thumbs/evyatar-rivka-05.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.9784
+        },
+        {
+          "file": "evyatar-rivka/evyatar-rivka-06.jpg",
+          "thumb": "evyatar-rivka/thumbs/evyatar-rivka-06.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.9455
+        },
+        {
+          "file": "evyatar-rivka/evyatar-rivka-07.jpg",
+          "thumb": "evyatar-rivka/thumbs/evyatar-rivka-07.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.9326
+        },
+        {
+          "file": "evyatar-rivka/evyatar-rivka-08.jpg",
+          "thumb": "evyatar-rivka/thumbs/evyatar-rivka-08.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.9343
+        },
+        {
+          "file": "evyatar-rivka/evyatar-rivka-09.jpg",
+          "thumb": "evyatar-rivka/thumbs/evyatar-rivka-09.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.881
+        },
+        {
+          "file": "evyatar-rivka/evyatar-rivka-10.jpg",
+          "thumb": "evyatar-rivka/thumbs/evyatar-rivka-10.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.8855
+        },
+        {
+          "file": "evyatar-rivka/evyatar-rivka-11.jpg",
+          "thumb": "evyatar-rivka/thumbs/evyatar-rivka-11.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.895
+        },
+        {
+          "file": "evyatar-rivka/evyatar-rivka-12.jpg",
+          "thumb": "evyatar-rivka/thumbs/evyatar-rivka-12.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.9294
+        }
+      ]
+    },
+    "shaindel-meir": {
+      "count": 12,
+      "images": [
+        {
+          "file": "shaindel-meir/shaindel-meir-01.jpg",
+          "thumb": "shaindel-meir/thumbs/shaindel-meir-01.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.9722
+        },
+        {
+          "file": "shaindel-meir/shaindel-meir-02.jpg",
+          "thumb": "shaindel-meir/thumbs/shaindel-meir-02.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.9297
+        },
+        {
+          "file": "shaindel-meir/shaindel-meir-03.jpg",
+          "thumb": "shaindel-meir/thumbs/shaindel-meir-03.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.9675
+        },
+        {
+          "file": "shaindel-meir/shaindel-meir-04.jpg",
+          "thumb": "shaindel-meir/thumbs/shaindel-meir-04.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.9037
+        },
+        {
+          "file": "shaindel-meir/shaindel-meir-05.jpg",
+          "thumb": "shaindel-meir/thumbs/shaindel-meir-05.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.7978
+        },
+        {
+          "file": "shaindel-meir/shaindel-meir-06.jpg",
+          "thumb": "shaindel-meir/thumbs/shaindel-meir-06.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.9279
+        },
+        {
+          "file": "shaindel-meir/shaindel-meir-07.jpg",
+          "thumb": "shaindel-meir/thumbs/shaindel-meir-07.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.8866
+        },
+        {
+          "file": "shaindel-meir/shaindel-meir-08.jpg",
+          "thumb": "shaindel-meir/thumbs/shaindel-meir-08.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.8661
+        },
+        {
+          "file": "shaindel-meir/shaindel-meir-09.jpg",
+          "thumb": "shaindel-meir/thumbs/shaindel-meir-09.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.8605
+        },
+        {
+          "file": "shaindel-meir/shaindel-meir-10.jpg",
+          "thumb": "shaindel-meir/thumbs/shaindel-meir-10.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.8879
+        },
+        {
+          "file": "shaindel-meir/shaindel-meir-11.jpg",
+          "thumb": "shaindel-meir/thumbs/shaindel-meir-11.jpg",
+          "width": 933,
+          "height": 1400,
+          "orientation": "portrait",
+          "score": 0.873
+        },
+        {
+          "file": "shaindel-meir/shaindel-meir-12.jpg",
+          "thumb": "shaindel-meir/thumbs/shaindel-meir-12.jpg",
+          "width": 1400,
+          "height": 933,
+          "orientation": "landscape",
+          "score": 0.851
+        }
+      ]
+    }
+  }
+}

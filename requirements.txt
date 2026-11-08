@@ -1,12 +1,16 @@
-﻿# Python 3.12 only (CrewAI does not support 3.13+ yet).
-# Pins verified with a pip dry-run against crewai==1.15.34 (added in phase 2),
-# which requires pydantic < 2.13.
+# Python 3.12 only (CrewAI does not support 3.13+ yet).
+# crewai 1.15.x requires pydantic < 2.13 (kept at 2.12.5). `pip check` is clean with these pins.
 streamlit==1.66.1
 pandas==3.1.0
 numpy==2.5.4
 pillow==13.0.0
-pydantic==2.12.5
+pydantic==2.12.5   # < 2.13 for crewai 1.15.x
 python-dotenv==1.2.4
 pytest==9.2.0
 openai==2.54.0
 imageio-ffmpeg==0.8.1
+# ML pipeline (phases 2-4)
+crewai==1.15.34
+scikit-learn==1.9.1
+joblib==1.6.0
+matplotlib==3.11.2

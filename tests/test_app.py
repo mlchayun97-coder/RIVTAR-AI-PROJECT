@@ -139,6 +139,21 @@ def test_palette_block_shows_swatches_without_hex_labels():
     assert ui.palette_block(ui.Ctx("en"), {"slug": "x"}) == ""
 
 
+def test_founder_section_first_name_only_with_paragraphs():
+    import ui
+    from views import about
+    for lang, name in (("en", "Rivka"), ("he", "רבקה")):
+        html = about.founder(ui.Ctx(lang))
+        assert f"<h3>{name}</h3>" in html and html.count("<p>") == 4  # the bio's four paragraphs
+        assert "Chayun" not in html and "חיון" not in html
+
+
+def test_no_placeholder_strings_in_content_files():
+    for f in [CONTENT / "en.json", CONTENT / "he.json", CONTENT / "site.json", *sorted((CONTENT / "projects").glob("*.json"))]:
+        text = f.read_text(encoding="utf-8")
+        assert not re.search(r'"\[[^"\]]*\]"', text), f.name
+
+
 def test_contact_details_everywhere():
     import ui
     from views import contact
@@ -208,9 +223,10 @@ def test_full_app_runs():
 
 def test_contact_empty_submit_shows_errors_and_saves_nothing(tmp_path, monkeypatch):
     from streamlit.testing.v1 import AppTest
+
+    from rivatar import config
+    monkeypatch.setattr(config, "LEADS_CSV", tmp_path / "leads.csv")  # restored after the test
     script = (f"import sys; sys.path[:0] = [{str(APP)!r}, {str(ROOT / 'src')!r}]\n"
-              "from rivatar import config\n"
-              f"config.LEADS_CSV = __import__('pathlib').Path({str(tmp_path / 'leads.csv')!r})\n"
               "import theme\nfrom views import contact\ntheme.inject()\ncontact.render()")
     at = AppTest.from_string(script, default_timeout=60)
     at.run()
@@ -257,7 +273,66 @@ def test_save_lead_csv(tmp_path):
     assert rec["client_type"] == "private" and rec["extra_photography"] == 1
 
 
-def test_estimator_stub_contract():
+def test_estimator_needs_every_model_field():
     r = estimate_budget({"event_type": "wedding"})
     assert r["status"] == "unavailable" and r["estimate_ils"] is None
     assert r["message"] == "Estimate available after the ML phase"
+
+
+def test_form_shows_the_budget_range_from_the_published_model(pipeline):
+    import ui
+    from rivatar.leads import event_features
+    r = estimate_budget(event_features(_lead()))
+    assert r["status"] == "ok" and r["model_version"] == pipeline.best_model
+    assert 10_000 < r["low_ils"] <= r["estimate_ils"] <= r["high_ils"] < 2_000_000
+    bigger = estimate_budget(event_features(_lead(guest_count=600)))
+    assert bigger["estimate_ils"] > r["estimate_ils"]
+    for lang, phrase in (("en", "A starting point, not a quote."), ("he", "נקודת פתיחה, לא הצעת מחיר.")):
+        box = ui.estimate_box(ui.Ctx(lang), "case", r)
+        assert f"₪{r['low_ils']:,.0f} – ₪{r['high_ils']:,.0f}" in box and phrase in box
+        assert pipeline.best_model in box and "est-pending" not in box
+
+
+def test_no_estimate_after_a_stopped_run(pipeline):
+    from rivatar.flow import run_flow
+    from rivatar.leads import event_features
+    try:
+        assert run_flow(offline=True, inject_violation=True).status == "STOPPED"
+        assert estimate_budget(event_features(_lead()))["status"] == "unavailable"
+    finally:
+        assert run_flow(offline=True).status == "SUCCEEDED"
+
+
+def _lab_html(lang: str) -> str:
+    from streamlit.testing.v1 import AppTest
+    script = (f"import sys; sys.path[:0] = [{str(APP)!r}, {str(ROOT / 'src')!r}]\n"
+              f"import streamlit as st\nst.query_params['lang'] = {lang!r}\n"
+              "import theme\nfrom views import ml_lab\ntheme.inject()\nml_lab.render()\n")
+    at = AppTest.from_string(script, default_timeout=60)
+    at.run()
+    assert not at.exception
+    return " ".join(str(h.proto.body) for h in at.get("html")) + " ".join(m.value for m in at.markdown)
+
+
+def test_ml_lab_shows_run_steps_decision_charts_contract_card(pipeline):
+    html = _lab_html("en")
+    for needle in ["Model published", "The agent&#x27;s decision", "Decided by", pipeline.best_model,
+                   "Model comparison", "data:image/png;base64,", "Data contract", "rivatar_events_clean",
+                   "Model Card", "[agent_decision]", "Data Insights"]:
+        assert needle in html, needle
+    assert html.count('class="pill ok"') >= 6  # every step done or passed (+ the published marker)
+    assert "ההחלטה של הסוכן" in _lab_html("he")
+
+
+def test_ml_lab_makes_a_stop_clear(pipeline):
+    from rivatar.flow import run_flow
+    try:
+        assert run_flow(offline=True, inject_violation=True).status == "STOPPED"
+        html = _lab_html("en")
+        text = re.sub(r"<[^>]+>", "", html)
+        assert "Pipeline stopped" in text and "Stopped at gate: data_contract" in text
+        assert "birthday_party" in text and "No model was published" in text
+        assert html.count('class="pill fail"') == 2 and html.count('class="pill skip"') == 2
+        assert "<h2>The agent&#x27;s decision</h2>" not in html and "<h2>Model Card</h2>" not in html
+    finally:
+        assert run_flow(offline=True).status == "SUCCEEDED"

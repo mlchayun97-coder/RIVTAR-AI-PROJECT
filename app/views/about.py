@@ -17,8 +17,9 @@ def founder(ctx) -> str:
     if C.is_todo(bio):
         return ""
     role_html = "" if C.is_todo(role) else ui.txt(role, tag="p", cls="label")
+    paras = "".join(ui.txt(p.strip(), tag="p") for p in bio.split("\n\n") if p.strip())  # keep paragraph breaks
     return (f'<section class="sec"><div class="founder"><h3>{escape(ctx.t("about.founder"))}</h3>'
-            f'{role_html}{ui.txt(bio, tag="p")}</div></section>')
+            f'{role_html}{paras}</div></section>')
 
 
 def render() -> None:

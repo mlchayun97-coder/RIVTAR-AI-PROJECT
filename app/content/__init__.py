@@ -103,7 +103,7 @@ def next_project(slug: str) -> dict | None:
 
 
 def event_type_label(code: str | None, lang: str) -> str:
-    return t(f"event_types.{code}", lang) if code else t("todo", lang)
+    return t(f"event_types.{code}", lang) if code else ""
 
 
 def reload() -> None:

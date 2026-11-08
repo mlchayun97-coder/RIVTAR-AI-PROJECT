@@ -1,0 +1,41 @@
+name: CI
+
+# Offline and deterministic: no API key is used or needed. Data is synthetic (seed 42) and regenerated here.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      CREWAI_TRACING_ENABLED: "false"
+      CREWAI_DISABLE_TELEMETRY: "true"
+      OTEL_SDK_DISABLED: "true"
+      PYTHONPATH: src
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Run the full flow (offline, deterministic)
+        run: python -m rivatar.main --offline
+      - name: Contract gate must stop a corrupted run
+        run: |
+          set +e
+          python -m rivatar.main --offline --inject-violation
+          code=$?
+          set -e
+          test "$code" = "1" || { echo "expected the pipeline to stop with exit code 1, got $code"; exit 1; }
+      - name: Tests
+        run: python -m pytest
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reports
+          path: |
+            reports/
+            artifacts/data_contract.json

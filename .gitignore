@@ -37,8 +37,8 @@ data/processed/
 data/leads.csv
 # lists original client folder/file names
 data/media_catalog.csv
-artifacts/
-reports/
+/artifacts/
+/reports/
 
 # ---- editors / OS ---------------------------------------------------------
 .vscode/

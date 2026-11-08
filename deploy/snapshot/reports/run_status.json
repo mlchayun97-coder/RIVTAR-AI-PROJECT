@@ -1,0 +1,116 @@
+{
+  "seed": 42,
+  "offline": false,
+  "inject_violation": false,
+  "mode": "LLM agents (gpt-4o-mini)",
+  "started_at": "2026-11-08T16:07:17+00:00",
+  "steps": [
+    {
+      "step": "generate_raw_data",
+      "at": "2026-11-08T16:07:17+00:00",
+      "rows": 1530,
+      "seed": 42,
+      "mode": "LLM agents (gpt-4o-mini)"
+    },
+    {
+      "step": "run_data_team",
+      "at": "2026-11-08T16:07:55+00:00",
+      "missing_artifacts": []
+    },
+    {
+      "step": "validate_data_contract",
+      "at": "2026-11-08T16:07:55+00:00",
+      "result": "PASSED",
+      "status": "passed",
+      "contract": "rivatar_events_clean",
+      "version": "1.0.0",
+      "rows": 1472,
+      "columns": 17,
+      "dataset_sha256": "bd3a0fc838e48cccb6848d0b55424a7e0ac5f2682641872c8844d514af5bae6c"
+    },
+    {
+      "step": "run_ml_team",
+      "at": "2026-11-08T16:08:40+00:00",
+      "missing_artifacts": []
+    },
+    {
+      "step": "agent_decision",
+      "at": "2026-11-08T16:08:40+00:00",
+      "decision": "which model version to publish",
+      "decided_by": "Model Trainer agent (gpt-4o-mini)",
+      "chosen": "v1_ridge_baseline",
+      "reason": "I chose the Ridge Baseline model (v1) due to its CV MAPE of 7.94%, which is well below the 25% threshold. It also has the lowest CV MAE of 10711.50 and a complexity score of 1, making it the simplest and most interpretable model.",
+      "policy_rule_choice": "v1_ridge_baseline",
+      "agrees_with_policy_rule": true
+    },
+    {
+      "step": "quality_and_reproducibility_gate",
+      "at": "2026-11-08T16:08:41+00:00",
+      "passed": true,
+      "mape": 0.07823928221618048,
+      "reproducible": true
+    },
+    {
+      "step": "publish_results",
+      "at": "2026-11-08T16:08:41+00:00",
+      "model": "v1_ridge_baseline",
+      "model_card": "model_card.md"
+    }
+  ],
+  "status": "SUCCEEDED",
+  "failed_gate": null,
+  "violations": [],
+  "contract_report": {
+    "status": "passed",
+    "contract": "rivatar_events_clean",
+    "version": "1.0.0",
+    "rows": 1472,
+    "columns": 17,
+    "dataset_sha256": "bd3a0fc838e48cccb6848d0b55424a7e0ac5f2682641872c8844d514af5bae6c"
+  },
+  "decision": {
+    "decision": "which model version to publish",
+    "chosen_model": "v1_ridge_baseline",
+    "reason": "I chose the Ridge Baseline model (v1) due to its CV MAPE of 7.94%, which is well below the 25% threshold. It also has the lowest CV MAE of 10711.50 and a complexity score of 1, making it the simplest and most interpretable model.",
+    "decided_by": "Model Trainer agent (gpt-4o-mini)",
+    "policy": "Only models with CV MAPE below 25% may be published. Among those, prefer the simpler model unless a more complex one lowers CV MAE by more than 5%: a simpler model is easier to explain to a producer and less likely to overfit.",
+    "policy_rule_choice": "v1_ridge_baseline",
+    "policy_rule_reason": "`v1_ridge_baseline` has the lowest CV MAE (₪10,711) and passes the MAPE limit.",
+    "agrees_with_policy_rule": true,
+    "candidates": {
+      "v1_ridge_baseline": {
+        "complexity": 1,
+        "cv_mae_mean": 10711.497346941822,
+        "cv_mape_mean": 0.07942397328190327,
+        "cv_r2_mean": 0.919553281029349
+      },
+      "v2_random_forest": {
+        "complexity": 2,
+        "cv_mae_mean": 16725.744085714257,
+        "cv_mape_mean": 0.12593012779679813,
+        "cv_r2_mean": 0.8218322174333663
+      },
+      "v3_hist_gradient_boosting": {
+        "complexity": 3,
+        "cv_mae_mean": 13005.5088264727,
+        "cv_mape_mean": 0.09738168266800615,
+        "cv_r2_mean": 0.8875863179509318
+      }
+    }
+  },
+  "best_model": "v1_ridge_baseline",
+  "best_holdout": {
+    "mae": 10614.033156816233,
+    "rmse": 17734.673391127784,
+    "mape": 0.07823928221618048,
+    "r2": 0.9280096243299472
+  },
+  "reproducibility": {
+    "model": "v1_ridge_baseline",
+    "seed": 42,
+    "max_abs_diff": 0.0,
+    "identical": true,
+    "data_sha256": "bd3a0fc838e48cccb6848d0b55424a7e0ac5f2682641872c8844d514af5bae6c"
+  },
+  "id": "3bc4093c-d6d4-465e-a1e7-7404d892279d"
+}

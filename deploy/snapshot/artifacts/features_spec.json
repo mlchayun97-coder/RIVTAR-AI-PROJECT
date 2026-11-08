@@ -1,0 +1,69 @@
+{
+  "categorical": [
+    "event_type",
+    "region",
+    "venue_type",
+    "catering_level",
+    "design_package",
+    "season"
+  ],
+  "numeric": [
+    "guest_count",
+    "log_guests",
+    "lead_days",
+    "services_count",
+    "month",
+    "weekday",
+    "is_thursday",
+    "is_friday",
+    "is_rush"
+  ],
+  "boolean": [
+    "extra_lighting",
+    "extra_photography",
+    "extra_music_talent",
+    "extra_shuttles",
+    "extra_social_promo"
+  ],
+  "excluded": [
+    "event_id",
+    "client_type",
+    "lead_source",
+    "inquiry_date",
+    "event_date"
+  ],
+  "target": "total_budget_ils",
+  "target_transform": "log1p",
+  "n_rows": 1472,
+  "n_features": 20,
+  "derived": {
+    "log_guests": "log1p(guest_count)",
+    "lead_days": "event_date - inquiry_date",
+    "month/weekday/season": "from event_date",
+    "is_thursday/is_friday": "weekday flags",
+    "is_rush": "lead_days < 45",
+    "services_count": "sum of 5 service flags"
+  },
+  "null_check": {
+    "event_type": 0,
+    "region": 0,
+    "venue_type": 0,
+    "catering_level": 0,
+    "design_package": 0,
+    "season": 0,
+    "guest_count": 0,
+    "log_guests": 0,
+    "lead_days": 0,
+    "services_count": 0,
+    "month": 0,
+    "weekday": 0,
+    "is_thursday": 0,
+    "is_friday": 0,
+    "is_rush": 0,
+    "extra_lighting": 0,
+    "extra_photography": 0,
+    "extra_music_talent": 0,
+    "extra_shuttles": 0,
+    "extra_social_promo": 0
+  }
+}

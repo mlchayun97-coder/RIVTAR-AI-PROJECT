@@ -1,0 +1,30 @@
+{
+  "decision": "which model version to publish",
+  "chosen_model": "v1_ridge_baseline",
+  "reason": "I chose the Ridge Baseline model (v1) due to its CV MAPE of 7.94%, which is well below the 25% threshold. It also has the lowest CV MAE of 10711.50 and a complexity score of 1, making it the simplest and most interpretable model.",
+  "decided_by": "Model Trainer agent (gpt-4o-mini)",
+  "policy": "Only models with CV MAPE below 25% may be published. Among those, prefer the simpler model unless a more complex one lowers CV MAE by more than 5%: a simpler model is easier to explain to a producer and less likely to overfit.",
+  "policy_rule_choice": "v1_ridge_baseline",
+  "policy_rule_reason": "`v1_ridge_baseline` has the lowest CV MAE (₪10,711) and passes the MAPE limit.",
+  "agrees_with_policy_rule": true,
+  "candidates": {
+    "v1_ridge_baseline": {
+      "complexity": 1,
+      "cv_mae_mean": 10711.497346941822,
+      "cv_mape_mean": 0.07942397328190327,
+      "cv_r2_mean": 0.919553281029349
+    },
+    "v2_random_forest": {
+      "complexity": 2,
+      "cv_mae_mean": 16725.744085714257,
+      "cv_mape_mean": 0.12593012779679813,
+      "cv_r2_mean": 0.8218322174333663
+    },
+    "v3_hist_gradient_boosting": {
+      "complexity": 3,
+      "cv_mae_mean": 13005.5088264727,
+      "cv_mape_mean": 0.09738168266800615,
+      "cv_r2_mean": 0.8875863179509318
+    }
+  }
+}

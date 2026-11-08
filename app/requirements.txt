@@ -1,0 +1,10 @@
+# Lean dependencies for the website on Streamlit Community Cloud (Python 3.12).
+# Streamlit Cloud uses this file because it sits next to the entry point (app/streamlit_app.py).
+# No crewai, no OpenAI: the site reads the published model (deploy/snapshot/ when there is no local run).
+# scikit-learn / numpy / pandas / joblib are pinned to the versions the snapshot model was trained with.
+streamlit==1.66.1
+pandas==3.1.0
+numpy==2.5.4
+scikit-learn==1.9.1
+joblib==1.6.0
+python-dotenv==1.2.4

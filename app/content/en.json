@@ -267,6 +267,7 @@
     "col_type": "Type",
     "col_rule": "Rule",
     "card_title": "Model Card",
-    "log_title": "Run log"
+    "log_title": "Run log",
+    "snapshot": "Shown: the published snapshot of the last live run (this host has no local run)."
   }
 }

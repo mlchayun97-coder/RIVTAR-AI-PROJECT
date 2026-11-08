@@ -14,15 +14,20 @@ import hashlib
 import json
 from datetime import datetime, timezone
 
-import matplotlib
+import numpy as np
+import pandas as pd
 
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt  # noqa: E402
-import numpy as np  # noqa: E402
-import pandas as pd  # noqa: E402
+from rivatar import config, vocab
+from rivatar.data_generator import NO, SPELLINGS, YES
 
-from rivatar import config, vocab  # noqa: E402
-from rivatar.data_generator import NO, SPELLINGS, YES  # noqa: E402
+
+def _pyplot():
+    """matplotlib only for the EDA charts, imported on first use: the website (which imports this module
+    through ml_ops.build_features) must not need it."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    return plt
 
 SERVICES = list(vocab.EXTRAS)
 CATEGORICAL = ["event_type", "client_type", "region", "venue_type", "catering_level",
@@ -199,11 +204,12 @@ def _style(ax, title: str, xlabel: str = "", ylabel: str = ""):
 def _save(fig, path) -> str:
     fig.tight_layout()
     fig.savefig(path, dpi=110, metadata={"Software": None})  # no timestamp/software tag: stable files
-    plt.close(fig)
+    _pyplot().close(fig)
     return path.name
 
 
 def run_eda(clean_path=config.CLEAN_DATA, out_dir=config.EDA_DIR, summary_path=config.EDA_SUMMARY) -> dict:
+    plt = _pyplot()
     df = pd.read_csv(clean_path, parse_dates=DATE_COLS)
     out_dir.mkdir(parents=True, exist_ok=True)
     y = df[config.TARGET]

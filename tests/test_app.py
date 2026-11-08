@@ -208,9 +208,10 @@ def test_full_app_runs():
 
 def test_contact_empty_submit_shows_errors_and_saves_nothing(tmp_path, monkeypatch):
     from streamlit.testing.v1 import AppTest
+
+    from rivatar import config
+    monkeypatch.setattr(config, "LEADS_CSV", tmp_path / "leads.csv")  # restored after the test
     script = (f"import sys; sys.path[:0] = [{str(APP)!r}, {str(ROOT / 'src')!r}]\n"
-              "from rivatar import config\n"
-              f"config.LEADS_CSV = __import__('pathlib').Path({str(tmp_path / 'leads.csv')!r})\n"
               "import theme\nfrom views import contact\ntheme.inject()\ncontact.render()")
     at = AppTest.from_string(script, default_timeout=60)
     at.run()

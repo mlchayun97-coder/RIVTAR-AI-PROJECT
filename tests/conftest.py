@@ -5,8 +5,21 @@ key. A dummy key is set BEFORE rivatar.config loads .env (which never overrides 
 so a real key in .env is never used by the tests.
 """
 import os
+import shutil
+import tempfile
 
 import pytest
+
+# Every file the pipeline and the form write (data/, artifacts/, reports/, leads.csv) goes to a
+# temporary folder, so running the tests never overwrites the real reports/ that ML LAB shows.
+# Set BEFORE rivatar.config is imported (config reads it once, at import).
+_OUTPUT = tempfile.mkdtemp(prefix="rivatar-tests-")
+os.environ["RIVATAR_OUTPUT_DIR"] = _OUTPUT
+
+
+def pytest_sessionfinish(session, exitstatus):
+    shutil.rmtree(_OUTPUT, ignore_errors=True)
+
 
 os.environ.setdefault("CREWAI_TRACING_ENABLED", "false")
 os.environ.setdefault("CREWAI_DISABLE_TELEMETRY", "true")

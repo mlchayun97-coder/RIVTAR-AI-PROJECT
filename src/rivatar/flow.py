@@ -63,7 +63,7 @@ def _seed_everything(seed: int) -> None:
 
 
 def _missing(paths) -> list[str]:
-    return [p.relative_to(config.ROOT).as_posix() for p in paths if not p.exists()]
+    return [p.relative_to(config.OUTPUT_ROOT).as_posix() for p in paths if not p.exists()]
 
 
 def _read(path) -> dict:
@@ -209,7 +209,7 @@ class RivatarFlow(Flow[PipelineState]):
         print(f"\n{bar}\n✋ PIPELINE STOPPED at gate: {self.state.failed_gate}\n{bar}")
         for v in self.state.violations:
             print(f"  ✗ {v}")
-        print(f"{bar}\nNo model was published. Details: {config.RUN_STATUS.relative_to(config.ROOT).as_posix()}\n{bar}")
+        print(f"{bar}\nNo model was published. Details: {config.RUN_STATUS.relative_to(config.OUTPUT_ROOT).as_posix()}\n{bar}")
         return self.state.status
 
 

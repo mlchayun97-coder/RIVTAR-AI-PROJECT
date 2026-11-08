@@ -42,6 +42,14 @@ def test_cli_exit_codes(monkeypatch):
     assert main([]) == 2  # no key and not offline: refuse, do not crash
 
 
+def test_tests_write_to_a_temporary_folder_not_the_project(pipeline):
+    """Running the tests must never overwrite the real reports/ that ML LAB shows."""
+    assert config.OUTPUT_ROOT != config.ROOT
+    for p in (config.REPORTS_DIR, config.ARTIFACTS_DIR, config.RAW_DIR, config.PROCESSED_DIR, config.LEADS_CSV):
+        assert config.OUTPUT_ROOT in p.parents, p
+    assert config.RUN_STATUS.exists()
+
+
 def test_no_secret_in_reports(pipeline):
     """The key must never reach a report or log (tests run with a dummy key)."""
     for p in [*config.REPORTS_DIR.glob("*.json"), *config.REPORTS_DIR.glob("*.md"), config.RUN_LOG]:

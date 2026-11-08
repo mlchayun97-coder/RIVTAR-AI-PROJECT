@@ -345,7 +345,7 @@ def build_data_contract(clean_path=config.CLEAN_DATA, out_path=config.DATA_CONTR
         "version": "1.0.0",
         "owner": "Data Team (Crew 1)",
         "consumer": "ML Team (Crew 2)",
-        "dataset_path": clean_path.relative_to(config.ROOT).as_posix(),
+        "dataset_path": clean_path.relative_to(config.OUTPUT_ROOT).as_posix(),
         "dataset_sha256": file_sha256(clean_path),
         "row_count": int(len(df)),
         "min_rows": config.MIN_ROWS_AFTER_CLEANING,

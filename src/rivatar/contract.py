@@ -60,7 +60,7 @@ def validate_contract(contract_path: Path = config.DATA_CONTRACT,
                       data_path: Path | None = None) -> dict:
     """Validate a dataset against its contract. Returns a report or raises."""
     c = load_contract(contract_path)
-    data_path = data_path or (config.ROOT / c.dataset_path)
+    data_path = data_path or (config.OUTPUT_ROOT / c.dataset_path)
     v: list[str] = []
 
     if not data_path.exists():

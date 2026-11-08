@@ -17,13 +17,18 @@ load_dotenv(ROOT / ".env", override=False)
 SEED = 42
 
 # ---- paths ----------------------------------------------------------------
+# Everything the pipeline and the form WRITE lives under OUTPUT_ROOT: the project folder by default,
+# or RIVATAR_OUTPUT_DIR when set. The tests set it to a temporary folder, so running them never
+# overwrites the real reports/ that the ML LAB page shows.
+OUTPUT_ROOT = Path(os.environ["RIVATAR_OUTPUT_DIR"]).resolve() if os.getenv("RIVATAR_OUTPUT_DIR") else ROOT
+
 DATA_DIR = ROOT / "data"
-RAW_DIR = DATA_DIR / "raw"
-PROCESSED_DIR = DATA_DIR / "processed"
-LEADS_CSV = DATA_DIR / "leads.csv"
+RAW_DIR = OUTPUT_ROOT / "data" / "raw"
+PROCESSED_DIR = OUTPUT_ROOT / "data" / "processed"
+LEADS_CSV = OUTPUT_ROOT / "data" / "leads.csv"
 MEDIA_CATALOG_CSV = DATA_DIR / "media_catalog.csv"
-ARTIFACTS_DIR = ROOT / "artifacts"
-REPORTS_DIR = ROOT / "reports"
+ARTIFACTS_DIR = OUTPUT_ROOT / "artifacts"
+REPORTS_DIR = OUTPUT_ROOT / "reports"
 
 APP_DIR = ROOT / "app"
 STATIC_DIR = APP_DIR / "static"

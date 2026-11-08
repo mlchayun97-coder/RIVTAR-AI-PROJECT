@@ -14,11 +14,15 @@ Steps
 4. Keep the committed web assets under a size budget: if over, step down quality, then long edge.
 5. Write manifest.json (read by the website) and print the total size.
 
-Videos are catalogued but not processed in this phase.
+Default mode (site redesign): export exactly the photos and videos chosen in the content files
+(app/content/projects/<slug>.json, app/content/site.json) at 400/800/1600 px, plus muted 720p video
+loops (max 10 s, under 3 MB) made with imageio-ffmpeg, and write app/static/media.json. Steps 1-4
+above remain available as --auto-select (phase-1 automatic picking, useful for drafting selections).
 
 Usage:
-    python scripts/prepare_media.py                 # defaults from rivatar.config
-    python scripts/prepare_media.py --per-event 10 --budget-mb 20
+    python scripts/prepare_media.py                 # curated export from the content files
+    python scripts/prepare_media.py --force         # re-export everything
+    python scripts/prepare_media.py --auto-select   # phase-1 automatic selection into app/static/events
 """
 
 from __future__ import annotations
@@ -351,21 +355,241 @@ def run(source_root: Path, out_dir: Path, catalog: Path, per_event: int = 12, bu
     return {"manifest": manifest, "total_bytes": total, "catalog_rows": len(files)}
 
 
+# ================================================================ curated export (site redesign)
+# The website shows only what the content files choose (app/content/projects/<slug>.json and
+# app/content/site.json). This step resolves those original file names in the export, writes web copies
+# at several widths with neutral names, encodes the short video loops, and writes app/static/media.json.
+
+# Web widths per role: full-width photos need 1600 px, pairs and details 1000 px, covers 400/800 px.
+ROLE_SIZES = {"hero": (800, 1600), "wide": (800, 1600), "pair": (600, 1000), "detail": (600, 1000),
+              "cover": (400, 800), "home": (800, 1600)}
+SIZES = tuple(sorted({w for ws in ROLE_SIZES.values() for w in ws}))
+QUALITY = {400: 72, 600: 70, 800: 70, 1000: 68, 1600: 64}
+VIDEO_MAX_SOURCE_MB = 10         # never touch large files (the 74.8 MB reel, the 2.6 GB clip)
+VIDEO_MAX_MB = 3.0
+VIDEO_SECONDS = 10
+VIDEO_SHORT_SIDE = 720
+
+
+def build_source_index(source_root: Path) -> dict[tuple[str, str], list[Path]]:
+    """(normalized top folder, file name) -> paths, over all export parts. Images and videos."""
+    index: dict[tuple[str, str], list[Path]] = {}
+    for part in find_export_parts(source_root):
+        for path in part.rglob("*"):
+            if path.is_file() and path.suffix.lower() in IMAGE_EXT | VIDEO_EXT:
+                rel = path.relative_to(part)
+                if len(rel.parts) > 1:
+                    index.setdefault((normalize_name(rel.parts[0]), normalize_name(path.name)), []).append(path)
+    return index
+
+
+def folder_for_slug(slug: str) -> str | None:
+    return next((folder for folder, s in SLUGS.items() if s == slug), None)
+
+
+def resolve(index: dict, folder: str | None, name: str, root: Path) -> Path:
+    """'design-reference/x.jpg' (relative to the project root), 'LOGO/x.jfif' (export folder/name),
+    or a bare file name inside `folder`."""
+    if "/" in name:
+        local = root / name
+        if local.is_file():
+            return local
+        folder, name = name.split("/", 1)
+    hits = index.get((normalize_name(folder or ""), normalize_name(name)), [])
+    if not hits:
+        raise FileNotFoundError(f"{name!r} not found in export folder {folder!r}")
+    if len({h.stat().st_size for h in hits}) > 1:
+        raise ValueError(f"{name!r} is ambiguous in {folder!r} ({len(hits)} different files)")
+    return hits[0]
+
+
+def _sig(path: Path, extra: str = "") -> str:
+    st = path.stat()
+    return f"{st.st_size}:{int(st.st_mtime)}:{extra}"
+
+
+def export_photo(src: Path, out_dir: Path, base: str, rotate: int = 0, sizes=SIZES) -> dict:
+    im = load_web_image(src)
+    if rotate:
+        im = im.rotate(rotate, expand=True)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    made = []
+    for w in sizes:
+        copy = im.copy()
+        if copy.width > w:
+            copy = copy.resize((w, round(copy.height * w / copy.width)), Image.Resampling.LANCZOS)
+        copy.save(out_dir / f"{base}-{w}.jpg", "JPEG", quality=QUALITY.get(w, 72), optimize=True, progressive=True)
+        made.append(w)
+    return {"base": base, "w": im.width, "h": im.height, "sizes": made}
+
+
+def export_video(src: Path, out_dir: Path, base: str) -> dict | None:
+    """Muted 720p loop, max 10 s, under 3 MB, plus a poster frame. None if ffmpeg is unavailable."""
+    try:
+        import imageio_ffmpeg
+        ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception as exc:  # pragma: no cover - depends on the machine
+        print(f"  ! ffmpeg unavailable ({exc}); skipping {src.name}")
+        return None
+    import subprocess
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    mp4, poster = out_dir / f"{base}.mp4", out_dir / f"{base}-poster.jpg"
+    side = VIDEO_SHORT_SIDE
+    scale = f"scale='if(gt(iw,ih),-2,{side})':'if(gt(iw,ih),{side},-2)'"
+    for crf in (28, 31, 34, 37):
+        cmd = [ffmpeg, "-v", "error", "-y", "-i", str(src), "-t", str(VIDEO_SECONDS), "-an", "-sn", "-dn",
+               "-map_metadata", "-1", "-vf", f"{scale},fps=30,format=yuv420p", "-c:v", "libx264", "-preset", "slow",
+               "-crf", str(crf), "-movflags", "+faststart", str(mp4)]
+        subprocess.run(cmd, check=True)
+        if mp4.stat().st_size <= VIDEO_MAX_MB * 1024 * 1024:
+            break
+    else:
+        print(f"  ! {base}: still over {VIDEO_MAX_MB} MB at crf 37")
+    raw = out_dir / f"{base}-poster-raw.png"
+    subprocess.run([ffmpeg, "-v", "error", "-y", "-ss", "0.5", "-i", str(mp4), "-frames:v", "1", str(raw)], check=True)
+    im = load_web_image(raw)
+    raw.unlink()
+    im.save(poster, "JPEG", quality=72, optimize=True, progressive=True)
+    return {"file": mp4.name, "poster": poster.name, "w": im.width, "h": im.height, "bytes": mp4.stat().st_size}
+
+
+def curated_jobs(content_dir: Path) -> tuple[list[dict], list[dict]]:
+    """Everything the content files ask for: photo jobs and video jobs."""
+    site = json.loads((content_dir / "site.json").read_text(encoding="utf-8"))
+    photos, videos = [], []
+    for pf in sorted((content_dir / "projects").glob("*.json")):
+        proj = json.loads(pf.read_text(encoding="utf-8"))
+        slug = proj["slug"]
+        jobs: dict[str, dict] = {}
+        items = [(proj.get("cover"), "cover"), (proj.get("hero"), "hero")]
+        items += [(ph, ph.get("layout", "wide")) for ch in proj.get("chapters", []) for ph in ch.get("photos", [])]
+        items.append((proj.get("palette"), "pair"))  # the photo beside the colour swatches
+        for item, role in items:
+            if item and item.get("photo"):
+                job = jobs.setdefault(item["photo"], {"group": slug, "folder": folder_for_slug(slug),
+                                                      "name": item["photo"], "rotate": int(item.get("rotate", 0)),
+                                                      "sizes": set()})
+                job["sizes"] |= set(ROLE_SIZES.get(role, ROLE_SIZES["wide"]))
+        photos += list(jobs.values())
+        videos += [{"group": slug, "folder": folder_for_slug(slug), "name": v["video"]} for v in proj.get("videos", [])]
+    home = site.get("home", {})
+    for key in ("courtyard", "card", "bride"):
+        if home.get(key, {}).get("source"):
+            photos.append({"group": "home", "folder": None, "name": home[key]["source"], "key": key, "rotate": 0,
+                           "sizes": set(ROLE_SIZES["home"])})
+    if home.get("bride", {}).get("rotate_desktop") and home["bride"].get("source"):
+        photos.append({"group": "home", "folder": None, "name": home["bride"]["source"], "key": "bride-rot",
+                       "rotate": 90, "sizes": set(ROLE_SIZES["home"])})
+    return photos, videos
+
+
+def run_curated(source_root: Path, static_dir: Path, content_dir: Path, budget_mb: float = 40.0,
+                other_asset_dirs: list[Path] | None = None, force: bool = False, root: Path = ROOT) -> dict:
+    """Export the curated photos and videos. Unchanged sources are skipped (see media.json 'sig')."""
+    manifest_path = static_dir / "media.json"
+    old = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
+    index = build_source_index(source_root)
+    photos, videos = curated_jobs(content_dir)
+    manifest: dict = {"sizes": list(SIZES), "projects": {}, "videos": {}, "home": {}}
+    counters: dict[str, int] = {}
+    errors: list[str] = []
+
+    for job in photos:
+        group = job["group"]
+        try:
+            src = resolve(index, job["folder"], job["name"], root)
+        except (FileNotFoundError, ValueError) as exc:
+            errors.append(f"{group}: {exc}")
+            continue
+        if group == "home":
+            base, out_dir = job["key"], static_dir / "home"
+            prev = old.get("home", {}).get(job["key"])
+        else:
+            counters[group] = counters.get(group, 0) + 1
+            base, out_dir = f"{group}-{counters[group]:02d}", static_dir / "projects" / group
+            prev = old.get("projects", {}).get(group, {}).get(job["name"])
+        sizes = tuple(sorted(job.get("sizes") or SIZES))
+        sig = _sig(src, f"r{job['rotate']}|{sizes}|{sorted(QUALITY.items())}")
+        if (not force and prev and prev.get("sig") == sig and prev.get("base") == base
+                and all((out_dir / f"{base}-{w}.jpg").exists() for w in prev["sizes"])):
+            entry = prev
+        else:
+            entry = {**export_photo(src, out_dir, base, job["rotate"], sizes), "sig": sig}
+            print(f"  wrote {out_dir.name}/{base} ({entry['w']}x{entry['h']})")
+        if group == "home":
+            manifest["home"][job["key"]] = entry
+        else:
+            manifest["projects"].setdefault(group, {})[job["name"]] = entry
+
+    vcount: dict[str, int] = {}
+    for job in videos:
+        group = job["group"]
+        try:
+            src = resolve(index, job["folder"], job["name"], root)
+        except (FileNotFoundError, ValueError) as exc:
+            errors.append(f"{group}: {exc}")
+            continue
+        if src.stat().st_size > VIDEO_MAX_SOURCE_MB * 1024 * 1024:
+            errors.append(f"{group}: {job['name']} is over {VIDEO_MAX_SOURCE_MB} MB, skipped by rule")
+            continue
+        vcount[group] = vcount.get(group, 0) + 1
+        base, out_dir = f"{group}-v{vcount[group]:02d}", static_dir / "projects" / group
+        sig = _sig(src, f"{VIDEO_SECONDS}|{VIDEO_SHORT_SIDE}|{VIDEO_MAX_MB}")
+        prev = next((v for v in old.get("videos", {}).get(group, []) if v.get("source") == job["name"]), None)
+        if not force and prev and prev.get("sig") == sig and prev.get("file") == f"{base}.mp4" \
+                and (out_dir / prev["file"]).exists():
+            entry = prev
+        else:
+            entry = export_video(src, out_dir, base)
+            if entry is None:
+                continue
+            entry.update(source=job["name"], sig=sig)
+            print(f"  wrote {base}.mp4 ({entry['bytes'] / 1024 / 1024:.2f} MB)")
+        manifest["videos"].setdefault(group, []).append(entry)
+
+    # remove web copies that the content files no longer ask for
+    keep = {f"{e['base']}-{w}.jpg" for g in manifest["projects"].values() for e in g.values() for w in e["sizes"]}
+    keep |= {f"{e['base']}-{w}.jpg" for e in manifest["home"].values() for w in e["sizes"]}
+    keep |= {n for vs in manifest["videos"].values() for v in vs for n in (v["file"], v["poster"])}
+    for sub in (static_dir / "projects", static_dir / "home"):
+        if sub.exists():
+            for f in sub.rglob("*"):
+                if f.is_file() and f.name not in keep:
+                    f.unlink()
+
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    web = dir_size(static_dir / "projects") + dir_size(static_dir / "home") + manifest_path.stat().st_size
+    total = web + sum(dir_size(d) for d in (other_asset_dirs or []))
+    print(f"\nCurated media: {web / 1024 / 1024:.2f} MB; total committed web assets: "
+          f"{total / 1024 / 1024:.2f} MB (budget {budget_mb:.0f} MB)")
+    for e in errors:
+        print(f"  ! {e}")
+    return {"manifest": manifest, "total_bytes": total, "errors": errors}
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--source-root", type=Path, default=config.ROOT, help="folder holding the export parts")
-    ap.add_argument("--out", type=Path, default=config.EVENTS_STATIC_DIR)
-    ap.add_argument("--catalog", type=Path, default=config.MEDIA_CATALOG_CSV)
+    ap.add_argument("--budget-mb", type=float, default=40.0)
+    ap.add_argument("--force", action="store_true", help="re-export everything")
+    ap.add_argument("--auto-select", action="store_true",
+                    help="phase-1 mode: score and pick photos automatically into app/static/events")
     ap.add_argument("--per-event", type=int, default=12)
-    ap.add_argument("--budget-mb", type=float, default=25.0)
     ap.add_argument("--thumb", type=int, default=600)
     args = ap.parse_args(argv)
 
-    # Everything else that is committed under app/ counts toward the same budget.
-    others = [config.STATIC_DIR / "fonts", config.APP_DIR / "assets"] if args.out == config.EVENTS_STATIC_DIR else []
-    result = run(args.source_root, args.out, args.catalog, args.per_event, args.budget_mb, args.thumb,
-                 other_asset_dirs=others)
-    return 0 if result["total_bytes"] <= args.budget_mb * 1024 * 1024 else 1
+    others = [config.STATIC_DIR / "fonts", config.APP_DIR / "assets"]
+    if args.auto_select:
+        result = run(args.source_root, config.EVENTS_STATIC_DIR, config.MEDIA_CATALOG_CSV, args.per_event,
+                     args.budget_mb, args.thumb, other_asset_dirs=others)
+        return 0 if result["total_bytes"] <= args.budget_mb * 1024 * 1024 else 1
+    if config.EVENTS_STATIC_DIR.exists():
+        others.append(config.EVENTS_STATIC_DIR)  # the phase-1 folder still counts while it exists
+    result = run_curated(args.source_root, config.STATIC_DIR, config.APP_DIR / "content", args.budget_mb,
+                         other_asset_dirs=others, force=args.force)
+    over = result["total_bytes"] > args.budget_mb * 1024 * 1024
+    return 1 if over or result["errors"] else 0
 
 
 if __name__ == "__main__":

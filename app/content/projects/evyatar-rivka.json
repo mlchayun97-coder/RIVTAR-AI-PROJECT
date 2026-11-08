@@ -1,0 +1,219 @@
+{
+  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops. location: one {en, he} or a list of them, main venue first. palette: 4 colours (#RRGGBB, top to bottom) + one photo; palette_source: designer | extracted.",
+  "slug": "evyatar-rivka",
+  "show": true,
+  "event_type": "wedding",
+  "name": {
+    "en": "Evyatar & Rivka",
+    "he": "אביתר ורבקה"
+  },
+  "location": {
+    "en": "DCity",
+    "he": "DCity"
+  },
+  "text": {
+    "en": "The wedding of Rivka, RIVATAR's founder, and Evyatar was the first event produced under the RIVATAR name. It took place at DCity, a venue built around Italian-inspired architecture: arcades, lanterns and an open courtyard. The design was set within that architecture, with round and long tables, warm-toned flowers and candlelight beneath the arches.",
+    "he": "החתונה של רבקה, מייסדת RIVATAR, ושל אביתר הייתה האירוע הראשון שהופק תחת השם RIVATAR. היא נערכה ב־DCity, מקום שבנוי סביב אדריכלות בהשראה איטלקית: קשתות, פנסים וחצר פתוחה. העיצוב נבנה בתוך האדריכלות הזו, עם שולחנות עגולים וארוכים, פרחים בגוונים חמים ואור נרות מתחת לקשתות."
+  },
+  "cover": {
+    "photo": "IMG_6398.jpg",
+    "focus": "50% 55%",
+    "why": "Vertical frame with the lantern, a set round table and the courtyard facades: the venue and the design in one image, cool dusk tones that differ from the other covers."
+  },
+  "hero": {
+    "photo": "IMG_6273.jpg",
+    "focus": "50% 60%",
+    "why": "Symmetrical view of the dinner courtyard: shows the scale of the production and the architecture at once."
+  },
+  "palette": {
+    "colors": [
+      "#EB9562",
+      "#A14A0C",
+      "#F4D5CA",
+      "#CC6A4E"
+    ],
+    "photo": "Lavi_Pgotography-1133.jpg",
+    "focus": "70% 60%",
+    "why": "Long table with orange flowers and rust napkins: closest match to the photo in the designer's palette tile."
+  },
+  "palette_source": "designer",
+  "chapters": [
+    {
+      "title": null,
+      "photos": [
+        {
+          "photo": "IMG_6386.jpg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The DCity courtyard under strings of light",
+            "he": "החצר ב־DCity מתחת לשרשראות אור"
+          },
+          "why": "Place: the ceremony space and its lights, a different angle from the opening photo."
+        },
+        {
+          "photo": "IMG_5968.jpg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Looking out from under the flower-framed chuppah to the aisle and the DCity courtyard.",
+            "he": "מבט מתחת לחופה המעוטרת בפרחים אל המעבר ואל החצר ב־DCity."
+          },
+          "why": "Design: the ceremony set-up as a whole."
+        },
+        {
+          "photo": "IMG_5927.jpg",
+          "layout": "pair",
+          "focus": "50% 40%",
+          "alt": {
+            "en": "Flowers on the chuppah frame",
+            "he": "פרחים על מסגרת החופה"
+          },
+          "why": "Detail of the chuppah flowers."
+        },
+        {
+          "photo": "Lavi_Pgotography-1133.jpg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A set table between the arcades",
+            "he": "שולחן ערוך בין הקשתות"
+          },
+          "why": "Pairs with the chuppah detail: table design against the architecture."
+        },
+        {
+          "photo": "Lavi_Pgotography-1044.jpg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The ceremony, guests gathered in the courtyard",
+            "he": "הטקס, האורחים בחצר"
+          },
+          "why": "People and ceremony: the full courtyard during the chuppah."
+        },
+        {
+          "photo": "Lavi_Pgotography-1089.jpg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The bride's bouquet",
+            "he": "זר הכלה"
+          },
+          "why": "A human detail from the ceremony."
+        },
+        {
+          "photo": "Lavi_Pgotography-1121.jpg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The bride and groom holding hands.",
+            "he": "החתן והכלה אוחזים ידיים."
+          },
+          "why": "A quiet ceremony moment that pairs with the bouquet."
+        },
+        {
+          "photo": "Lavi_Pgotography-1243.jpg",
+          "layout": "wide",
+          "focus": "50% 40%",
+          "alt": {
+            "en": "The bride and groom walking together, in black and white.",
+            "he": "החתן והכלה הולכים יחד, בשחור־לבן."
+          },
+          "why": "The couple: the photographer's own black-and-white frame, kept as delivered."
+        },
+        {
+          "photo": "Lavi_Pgotography-1154.jpg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Red candles and flowers on a long table",
+            "he": "נרות אדומים ופרחים על שולחן ארוך"
+          },
+          "why": "Design: the colour palette of the tables."
+        },
+        {
+          "photo": "IMG_5825.jpg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Red orchids in a table arrangement.",
+            "he": "סחלבים אדומים בסידור שולחן."
+          },
+          "why": "Flower detail in the same palette."
+        },
+        {
+          "photo": "IMG_6248-Enhanced-NR.jpg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A round table seen from above",
+            "he": "שולחן עגול במבט מלמעלה"
+          },
+          "why": "A new angle on the table layout."
+        },
+        {
+          "photo": "Lavi_Pgotography-1148.jpg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Orange roses in an arrangement",
+            "he": "ורדים כתומים בסידור פרחים"
+          },
+          "why": "Flower detail."
+        },
+        {
+          "photo": "IMG_6208.jpg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A printed menu in Hebrew beside a rust-coloured napkin.",
+            "he": "תפריט מודפס בעברית לצד מפית בגוון חלודה."
+          },
+          "why": "Stationery detail."
+        },
+        {
+          "photo": "IMG_6056.jpg",
+          "layout": "detail",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A knotted red napkin on a plate",
+            "he": "מפית אדומה קשורה על צלחת"
+          },
+          "why": "Textile detail."
+        },
+        {
+          "photo": "IMG_6128.jpg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A crystal chandelier under draped fabric",
+            "he": "נברשת קריסטל מתחת לבד נשפך"
+          },
+          "why": "Atmosphere and lighting."
+        },
+        {
+          "photo": "Lavi_Pgotography-2050.jpg",
+          "layout": "pair",
+          "focus": "50% 60%",
+          "alt": {
+            "en": "The couple dancing under a stone arch",
+            "he": "בני הזוג רוקדים מתחת לקשת אבן"
+          },
+          "why": "The couple, a moment of celebration."
+        },
+        {
+          "photo": "Lavi_Pgotography-2033.jpg",
+          "layout": "pair",
+          "focus": "50% 60%",
+          "alt": {
+            "en": "The couple in silhouette in a lit archway",
+            "he": "בני הזוג בצללית בתוך קשת מוארת"
+          },
+          "why": "Closing photo."
+        }
+      ]
+    }
+  ],
+  "videos": [],
+  "credits": []
+}

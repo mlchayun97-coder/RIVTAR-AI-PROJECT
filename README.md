@@ -66,6 +66,10 @@ python scripts/prepare_media.py --per-event 10 --budget-mb 20
 To change the photos for an event, edit `app/static/events/selection.json`: `include` (original file
 names, in order; the first is used first) and `exclude`, then run the script again. Videos are skipped in phase 1.
 
+> **Phase 1 only.** The steps above describe `--auto-select`. Its output (`app/static/events/`) is no longer
+> committed: the site uses the curated photos named in the content files (`app/static/projects/`,
+> `app/static/media.json`), which `python scripts/prepare_media.py` exports within a 40 MB budget.
+
 ## Synthetic data
 
 ```powershell
@@ -94,7 +98,7 @@ app/                      Streamlit website
   theme.py, ui.py         styling and HTML building blocks
   views/                  home, gallery, ml_lab pages
   static/fonts/           self-hosted fonts (OFL)
-  static/events/          processed event photos + manifest.json + selection.json
+  static/projects/        curated web photos and video loops per project (+ static/media.json)
   assets/                 logos, favicon
 src/rivatar/
   config.py               paths, seed, settings (.env via python-dotenv)

@@ -1,23 +1,59 @@
-"""HTML building blocks for the site. Pure functions that return HTML strings (no Streamlit calls),
-so they are easy to test. All text is escaped; text in [brackets] is rendered as a visible TODO.
+"""HTML building blocks. Pure functions that return HTML strings (no Streamlit calls), so they are easy
+to test. All text is escaped; text in [brackets] is rendered as a visible TODO.
 """
 
 from __future__ import annotations
 
 import json
 import re
+from dataclasses import dataclass
 from functools import lru_cache
-from urllib.parse import quote
 from html import escape
 from pathlib import Path
+from urllib.parse import quote
 
 import content as C
 from theme import STATIC_URL
 
 APP_DIR = Path(__file__).resolve().parent
-EVENTS_DIR = APP_DIR / "static" / "events"
+STATIC_DIR = APP_DIR / "static"
 LOGO_SVG = APP_DIR / "assets" / "rivatar-logo.svg"
-TONES = ["olive", "linen", "wine", "sand", "dusk", "rose"]
+WHATSAPP_BASE = "https://wa.me/"
+
+NAV = ("home", "about", "projects", "services", "contact")
+PAGE_PATHS = {"home": "", "about": "about", "projects": "projects", "services": "services",
+              "contact": "contact", "lab": "ml-lab"}
+
+
+# ------------------------------------------------------------------ context
+@dataclass(frozen=True)
+class Ctx:
+    """Language and current page. Every link keeps the language (?lang=he)."""
+    lang: str = "en"
+    path: str = ""  # current page path without leading slash ("" = home)
+
+    @property
+    def dir(self) -> str:
+        return "rtl" if self.lang == "he" else "ltr"
+
+    def t(self, key: str, **fmt) -> str:
+        return C.t(key, self.lang, **fmt)
+
+    def loc(self, field) -> str:
+        return C.loc(field, self.lang)
+
+    def href(self, path: str, lang: str | None = None) -> str:
+        lang = lang or self.lang
+        base = "/" + path.strip("/")
+        return f"{base}?lang={lang}" if (lang != C.DEFAULT_LANG or lang != self.lang) else base
+
+
+def page_path(page: str) -> str:
+    return PAGE_PATHS.get(page, page)
+
+
+def project_path(slug: str) -> str:
+    return f"project-{slug}"
 
 
 # ------------------------------------------------------------------ basics
@@ -28,270 +64,387 @@ def txt(text: str, cls: str = "", tag: str = "span", attrs: str = "") -> str:
     return f"<{tag}{cls_attr}{attrs}>{escape(text)}</{tag}>"
 
 
-@lru_cache(maxsize=1)
-def logo_mask_css() -> str:
-    """st.html strips inline <svg>, so the logo is drawn as a CSS mask filled with currentColor
-    (dark in the header, ivory on the hero photo)."""
-    svg = re.sub(r"\s+", " ", LOGO_SVG.read_text(encoding="utf-8")).strip()
+def wrap(ctx: Ctx, html: str) -> str:
+    return f'<div class="site" dir="{ctx.dir}" lang="{ctx.lang}">{html}</div>'
+
+
+def _mask(svg: str) -> str:
+    svg = re.sub(r"\s+", " ", svg).strip()
     url = f'url("data:image/svg+xml,{quote(svg)}")'
-    return (f".logo{{display:block;aspect-ratio:331/60;background:currentColor;"
-            f"-webkit-mask:{url} center/contain no-repeat;mask:{url} center/contain no-repeat}}")
+    return f"-webkit-mask:{url} center/contain no-repeat;mask:{url} center/contain no-repeat"
 
 
-def logo(cls: str = "logo") -> str:
-    return f'<span class="{cls}" role="img" aria-label="RIVATAR"></span>'
+_IG = ("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5'>"
+       "<rect x='3' y='3' width='18' height='18' rx='5'/><circle cx='12' cy='12' r='4.2'/>"
+       "<circle cx='17.4' cy='6.6' r='1' fill='black' stroke='none'/></svg>")
+_WA = ("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5' "
+       "stroke-linejoin='round'><path d='M4.2 19.8l1.2-4A8.4 8.4 0 1 1 8.5 19l-4.3.8z'/>"
+       "<path fill='black' stroke='none' d='M9.2 7.6c.3-.1.6 0 .7.3l.7 1.6c.1.3 0 .5-.2.7l-.5.5c.6 1.2 1.6 2.2 "
+       "2.8 2.8l.5-.5c.2-.2.5-.3.7-.2l1.6.7c.3.1.4.4.3.7-.3 1-1.2 1.6-2.2 1.4-2.8-.6-5-2.8-5.6-5.6-.2-1 .4-1.9 "
+       "1.2-2.4z'/></svg>")
 
 
-def page_url(slug: str) -> str:
-    return f"/story-{slug}"
+@lru_cache(maxsize=1)
+def icon_css() -> str:
+    """st.html strips inline <svg>, so the logo and icons are CSS masks filled with currentColor."""
+    logo = LOGO_SVG.read_text(encoding="utf-8")
+    return f".logo{{{_mask(logo)}}}.ico-ig{{{_mask(_IG)}}}.ico-wa{{{_mask(_WA)}}}"
 
 
-def home_anchor(anchor: str, on_home: bool) -> str:
-    return f"#{anchor}" if on_home else f"/#{anchor}"
+def logo() -> str:
+    return '<span class="logo" role="img" aria-label="RIVATAR"></span>'
+
+
+def whatsapp_url() -> str:
+    """site.json contact.whatsapp: a full https://wa.me/... link, or just the number."""
+    wa = C.site().get("contact", {}).get("whatsapp", "")
+    return wa if wa.startswith("http") else WHATSAPP_BASE + wa
+
+
+def contact_links(ctx: Ctx) -> list[tuple[str, str, str | None]]:
+    """(label key, text, href) for each real contact detail in site.json; placeholders and empty values are
+    left out. href None = plain text (the address)."""
+    info = C.site().get("contact", {})
+    phone, email = info.get("phone", ""), info.get("email", "")
+    address = ctx.loc(info.get("address"))
+    items = [("contact.phone", phone, info.get("phone_href") or f"tel:{phone}"),
+             ("contact.email", email, f"mailto:{email}"),
+             ("contact.whatsapp", ctx.t("contact.whatsapp"), whatsapp_url() if info.get("whatsapp") else ""),
+             ("contact.address", address, None)]
+    return [(k, v, h) for k, v, h in items if v and not C.is_todo(v) and h != ""]
+
+
+def link(text: str, href: str | None) -> str:
+    """Escaped link; tel:/mailto: open in place, web links in a new tab. href None = plain text."""
+    if href is None:
+        return f"<span>{escape(text)}</span>"
+    new_tab = ' target="_blank" rel="noopener"' if href.startswith("http") else ""
+    return f'<a href="{escape(href)}"{new_tab}>{escape(text)}</a>'
 
 
 # ------------------------------------------------------------------ media
 @lru_cache(maxsize=1)
-def manifest() -> dict:
-    path = EVENTS_DIR / "manifest.json"
-    if not path.exists():
-        return {"events": {}}
-    return json.loads(path.read_text(encoding="utf-8"))
+def media() -> dict:
+    path = STATIC_DIR / "media.json"
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"projects": {}, "home": {}, "videos": {}}
 
 
-def event_images(slug: str) -> list[dict]:
-    return manifest().get("events", {}).get(slug, {}).get("images", [])
+def photo_entry(slug: str, photo: str | None) -> dict | None:
+    return media().get("projects", {}).get(slug, {}).get(photo or "")
 
 
-def img_url(rel: str) -> str:
-    return f"{STATIC_URL}/events/{rel}"
+def _srcset(folder: str, entry: dict) -> tuple[str, str]:
+    urls = [(w, f"{STATIC_URL}/{folder}/{entry['base']}-{w}.jpg") for w in entry["sizes"]]
+    return urls[-1][1] if len(urls) == 1 else urls[len(urls) // 2][1], ", ".join(f"{u} {w}w" for w, u in urls)
 
 
-def pick_images(slug: str, wants: list[str], skip: set[str] | frozenset[str] = frozenset()) -> list[dict | None]:
-    """Pick one image per wanted orientation ('landscape'/'portrait'/'any'), no repeats.
-    Images whose file is in `skip` (e.g. already used in the hero) are avoided.
-    Falls back to any remaining image; None if the event has too few photos."""
-    pool = [i for i in event_images(slug) if i["file"] not in skip]
-    out: list[dict | None] = []
-    for want in wants:
-        choice = next((i for i in pool if want == "any" or i["orientation"] == want), None)
-        if choice is None and pool:
-            choice = pool[0]
-        if choice is not None:
-            pool.remove(choice)
-        out.append(choice)
-    return out
+def img(folder: str, entry: dict | None, alt: str = "", sizes: str = "100vw", focus: str = "50% 50%",
+        eager: bool = False) -> str:
+    if not entry:
+        return ""
+    src, srcset = _srcset(folder, entry)
+    return (f'<img src="{src}" srcset="{srcset}" sizes="{sizes}" alt="{escape(alt)}" width="{entry["w"]}" '
+            f'height="{entry["h"]}" style="object-position:{escape(focus)}" '
+            f'loading="{"eager" if eager else "lazy"}" decoding="async">')
 
 
-def photo(image: dict | None, cls: str, tag: str = "", tone: str = "sand", full: bool = True,
-          eager: bool = False, extra: str = "") -> str:
-    """A design 'ph' frame; a toned placeholder when there is no image."""
-    inner = (f'<img src="{img_url(image["file"] if full else image["thumb"])}" alt="" '
-             f'loading="{"eager" if eager else "lazy"}" decoding="async">' if image else '<div class="ph-img"></div>')
-    tag_html = f'<span class="ph-tag">{escape(tag)}</span>' if tag else ""
-    return f'<figure class="ph {cls} {tone}">{inner}{tag_html}{extra}</figure>'
+def project_img(slug: str, item: dict | None, alt: str = "", sizes: str = "100vw", eager: bool = False) -> str:
+    if not item:
+        return ""
+    return img(f"projects/{slug}", photo_entry(slug, item.get("photo")), alt, sizes, item.get("focus", "50% 50%"), eager)
+
+
+def ref_img(ref: dict, alt: str = "", sizes: str = "50vw") -> str:
+    """A {"project": slug, "photo": name} reference from site.json."""
+    return project_img(ref.get("project", ""), {"photo": ref.get("photo")}, alt, sizes)
+
+
+def figure(inner: str, cls: str = "") -> str:
+    return f'<figure class="ph {cls}">{inner}</figure>'
 
 
 # ------------------------------------------------------------------ chrome
-def masthead(on_home: bool) -> str:
-    links = "".join(f'<a href="{home_anchor(a, on_home)}" target="_self">{escape(lbl)}</a>' for lbl, a in C.NAV)
-    links += f'<a class="lab" href="/ml-lab" target="_self">{escape(C.NAV_LAB)}</a>'
-    cta_lbl, cta_anchor = C.NAV_CTA
+def masthead(ctx: Ctx, current: str, solid: bool = False) -> str:
+    links = "".join(
+        f'<a href="{ctx.href(page_path(p))}" target="_self"{" aria-current=\"page\"" if p == current else ""}>'
+        f'{escape(ctx.t("nav." + p))}</a>' for p in NAV)
+    langs = []
+    for code in C.LANGS:
+        label = code.upper()
+        if code == ctx.lang:
+            langs.append(f'<span class="on" aria-current="true">{label}</span>')
+        else:
+            langs.append(f'<a href="{ctx.href(ctx.path, lang=code)}" target="_self" hreflang="{code}" '
+                         f'lang="{code}">{label}</a>')
+    lang_html = '<span class="sep" aria-hidden="true">|</span>'.join(langs)
     return f"""
-<header class="mast" id="mast">
-  <details class="menu"><summary>{escape(C.MENU_LABEL)}</summary><nav aria-label="ניווט נייד">{links}</nav></details>
-  <nav aria-label="ניווט ראשי">{links}</nav>
-  <a class="wordmark" href="/" target="_self" aria-label="{escape(C.BRAND)}">{logo()}<small>PRODUCTIONS</small></a>
-  <a class="cta" href="{home_anchor(cta_anchor, on_home)}" target="_self">{escape(cta_lbl)}</a>
+<header class="mast{' solid' if solid else ''}">
+  <a class="brand" href="{ctx.href('')}" target="_self" aria-label="RIVATAR">{logo()}</a>
+  <nav class="main" aria-label="{escape(ctx.t('nav.menu'))}">{links}</nav>
+  <div class="lang" aria-label="Language">{lang_html}</div>
+  <details class="menu"><summary>{escape(ctx.t('nav.menu'))}</summary><nav>{links}</nav></details>
 </header>"""
 
 
-def footer(on_home: bool) -> str:
-    nav = "".join(f'<a href="{home_anchor(a, on_home)}" target="_self">{escape(lbl)}</a>' for lbl, a in C.FOOTER_NAV)
+def cta_band(ctx: Ctx) -> str:
+    """Full-width black-and-white photo band with an invitation and a CONTACT button.
+    Left out on the contact page itself."""
+    if ctx.path == page_path("contact"):
+        return ""
+    ref = C.site().get("cta_band", {})
+    photo = project_img(ref.get("project", ""), ref, sizes="100vw")
+    return (f'<section class="cta-band">{figure(photo, "bw")}'
+            f'<div class="cta-copy">{txt(ctx.t("cta.title"), tag="h2")}'
+            f'<a class="btn-line" href="{ctx.href(page_path("contact"))}" target="_self">'
+            f'{escape(ctx.t("cta.button"))}</a></div></section>')
+
+
+def footer(ctx: Ctx) -> str:
+    insta = C.site().get("contact", {}).get("instagram", "")
+    menu = "".join(f'<li><a href="{ctx.href(page_path(p))}" target="_self">{escape(ctx.t("nav." + p))}</a></li>'
+                   for p in NAV)
+    contact = "".join(f"<li>{link(text, href)}</li>" for _, text, href in contact_links(ctx))
+    # Privacy policy / terms stay hidden until the real pages exist.
+    infos = f'<li><a href="{ctx.href(page_path("lab"))}" target="_self">{escape(ctx.t("nav.lab"))}</a></li>'
+    ig = (f'<a href="{escape(insta)}" target="_blank" rel="noopener" aria-label="Instagram"><span class="ico ico-ig"></span></a>'
+          if insta.startswith("http") else "")
     return f"""
 <footer class="foot">
-  <div class="foot-word">{logo()}</div>
-  <div class="foot-row"><span>{escape(C.FOOTER_LINE)}</span><nav aria-label="ניווט תחתון">{nav}</nav></div>
-</footer>"""
-
-
-def wrap(html: str) -> str:
-    return f'<div class="site" dir="rtl" lang="he">{html}</div>'
-
-
-# ------------------------------------------------------------------ home sections
-def hero_images() -> tuple[dict | None, dict | None]:
-    """Cover = the hero event's last landscape photo (its first one opens the event's story)."""
-    landscapes = [i for i in event_images(C.HERO_EVENT) if i["orientation"] == "landscape"]
-    cover = landscapes[-1] if landscapes else next(iter(pick_images(C.HERO_EVENT, ["any"])), None)
-    portraits = [i for i in event_images(C.HERO_SIDE_EVENT) if i["orientation"] == "portrait"]
-    side = portraits[-1] if portraits else next(iter(pick_images(C.HERO_SIDE_EVENT, ["any"])), None)
-    return cover, side
-
-
-def hero_files() -> frozenset[str]:
-    return frozenset(i["file"] for i in hero_images() if i)
-
-
-def hero() -> str:
-    cover, side = hero_images()
-    disc = "".join(f"<span>{escape(d)}</span>" for d in C.DISCIPLINES)
-    return f"""
-<div class="hero" id="top">
-  {photo(cover, "hero-main", C.HERO_TAG, "sand", eager=True, extra=f'<div class="hero-word">{logo()}</div>')}
-  <div class="hero-copy"><h1>{escape(C.HERO_TITLE)}</h1><p class="lede">{escape(C.HERO_LEDE)}</p></div>
-  <div class="hero-side">
-    {photo(side, "", C.HERO_SIDE_TAG, "rose", full=False, eager=True)}
-    {txt(C.HERO_SIDE_CAPTION, tag="p", cls="cap")}
+  <div class="foot-top">
+    <div class="brand-col"><a class="brand" href="{ctx.href('')}" target="_self" aria-label="RIVATAR">{logo()}</a></div>
+    <div class="foot-col"><h4>{escape(ctx.t('footer.menu'))}</h4><ul>{menu}</ul></div>
+    <div class="foot-col"><h4>{escape(ctx.t('footer.contact'))}</h4><ul>{contact}</ul></div>
+    <div class="foot-col"><h4>{escape(ctx.t('footer.info'))}</h4><ul>{infos}</ul></div>
   </div>
-  <div class="disciplines">{disc}<span class="lat">{escape(C.DISCIPLINES_LATIN)}</span></div>
-</div>"""
-
-
-def _story_text(ev: dict) -> str:
-    n = len(event_images(ev["slug"]))
-    type_lbl = C.event_type_label(ev)
-    return f"""
-<div class="story-text">
-  <p class="kicker">{txt(type_lbl, "label")}{txt(ev.get("location", ""), "label")}</p>
-  <h3 class="lat">{escape(ev["name"])}</h3>
-  {txt(ev.get("desc", ""), "desc", "p")}
-  <a class="more" href="{page_url(ev["slug"])}" target="_self">{escape(C.STORY_MORE)} <span>←</span></a>
-  <span class="gal-count">{escape(C.GALLERY_COUNT.format(n=n))}</span>
-</div>"""
-
-
-def story(ev: dict, layout: str, k: int) -> str:
-    """Three spread layouts from the design, in rotation: a (wide + side), b (text, tall, low), c (pano + strip)."""
-    slug, t, used = ev["slug"], C.IMAGE_TAGS, hero_files()
-    tone = lambda i: TONES[(k + i) % len(TONES)]  # noqa: E731
-    if layout == "a":
-        wide, side = pick_images(slug, ["landscape", "portrait"], used)
-        return f"""<article class="story s-a">{photo(wide, "wide", t["wide"], tone(0))}
-  <div class="side">{photo(side, "", t["detail"], tone(1), full=False)}{_story_text(ev)}</div></article>"""
-    if layout == "b":
-        tall, low = pick_images(slug, ["portrait", "any"], used)
-        return f"""<article class="story s-b">{_story_text(ev)}{photo(tall, "tall", t["portrait"], tone(0))}
-  {photo(low, "low", t["detail"], tone(1), full=False)}</article>"""
-    pano, *strip = pick_images(slug, ["landscape", "portrait", "any", "portrait"], used)
-    strip_html = "".join(photo(im, "", tg, tone(i + 1), full=False)
-                         for i, (im, tg) in enumerate(zip(strip, [t["detail"], t["detail"], t["moment"]])))
-    return f"""<article class="story s-c">{photo(pano, "pano", t["pano"], tone(0))}{_story_text(ev)}
-  <div class="strip">{strip_html}</div></article>"""
-
-
-def stories() -> str:
-    arts = "".join(story(ev, "abc"[k % 3], k) for k, ev in enumerate(C.visible_events()))
-    return f"""
-<section class="sec" id="stories" aria-labelledby="stories-h">
-  <div class="sec-head"><h2 id="stories-h">{escape(C.STORIES_TITLE)}</h2><span class="lat">{escape(C.STORIES_LATIN)}</span>
-    <p class="note">{escape(C.STORIES_NOTE)}</p></div>
-  <div class="stories">{arts}</div>
-</section>"""
-
-
-def approach() -> str:
-    pillars = "".join(f"""<div class="pillar"><span class="lat">{escape(p["latin"])}</span><h3>{escape(p["title"])}</h3>
-      <p>{escape(p["text"])}</p></div>""" for p in C.PILLARS)
-    return f"""
-<section class="sec" id="approach" aria-labelledby="approach-h">
-  <div class="sec-head"><h2 id="approach-h">{escape(C.APPROACH_TITLE)}</h2><span class="lat">{escape(C.APPROACH_LATIN)}</span></div>
-  <div class="approach">
-    <p class="statement">{escape(C.APPROACH_STATEMENT)} <em>{escape(C.APPROACH_STATEMENT_EM)}</em></p>
-    <div class="pillars">{pillars}</div>
+  <div class="foot-bottom">
+    <div class="icons">{ig}<a href="{whatsapp_url()}" target="_blank" rel="noopener" aria-label="WhatsApp"><span class="ico ico-wa"></span></a></div>
+    <small>{escape(ctx.t('footer.rights'))}</small>
   </div>
-</section>"""
+</footer>
+<a class="wa-float" href="{whatsapp_url()}" target="_blank" rel="noopener" aria-label="{escape(ctx.t('contact.whatsapp_aria'))}"><span class="ico ico-wa"></span></a>"""
 
 
-def services() -> str:
-    items = "".join(f"""<li class="svc"><h3>{escape(s["title"])}<span class="lat">{escape(s["latin"])}</span></h3>
-      <p>{escape(s["text"])}</p><span class="swatch" style="--tone:var(--ph-{s["tone"]})"></span></li>""" for s in C.SERVICES)
-    addons = "".join(f"<span>{escape(a)}</span>" for a in C.ADDONS)
+def page_end(ctx: Ctx) -> str:
+    return cta_band(ctx) + footer(ctx)
+
+
+def intro(ctx: Ctx) -> str:
+    """First-visit intro: logo + line typed letter by letter (CSS only), fades out by itself."""
+    line = ctx.t("intro.line")
+    step = 1.3 / max(len(line), 1)
+    letters = "".join(f'<span style="animation-delay:{0.45 + i * step:.2f}s">{escape(ch)}</span>'
+                      for i, ch in enumerate(line))
+    return (f'<div class="intro" role="presentation" aria-hidden="true" title="{escape(ctx.t("intro.skip"))}">'
+            f'{logo()}<p>{letters}</p></div>')
+
+
+# ------------------------------------------------------------------ home
+def _home_img(key: str, alt: str, sizes: str, eager: bool = False) -> str:
+    cfg = C.site().get("home", {}).get(key, {})
+    return img("home", media().get("home", {}).get(key), alt, sizes, cfg.get("focus", "50% 50%"), eager)
+
+
+def xfade(ctx: Ctx, refs: list[dict], cls: str = "bw", sizes: str = "40vw") -> str:
+    refs = [r for r in refs if photo_entry(r.get("project", ""), r.get("photo"))][:4]
+    if not refs:
+        return ""
+    imgs = "".join(ref_img(r, sizes=sizes) for r in refs)
+    n = len(refs) if len(refs) in (3, 4) else 0
+    return f'<figure class="ph xfade {cls} n{n}" aria-label="{escape(ctx.t("home.crossfade_label"))}">{imgs}</figure>'
+
+
+def home_top(ctx: Ctx) -> str:
+    home = C.site().get("home", {})
+    bride = (f'<span class="rot">{_home_img("bride-rot", ctx.t("home.bride_alt"), "(max-width:700px) 100vw, 40vw")}</span>'
+             if home.get("bride", {}).get("rotate_desktop") else "")
+    bride += f'<span class="upright">{_home_img("bride", ctx.t("home.bride_alt"), "100vw")}</span>'
     return f"""
-<section class="sec" id="services" aria-labelledby="services-h">
-  <div class="sec-head"><h2 id="services-h">{escape(C.SERVICES_TITLE)}</h2><span class="lat">{escape(C.SERVICES_LATIN)}</span></div>
-  <ul class="svc-list">{items}</ul>
-  <p class="addons"><span class="label">{escape(C.ADDONS_LABEL)}</span>{addons}</p>
-</section>"""
-
-
-def about() -> str:
-    return f"""
-<section class="sec" id="about" aria-labelledby="about-h">
-  <div class="about">
-    {photo(None, "portrait", C.ABOUT_PORTRAIT_TAG, "linen")}
-    <div class="bio">
-      <span class="label">{escape(C.ABOUT_LABEL)}</span>
-      <h2 class="name" id="about-h">{escape(C.ABOUT_NAME)}</h2>
-      {txt(C.ABOUT_ROLE, tag="p")}
-      {txt(C.ABOUT_BIO, tag="p")}
+<section class="home-split">
+  <div class="home-left">
+    {figure(_home_img("courtyard", ctx.t("home.courtyard_alt"), "(max-width:700px) 100vw, 50vw", eager=True), "bw")}
+    <div class="home-copy">
+      <h1>{escape(ctx.t("home.title"))}</h1>
+      <p>{escape(ctx.t("home.text"))}</p>
+      <a class="link-line" href="{ctx.href("projects")}" target="_self">{escape(ctx.t("home.cta"))}</a>
     </div>
   </div>
+  <div class="home-right">
+    {figure(_home_img("card", ctx.t("home.card_alt"), "(max-width:700px) 100vw, 40vw", eager=True), "home-card")}
+    <figure class="ph home-bride bw">{bride}</figure>
+    {xfade(ctx, home.get("crossfade", []))}
+    <p class="xfade-cap label"><span>{escape(ctx.t("home.crossfade_label"))}</span><span>RIVATAR</span></p>
+  </div>
 </section>"""
 
 
-def contact_head() -> str:
-    dl = "".join(f"<dt>{escape(k)}</dt>{txt(v, tag='dd')}" for k, v in C.CONTACT_DETAILS)
+# ------------------------------------------------------------------ covers
+def cover(ctx: Ctx, proj: dict, eager: bool = False) -> str:
+    slug = proj["slug"]
+    name = ctx.loc(proj.get("name"))
+    kind = C.event_type_label(proj.get("event_type"), ctx.lang)
+    where = (C.venues(proj.get("location"), ctx.lang) or [""])[0]  # main venue
+    image = project_img(slug, proj.get("cover"), alt=name, eager=eager,
+                        sizes="(max-width:700px) 100vw, (max-width:1000px) 50vw, 33vw")
     return f"""
-<div class="contact-head" id="contact">
-  <span class="lat">{escape(C.CONTACT_LATIN)}</span>
-  <h2 id="contact-h">{escape(C.CONTACT_TITLE)}</h2>
-  <dl>{dl}</dl>
-</div>"""
+<a class="cover" href="{ctx.href(project_path(slug))}" target="_self" aria-label="{escape(name)}, {escape(kind)}, {escape(where)}">
+  {figure(image)}
+  <div class="meta"><span class="label">{escape(kind)}</span><h3>{escape(name)}</h3>{txt(where, "where")}</div>
+</a>"""
 
 
-def legend(text: str, first: bool = False) -> str:
-    return f'<p class="legend{" first" if first else ""}">{escape(text)}</p>'
+def covers(ctx: Ctx, projects: list[dict]) -> str:
+    return f'<div class="covers">{"".join(cover(ctx, p, eager=i < 3) for i, p in enumerate(projects))}</div>'
 
 
-def estimate_box(case: str | None, result: dict | None) -> str:
+# ------------------------------------------------------------------ project page
+def _gallery_rows(ctx: Ctx, slug: str, photos: list[dict]) -> str:
+    rows, pending = [], []
+
+    def flush_pair():
+        if len(pending) == 2:
+            rows.append('<div class="g-pair">' + "".join(
+                figure(project_img(slug, p, ctx.loc(p.get("alt")), "(max-width:700px) 100vw, 50vw"), "zoom")
+                for p in pending) + "</div>")
+        elif pending:
+            p = pending[0]
+            rows.append(figure(project_img(slug, p, ctx.loc(p.get("alt")), "(max-width:700px) 100vw, 560px"), "g-detail zoom"))
+        pending.clear()
+
+    for p in photos:
+        layout = p.get("layout", "wide")
+        if layout == "pair":
+            pending.append(p)
+            if len(pending) == 2:
+                flush_pair()
+            continue
+        flush_pair()
+        if layout == "detail":
+            rows.append(figure(project_img(slug, p, ctx.loc(p.get("alt")), "(max-width:700px) 100vw, 560px"), "g-detail zoom"))
+        else:
+            rows.append(figure(project_img(slug, p, ctx.loc(p.get("alt")), "100vw"), "g-wide zoom"))
+    flush_pair()
+    return "".join(rows)
+
+
+def has_gallery(proj: dict) -> bool:
+    return any(ch.get("photos") for ch in proj.get("chapters", []))
+
+
+def project_hero(ctx: Ctx, proj: dict) -> str:
+    slug = proj["slug"]
+    name = ctx.loc(proj.get("name"))
+    kind = C.event_type_label(proj.get("event_type"), ctx.lang)
+    where = (C.venues(proj.get("location"), ctx.lang) or [""])[0]  # main venue
+    return f"""
+<section class="p-hero">
+  {figure(project_img(slug, proj.get("hero") or proj.get("cover"), name, "100vw", eager=True))}
+  <div class="p-hero-copy">
+    <span class="label">{escape(kind)} · {escape(where)}</span>
+    <h1>{escape(name)}</h1>
+    {f'<a class="btn-line" href="#gallery">{escape(ctx.t("project.gallery"))}</a>' if has_gallery(proj) else ""}
+  </div>
+</section>"""
+
+
+HEX = re.compile(r"#[0-9A-Fa-f]{6}")
+
+
+def palette_block(ctx: Ctx, proj: dict) -> str:
+    """COLOR PALETTE: four stacked swatches beside one photo from the event. No hex labels on the site;
+    invalid colour values are skipped. Empty when the project has no palette yet."""
+    pal = proj.get("palette") or {}
+    colors = [c for c in pal.get("colors", []) if isinstance(c, str) and HEX.fullmatch(c)][:4]
+    if not colors:
+        return ""
+    swatches = "".join(f'<span style="background:{c}"></span>' for c in colors)
+    photo = project_img(proj["slug"], pal, "", "(max-width:700px) 50vw, 300px")
+    return (f'<section class="palette"><span class="label">{escape(ctx.t("project.palette"))}</span>'
+            f'<div class="palette-row"><div class="swatches" role="img" '
+            f'aria-label="{escape(ctx.t("project.palette"))}">{swatches}</div>'
+            f'{figure(photo) if photo else ""}</div></section>')
+
+
+def project_body(ctx: Ctx, proj: dict) -> str:
+    slug = proj["slug"]
+    text = ctx.loc(proj.get("text"))
+    if C.is_todo(text):
+        text = ""
+    places = C.venues(proj.get("location"), ctx.lang)
+    facts = [("project.type", [C.event_type_label(proj.get("event_type"), ctx.lang)]),
+             ("project.venues" if len(places) > 1 else "project.location", places)]
+    credits = [c for c in proj.get("credits", []) if c]
+    facts_html = "".join(f'<div><dt class="label">{escape(ctx.t(k))}</dt>{"".join(txt(v, tag="dd") for v in vs)}</div>'
+                         for k, vs in facts if vs)
+    intro = f"""
+<section class="p-intro">
+  {txt(text, "lead", "p") + '<span class="rule"></span>' if text else ""}
+  <dl class="p-facts">{facts_html}</dl>
+</section>"""
+    chapters = []
+    hero_photo = (proj.get("hero") or {}).get("photo")
+    for ch in proj.get("chapters", []):
+        photos = [p for p in ch.get("photos", []) if p.get("photo") != hero_photo]  # never show the hero twice
+        if not photos:
+            continue
+        title = ctx.loc(ch.get("title")) if ch.get("title") else ""
+        head = f'<h2 class="chapter-title">{escape(title)}</h2>' if title else ""
+        chapters.append(head + _gallery_rows(ctx, slug, photos))
+    # No "[gallery being curated]" placeholder: a project without photos simply has no gallery section yet.
+    gallery = f'<section class="gallery" id="gallery">{"".join(chapters)}</section>' if chapters else ""
+    films = ""
+    vids = media().get("videos", {}).get(slug, [])
+    if vids:
+        items = "".join(
+            f'<figure class="ph" style="--ar:{v["w"]}/{v["h"]}">'
+            f'<video src="{STATIC_URL}/projects/{slug}/{v["file"]}" poster="{STATIC_URL}/projects/{slug}/{v["poster"]}" '
+            f'autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>'
+            f'<img class="still" src="{STATIC_URL}/projects/{slug}/{v["poster"]}" alt="" loading="lazy"></figure>'
+            for v in vids)
+        films = f'<section class="films"><h2>{escape(ctx.t("project.films"))}</h2><div class="films-row">{items}</div></section>'
+    credit_html = ""
+    if credits:
+        credit_html = (f'<section class="p-intro"><span class="label">{escape(ctx.t("project.credits"))}</span>'
+                       + "".join(txt(ctx.loc(c), tag="p") for c in credits) + "</section>")
+    nxt = C.next_project(slug)
+    next_html = ""
+    if nxt:
+        next_html = f"""
+<section class="p-next">
+  <a class="btn-line" href="{ctx.href(project_path(nxt["slug"]))}" target="_self">{escape(ctx.t("project.next"))}</a>
+  <h2>{escape(ctx.loc(nxt.get("name")))}</h2>
+</section>"""
+    invite = f"""
+<section class="p-invite">
+  <h2>{escape(ctx.t("project.invite_title"))}</h2>
+  <p>{escape(ctx.t("project.invite_text"))}</p>
+  <a class="link-line" href="{ctx.href("contact")}" target="_self">{escape(ctx.t("project.invite_cta"))}</a>
+</section>"""
+    return (intro + palette_block(ctx, proj) + gallery
+            + films + credit_html
+            + next_html + invite)
+
+
+# ------------------------------------------------------------------ contact
+def estimate_box(ctx: Ctx, case: str | None, result: dict | None) -> str:
     """Estimate panel. Shows the live estimate when the estimator returns one (phase 3)."""
-    E = C.ESTIMATE
-    case_html = escape(case) if case else f'<span style="color:var(--fg-2)">{escape(E["case_empty"])}</span>'
+    case_html = escape(case) if case else f'<span style="color:var(--fg-2)">{escape(ctx.t("estimate.case_empty"))}</span>'
     if result and result.get("status") == "ok":
         body = (f'<p class="est-num" dir="ltr" style="color:var(--fg)">₪{result["estimate_ils"]:,.0f}</p>'
-                f'<div class="est-track"></div><div class="est-ends" style="display:flex;justify-content:space-between;'
-                f'direction:ltr;font-size:.85rem;color:var(--fg-2);margin-top:.7rem"><span>₪{result["low_ils"]:,.0f}</span>'
-                f'<span>₪{result["high_ils"]:,.0f}</span></div>')
+                f'<p class="est-fine" dir="ltr">₪{result["low_ils"]:,.0f} – ₪{result["high_ils"]:,.0f}</p>')
         tag = ""
     else:
-        body = (f'<p class="est-num" dir="ltr">₪ —</p><p class="est-pending">{escape(E["unavailable_he"])}'
-                f'<span class="lat" dir="ltr">{escape(E["unavailable_en"])}</span></p><div class="est-track"></div>')
-        tag = f'<span class="est-tag">{escape(E["tag"])}</span>'
+        body = (f'<p class="est-num" dir="ltr">₪ —</p>'
+                f'<p class="est-pending">{escape(ctx.t("estimate.unavailable"))}</p>')
+        tag = f'<span class="est-tag">{escape(ctx.t("estimate.tag"))}</span>'
     return f"""
-<aside class="estimate" aria-label="{escape(E["label"])}">
-  <div class="est-top"><span class="label">{escape(E["label"])}</span>{tag}</div>
+<aside class="estimate" aria-label="{escape(ctx.t("estimate.label"))}">
+  <div class="est-top"><span class="label">{escape(ctx.t("estimate.label"))}</span>{tag}</div>
   <p class="est-case">{case_html}</p>
   {body}
-  <p class="est-fine">{escape(E["fine"])}</p>
+  <p class="est-fine">{escape(ctx.t("estimate.fine"))}</p>
 </aside>"""
 
 
-def messages(errors: list[str] | None = None, ok: str | None = None) -> str:
-    if errors:
-        items = "".join(f"<li>{escape(e)}</li>" for e in errors)
-        return f'<div class="form-errors" role="alert">{escape(C.FORM["fix_errors"])}<ul>{items}</ul></div>'
-    if ok:
-        return f'<div class="form-ok" role="status">{escape(ok)}</div>'
-    return ""
-
-
-# ------------------------------------------------------------------ gallery page
-def gallery(ev: dict) -> str:
-    imgs = event_images(ev["slug"])
-    tiles = "".join(f'<a href="{img_url(i["file"])}" target="_blank" rel="noopener">'
-                    f'<img src="{img_url(i["thumb"])}" alt="" loading="lazy" width="{i["width"]}" height="{i["height"]}"></a>'
-                    for i in imgs)
-    others = "".join(f'<a href="{page_url(o["slug"])}" target="_self"{" aria-current=\"page\"" if o["slug"] == ev["slug"] else ""}>'
-                     f'{escape(o["name"])}</a>' for o in C.visible_events())
-    return f"""
-<div class="gal-head">
-  <a class="back" href="/#stories" target="_self">→ {escape(C.GALLERY_BACK)}</a>
-  <p class="kicker" style="display:flex;gap:.7rem;flex-wrap:wrap">{txt(C.event_type_label(ev), "label")}{txt(ev.get("location", ""), "label")}</p>
-  <h1>{escape(ev["name"])}</h1>
-  {txt(ev.get("desc", ""), "desc", "p")}
-  <span class="gal-count">{escape(C.GALLERY_COUNT.format(n=len(imgs)))}</span>
-</div>
-<div class="gallery">{tiles}</div>
-<p class="gal-hint">{escape(C.GALLERY_HINT)}</p>
-<nav class="gal-others" aria-label="אירועים נוספים">{others}</nav>"""
+def errors_box(ctx: Ctx, messages: list[str]) -> str:
+    items = "".join(f"<li>{escape(m)}</li>" for m in messages)
+    return f'<div class="form-errors" role="alert">{escape(ctx.t("form.fix_errors"))}<ul>{items}</ul></div>'

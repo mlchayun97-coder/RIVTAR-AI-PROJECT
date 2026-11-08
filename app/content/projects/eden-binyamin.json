@@ -1,0 +1,193 @@
+{
+  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops. location: one {en, he} or a list of them, main venue first. palette: 4 colours (#RRGGBB, top to bottom) + one photo; palette_source: designer | extracted.",
+  "slug": "eden-binyamin",
+  "show": true,
+  "event_type": "wedding",
+  "name": {
+    "en": "Eden & Binyamin",
+    "he": "עדן ובנימין"
+  },
+  "location": {
+    "en": "Montreal, Canada",
+    "he": "מונטריאול, קנדה"
+  },
+  "text": {
+    "en": "Eden and Binyamin, a couple from Canada, were married in Montreal. They arrived in a horse-drawn carriage, and the colours of the wedding were deep purple and plum, with warm tan and rust accents. The evening moved from the carriage arrival outside to a reception hall set with flowers and candlelight.",
+    "he": "עדן ובנימין, זוג מקנדה, התחתנו במונטריאול. הם הגיעו בכרכרה רתומה לסוסים, וצבעי החתונה היו סגול עמוק ושזיף, עם נגיעות של חום-בז' חם וחלודה. הערב עבר מההגעה בכרכרה בחוץ אל אולם קבלת הפנים, ערוך בפרחים ובאור נרות."
+  },
+  "cover": {
+    "photo": "PINL3469.jpg",
+    "focus": "45% 55%",
+    "why": "The couple beside the carriage at night: confirms the carriage entrance from the brief and gives the set its darkest, most dramatic frame."
+  },
+  "hero": {
+    "photo": "MAD_6660.jpg",
+    "focus": "50% 50%",
+    "why": "Wide establishing frame from the approved shortlist."
+  },
+  "palette": {
+    "colors": [
+      "#1E1A24",
+      "#2F2548",
+      "#B69785",
+      "#7C2718"
+    ],
+    "photo": "DSC_8808.jpg",
+    "focus": "50% 50%",
+    "why": "Candlelit table under the purple light; the photo the designer paired with this palette."
+  },
+  "palette_source": "designer",
+  "chapters": [
+    {
+      "title": null,
+      "photos": [
+        {
+          "photo": "MAD_6660.jpg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A horse-drawn carriage carries the bride and groom along a paved drive at night in Montreal.",
+            "he": "כרכרה רתומה לסוס מובילה את החתן והכלה בשביל מרוצף בלילה, במונטריאול."
+          }
+        },
+        {
+          "photo": "PINL3472.jpg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The bride and groom in an open horse-drawn carriage at night, the driver in a top hat holding the reins.",
+            "he": "חתן וכלה בכרכרה פתוחה רתומה לסוס בלילה, והעגלון בכובע צילינדר אוחז במושכות."
+          }
+        },
+        {
+          "photo": "MAD_4879.jpg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Black and white: the bride and groom seen from behind between tall stone columns, her long train spread on the ground.",
+            "he": "בשחור־לבן: החתן והכלה מגבם בין עמודי אבן גבוהים, והשובל הארוך של השמלה פרוש על הקרקע."
+          }
+        },
+        {
+          "photo": "MAD_4778.jpg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The bride and groom under a clear umbrella on the steps of a building with tall stone columns.",
+            "he": "החתן והכלה תחת מטרייה שקופה על מדרגות בניין עם עמודי אבן גבוהים."
+          }
+        },
+        {
+          "photo": "DSC_6361.jpg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The bride, holding a white bouquet, smiles at the groom beside her.",
+            "he": "הכלה, עם זר לבן, מחייכת אל החתן שלצידה."
+          }
+        },
+        {
+          "photo": "MAD_6015.jpg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Close-up of the bride's lace sleeves and folded hands beneath her veil.",
+            "he": "תקריב של שרוולי התחרה של הכלה וידיה השלובות מתחת להינומה."
+          }
+        },
+        {
+          "photo": "PINL3436.jpg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The reception hall in purple and blue light, long tables set with candles and clear chairs.",
+            "he": "אולם קבלת הפנים באור סגול וכחול, שולחנות ארוכים ערוכים בנרות וכיסאות שקופים."
+          }
+        },
+        {
+          "photo": "DSC_8793.jpg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A round table with candles and flowers in front of purple-lit drapes.",
+            "he": "שולחן עגול עם נרות ופרחים מול וילונות מוארים בסגול."
+          }
+        },
+        {
+          "photo": "DSC_8819.jpg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A tall arrangement of white and green flowers above a round table, purple-lit drapes behind.",
+            "he": "סידור גבוה של פרחים לבנים וירוקים מעל שולחן עגול, ומאחוריו וילונות מוארים בסגול."
+          }
+        },
+        {
+          "photo": "IBP_3879.jpg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Red, purple and orange flowers in a metallic vase beside a floating candle and a table-number card.",
+            "he": "פרחים באדום, סגול וכתום באגרטל מתכתי, לצד נר צף וכרטיס מספר שולחן."
+          }
+        },
+        {
+          "photo": "PINL3440.jpg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A long table glowing with candles and flowers, purple light on the drapes behind.",
+            "he": "שולחן ארוך זוהר בנרות ופרחים, ואור סגול על הווילונות שמאחור."
+          }
+        },
+        {
+          "photo": "PINL3447.jpg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Long tables with tall floral centrepieces and candlelight under crystal chandeliers.",
+            "he": "שולחנות ארוכים עם סידורי פרחים גבוהים ואור נרות מתחת לנברשות קריסטל."
+          }
+        },
+        {
+          "photo": "DSC_8811.jpg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Floating candles in glass cylinders and small purple flowers on a dark table.",
+            "he": "נרות צפים בגלילי זכוכית ופרחים סגולים קטנים על שולחן כהה."
+          }
+        },
+        {
+          "photo": "MAD_6009.jpg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The bride, veiled and smiling, enters the hall with the groom beside her and guests behind.",
+            "he": "הכלה, עם הינומה ומחייכת, נכנסת לאולם, החתן לצידה והאורחים מאחור."
+          }
+        },
+        {
+          "photo": "DSC_0523.jpg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A dessert table with a tall cream-puff tower, pastries and cookies.",
+            "he": "שולחן קינוחים עם מגדל פחזניות גבוה, מאפים ועוגיות."
+          }
+        },
+        {
+          "photo": "MAD_6687.jpg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Guests dance outside at night beside the horse-drawn carriage.",
+            "he": "אורחים רוקדים בחוץ בלילה ליד הכרכרה הרתומה לסוס."
+          }
+        }
+      ]
+    }
+  ],
+  "videos": [],
+  "credits": []
+}

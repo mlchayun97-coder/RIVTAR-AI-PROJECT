@@ -11,11 +11,11 @@ showSidebarNavigation = false
 gatherUsageStats = false
 
 [theme]
-# Dark palette from the design draft (rivatar-home.html, dark mode)
+# Site palette: black, off-white text (see app/theme.py)
 base = "dark"
-primaryColor = "#ECE5D9"
-backgroundColor = "#161513"
-secondaryBackgroundColor = "#201E1B"
-textColor = "#ECE5D9"
-linkColor = "#ECE5D9"
-font = "Assistant, 'Segoe UI', Arial, sans-serif"
+primaryColor = "#EDE8E0"
+backgroundColor = "#000000"
+secondaryBackgroundColor = "#141312"
+textColor = "#EDE8E0"
+linkColor = "#EDE8E0"
+font = "Jost, Heebo, 'Segoe UI', Arial, sans-serif"

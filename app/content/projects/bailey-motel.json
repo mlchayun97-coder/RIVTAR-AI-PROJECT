@@ -1,0 +1,202 @@
+{
+  "_help": "One project. Photos are original file names inside this event's export folder; run scripts/prepare_media.py after changing them. layout: wide | pair (two in a row) | detail. focus = CSS object-position for crops. location: one {en, he} or a list of them, main venue first. palette: 4 colours (#RRGGBB, top to bottom) + one photo; palette_source: designer | extracted.",
+  "slug": "bailey-motel",
+  "show": true,
+  "event_type": "wedding",
+  "name": {
+    "en": "Bailey & Motel",
+    "he": "ביילי ומוטל"
+  },
+  "location": {
+    "en": "Olmaya, Jerusalem",
+    "he": "עולמיה, ירושלים"
+  },
+  "text": {
+    "en": "Bailey and Motel came from California, and both served as lone soldiers. They wanted an authentic Jerusalem view for their wedding and found it at Olmaya. Bailey asked for a green-and-white design, carried through the chuppah, the tables and the seating corners in white flowers and fresh greenery.",
+    "he": "ביילי ומוטל הגיעו מקליפורניה, ושניהם שירתו כחיילים בודדים. הם רצו נוף ירושלמי אמיתי לחתונה שלהם, ומצאו אותו בעולמיה. ביילי ביקשה עיצוב בירוק ולבן, שעבר דרך החופה, השולחנות ופינות הישיבה בפרחים לבנים ובירק רענן."
+  },
+  "cover": {
+    "photo": "2C553153-8BE4-4B7A-A5C5-A08C2E62E6BA.jpeg",
+    "focus": "40% 45%",
+    "why": "A human moment, the bride with a young girl among white flowers: sets this Olmaya wedding apart from the view-led Avigail & Nuri cover."
+  },
+  "hero": {
+    "photo": "16242809-3C90-4E5C-981F-CD102D918A93.jpeg",
+    "focus": "50% 50%",
+    "why": "Wide establishing frame from the approved shortlist."
+  },
+  "palette": {
+    "colors": [
+      "#201E17",
+      "#818E48",
+      "#B3B99D",
+      "#CFCFD6"
+    ],
+    "photo": "2C553153-8BE4-4B7A-A5C5-A08C2E62E6BA.jpeg",
+    "focus": "40% 45%",
+    "why": "Extracted from the curated cover (version A, approved)."
+  },
+  "palette_source": "extracted",
+  "chapters": [
+    {
+      "title": null,
+      "photos": [
+        {
+          "photo": "1B8DE473-B692-489D-924D-DEEA3FC17FB9.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A chuppah dressed in greenery and white flowers above rows of wooden chairs, the Jerusalem skyline behind, at Olmaya.",
+            "he": "חופה מעוטרת בירק ופרחים לבנים מעל שורות כיסאות עץ, ומאחוריה קו הרקיע של ירושלים, בעולמיה."
+          }
+        },
+        {
+          "photo": "7B0A350A-BEAD-466F-85D8-47968A4D666F.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A corner of the chuppah: greenery and white flowers climbing a wooden post, the city below.",
+            "he": "פינה של החופה: ירק ופרחים לבנים מטפסים על עמוד עץ, והעיר למטה."
+          }
+        },
+        {
+          "photo": "441A191C-0488-4A73-B351-BCC80AA438A3.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The bride in a white gown and veil sits on a sofa among white flowers, a woman in yellow beside her.",
+            "he": "הכלה בשמלה לבנה ובהינומה יושבת על ספה בין פרחים לבנים, ולצידה אישה בצהוב."
+          }
+        },
+        {
+          "photo": "5AF16265-6423-46E2-8909-73A2EA22C070.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The bride and a young girl in a pink dress sit together among white flowers.",
+            "he": "הכלה וילדה בשמלה ורודה יושבות יחד בין פרחים לבנים."
+          }
+        },
+        {
+          "photo": "9DA094F7-9876-4059-9925-90F20ADA9F38.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Close-up of the bride holding hands with a young girl in a pink dress.",
+            "he": "תקריב של הכלה אוחזת בידיה של ילדה בשמלה ורודה."
+          }
+        },
+        {
+          "photo": "B4349FCB-9A40-42D6-8381-8EA942D5B870.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The bride in her veil on a sofa framed by white flowers, a woman in yellow facing her.",
+            "he": "הכלה עם הינומה על ספה ממוסגרת בפרחים לבנים, ומולה אישה בצהוב."
+          }
+        },
+        {
+          "photo": "2B70D06B-6907-4A00-954A-FA1E27C47D50.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A seating corner with a white sofa, cushions and a low table in front of the dining tables.",
+            "he": "פינת ישיבה עם ספה לבנה, כריות ושולחן נמוך מול שולחנות האוכל."
+          }
+        },
+        {
+          "photo": "517B8B40-27BF-441B-A2F8-EEF08E511BDE.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A green glass bottle and a white vase with delicate flowers on a table.",
+            "he": "בקבוק זכוכית ירוק ואגרטל לבן עם פרחים עדינים על שולחן."
+          }
+        },
+        {
+          "photo": "51BDCD7A-8775-4C7C-B0E3-DB36A1744F17.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "The hall with seating corners, a long table and white flowers in afternoon light.",
+            "he": "האולם עם פינות ישיבה, שולחן ארוך ופרחים לבנים באור אחר הצהריים."
+          }
+        },
+        {
+          "photo": "16242809-3C90-4E5C-981F-CD102D918A93.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A long table runner of white flowers and greenery with a table card.",
+            "he": "ראנר שולחן ארוך של פרחים לבנים וירק עם כרטיס שולחן."
+          }
+        },
+        {
+          "photo": "A2020A11-F9E2-4318-A145-621C9CB44F50.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Greenery and white flowers along a wooden table set with dark green napkins.",
+            "he": "ירק ופרחים לבנים לאורך שולחן עץ ערוך במפיות בירוק כהה."
+          }
+        },
+        {
+          "photo": "047DCC16-93C0-437E-93CF-231022F5BE15.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A table draped in white fabric with flowers spilling over each end.",
+            "he": "שולחן עטוף בבד לבן עם פרחים הגולשים משני קצותיו."
+          }
+        },
+        {
+          "photo": "B5E0860B-DF50-489E-81F7-00FCA50AE1F0.jpeg",
+          "layout": "wide",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A round table with white flowers, glasses and dark green napkins.",
+            "he": "שולחן עגול עם פרחים לבנים, כוסות ומפיות בירוק כהה."
+          }
+        },
+        {
+          "photo": "D2E9D436-9C19-4845-A7C6-067FBB8CAE73.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A low arrangement of white roses and trailing greenery on a white tablecloth.",
+            "he": "סידור נמוך של ורדים לבנים וירק משתלשל על מפה לבנה."
+          }
+        },
+        {
+          "photo": "7017073B-CED0-436D-9193-7FDDD7634827.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A printed menu tucked into a knotted dark green napkin.",
+            "he": "תפריט מודפס בתוך מפית קשורה בירוק כהה."
+          }
+        },
+        {
+          "photo": "568CD3BE-A83E-4CB1-99A2-7A0D52FFA103.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "A table card reading “Friends” beside white flowers and tea lights.",
+            "he": "כרטיס שולחן שכתוב בו “Friends” לצד פרחים לבנים ונרות קטנים."
+          }
+        },
+        {
+          "photo": "D07D052B-ECFD-4DFC-AE2D-AA63B77674FC.jpeg",
+          "layout": "pair",
+          "focus": "50% 50%",
+          "alt": {
+            "en": "Small white flowers growing in moss in a white stone pot.",
+            "he": "פרחים לבנים קטנים צומחים בטחב בעציץ אבן לבן."
+          }
+        }
+      ]
+    }
+  ],
+  "videos": [],
+  "credits": []
+}

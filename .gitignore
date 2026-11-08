@@ -25,6 +25,8 @@ RIVATAR WEBSITE-*/
 *.MP4
 *.mov
 *.MOV
+# ...except the short muted loops exported by scripts/prepare_media.py, which the site plays
+!/app/static/projects/*/*.mp4
 # Originals kept at the project root (copies live in docs/ and app/assets/)
 /rivatar-home.html
 /rivatar-logo.svg

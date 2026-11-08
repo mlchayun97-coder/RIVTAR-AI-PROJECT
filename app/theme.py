@@ -344,7 +344,8 @@ html body .stApp .st-key-letter [data-testid="stSelectbox"] div[class]{border:0 
 .lab-chart{margin:0;background:#fff;padding:.4rem}
 .lab-chart img{display:block;width:100%;height:auto}
 .lab-chart figcaption{color:#5E5A54;font-size:.78rem;padding:.4rem .2rem .1rem}
-.lab-log{background:#0e0d0c;border:1px solid var(--rule);padding:1rem 1.2rem;overflow-x:auto;font-size:.8rem;line-height:1.7;white-space:pre}
+.lab-log{background:#0e0d0c;border:1px solid var(--rule);padding:1rem 1.2rem;font-size:.8rem;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}
+.lab-log span{display:block;padding-inline-start:2ch;text-indent:-2ch}
 .lab-log .dec{color:#E3CF8F}
 .lab-log .bad{color:var(--err)}
 .lab-note{padding:1.4rem var(--gutter) 0;color:var(--todo);font-size:.92rem}

@@ -426,11 +426,11 @@ def project_body(ctx: Ctx, proj: dict) -> str:
 
 # ------------------------------------------------------------------ contact
 def estimate_box(ctx: Ctx, case: str | None, result: dict | None) -> str:
-    """Estimate panel. Shows the live estimate when the estimator returns one (phase 3)."""
+    """Estimate panel: the budget range from the published model, or 'unavailable' if no model passed."""
     case_html = escape(case) if case else f'<span style="color:var(--fg-2)">{escape(ctx.t("estimate.case_empty"))}</span>'
     if result and result.get("status") == "ok":
-        body = (f'<p class="est-num" dir="ltr" style="color:var(--fg)">₪{result["estimate_ils"]:,.0f}</p>'
-                f'<p class="est-fine" dir="ltr">₪{result["low_ils"]:,.0f} – ₪{result["high_ils"]:,.0f}</p>')
+        body = (f'<p class="est-num" dir="ltr" style="color:var(--fg)">₪{result["low_ils"]:,.0f} – ₪{result["high_ils"]:,.0f}</p>'
+                f'<p class="est-fine">{escape(ctx.t("estimate.model", model=result["model_version"]))}</p>')
         tag = ""
     else:
         body = (f'<p class="est-num" dir="ltr">₪ —</p>'

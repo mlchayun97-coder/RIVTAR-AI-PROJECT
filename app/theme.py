@@ -416,8 +416,14 @@ def _fonts_css() -> str:
     return (APP_DIR / "static" / "fonts" / "fonts.css").read_text(encoding="utf-8")
 
 
-def inject() -> None:
-    """Inject fonts and site CSS. Call once per page run, before any content."""
+@st.cache_resource(show_spinner=False)
+def _stylesheet() -> str:
+    """Fonts + site CSS + icon masks, built once per server process (the same for every visitor)."""
     from ui import icon_css  # local import: ui imports theme
 
-    st.html(f"<style>{_fonts_css()}\n{_CSS}\n{icon_css()}</style>")
+    return f"<style>{_fonts_css()}\n{_CSS}\n{icon_css()}</style>"
+
+
+def inject() -> None:
+    """Inject fonts and site CSS. Call once per page run, before any content."""
+    st.html(_stylesheet())

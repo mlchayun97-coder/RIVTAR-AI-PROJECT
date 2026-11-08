@@ -43,9 +43,15 @@ class Ctx:
         return C.loc(field, self.lang)
 
     def href(self, path: str, lang: str | None = None) -> str:
+        """Internal link: RELATIVE ("about?intro=0", home = "./?intro=0"). On Streamlit Community Cloud the
+        app runs in a frame under a proxy path; an absolute "/about" leaves that path and loads the Cloud's
+        own (white) loading page and a brand-new session. All pages are one level deep, so a relative link
+        always lands on the sibling page. Keeps the language, and always carries intro=0 so the intro never
+        replays after the first visit."""
         lang = lang or self.lang
-        base = "/" + path.strip("/")
-        return f"{base}?lang={lang}" if (lang != C.DEFAULT_LANG or lang != self.lang) else base
+        base = path.strip("/") or "./"
+        params = [f"lang={lang}"] if (lang != C.DEFAULT_LANG or lang != self.lang) else []
+        return f"{base}?{'&'.join(params + ['intro=0'])}"
 
 
 def page_path(page: str) -> str:

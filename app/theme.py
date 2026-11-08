@@ -11,7 +11,9 @@ from pathlib import Path
 import streamlit as st
 
 APP_DIR = Path(__file__).resolve().parent
-STATIC_URL = "/app/static"
+# RELATIVE on purpose (no leading slash): on Streamlit Community Cloud the app runs behind a proxy path
+# (https://<app>.streamlit.app/~/+/), so an absolute "/app/static" misses it and every image and font 404s.
+STATIC_URL = "app/static"
 
 _CSS = r"""
 :root{

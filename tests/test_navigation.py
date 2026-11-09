@@ -86,3 +86,15 @@ def test_streamlit_theme_is_dark_so_the_loading_screen_matches_the_site():
     assert theme["backgroundColor"].lower() == "#000000"
     assert theme["primaryColor"] and theme["textColor"]
     assert cfg["server"]["enableStaticServing"] is True
+
+
+def test_home_bride_keeps_one_orientation_at_every_width():
+    """The rotated bride (as in the design) is the only bride image, and no media query changes it."""
+    import content as C
+    import theme
+    import ui
+    html = ui.home_top(ui.Ctx("en"))
+    assert C.site()["home"]["bride"]["rotate_desktop"]
+    assert 'class="rot"' in html and 'class="upright"' not in html
+    for block in re.findall(r"@media[^{]*\{(.*?)\n\}", theme._CSS, re.S):
+        assert ".home-bride" not in block, "a media query changes the bride image"

@@ -102,6 +102,7 @@ header[data-testid="stHeader"]{display:none}
 .home-card{aspect-ratio:565/340}
 .home-bride{aspect-ratio:565/255}
 .home-bride .upright{display:none}
+/* The bride photo keeps the SAME orientation and frame at every width and orientation (no phone override). */
 .xfade{position:relative;aspect-ratio:4/5;width:78% !important;margin-top:clamp(40px,10vh,120px) !important}
 .xfade img{position:absolute;inset:0;opacity:0}
 .xfade img:first-child{opacity:1}
@@ -377,9 +378,6 @@ html body .stApp .st-key-letter [data-testid="stSelectbox"] div[class]{border:0 
   .home-copy{inset-inline:20px;bottom:44px}
   .home-copy h1{font-size:clamp(2.4rem,11vw,3.2rem)}
   .home-right{padding:56px 16px 24px}
-  .home-bride{aspect-ratio:4/5}
-  .home-bride .rot{display:none}
-  .home-bride .upright{display:block}
   .xfade{width:100% !important;margin-top:24px !important}
   .xfade-cap{width:100%}
   .covers{grid-template-columns:1fr;gap:16px}

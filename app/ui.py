@@ -261,9 +261,12 @@ def xfade(ctx: Ctx, refs: list[dict], cls: str = "bw", sizes: str = "40vw") -> s
 
 def home_top(ctx: Ctx) -> str:
     home = C.site().get("home", {})
-    bride = (f'<span class="rot">{_home_img("bride-rot", ctx.t("home.bride_alt"), "(max-width:700px) 100vw, 40vw")}</span>'
-             if home.get("bride", {}).get("rotate_desktop") else "")
-    bride += f'<span class="upright">{_home_img("bride", ctx.t("home.bride_alt"), "100vw")}</span>'
+    # One orientation everywhere: the rotated bride (as in the design) at every width, phone included.
+    # The upright copy is used only if rotation is turned off in site.json.
+    if home.get("bride", {}).get("rotate_desktop"):
+        bride = f'<span class="rot">{_home_img("bride-rot", ctx.t("home.bride_alt"), "(max-width:700px) 100vw, 40vw")}</span>'
+    else:
+        bride = f'<span class="upright" style="display:block">{_home_img("bride", ctx.t("home.bride_alt"), "(max-width:700px) 100vw, 40vw")}</span>'
     return f"""
 <section class="home-split">
   <div class="home-left">

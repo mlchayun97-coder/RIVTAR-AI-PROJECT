@@ -6,9 +6,12 @@ Motion is CSS only and always ends in the visible state; prefers-reduced-motion 
 
 from __future__ import annotations
 
+import json
+import re
 from pathlib import Path
 
 import streamlit as st
+import streamlit.components.v1 as components
 
 APP_DIR = Path(__file__).resolve().parent
 # RELATIVE on purpose (no leading slash): on Streamlit Community Cloud the app runs behind a proxy path
@@ -86,7 +89,7 @@ header[data-testid="stHeader"]{display:none}
 .intro.skip{animation:intro-out .35s ease forwards}
 @keyframes intro-out{to{opacity:0;visibility:hidden}}
 @keyframes fade-in{to{opacity:1}}
-.st-key-introjs{position:absolute !important;width:0 !important;height:0 !important;overflow:hidden}
+.st-key-introjs,.st-key-scalejs{position:absolute !important;width:0 !important;height:0 !important;overflow:hidden}
 
 /* ---------- home ---------- */
 .home-split{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
@@ -357,6 +360,18 @@ html body .stApp .st-key-letter [data-testid="stSelectbox"] div[class]{border:0 
 .st-key-labinsights h2,.st-key-labcard h2,.st-key-labinsights h3,.st-key-labcard h3{font-family:var(--f-title) !important;font-weight:400 !important;font-size:1.25rem !important;text-transform:uppercase}
 .st-key-labinsights table,.st-key-labcard table{font-size:.88rem}
 
+/* ---------- reduced motion: no intro, no crossfades, no slide-ins ---------- */
+@media (prefers-reduced-motion:reduce){
+  .intro{display:none !important}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .xfade img:not(:first-child){opacity:0 !important}
+  .films-row video{display:none}
+  .films-row .still{display:block}
+}
+"""
+
+# The stacked phone/tablet layout (site.json "phone_layout": "stacked").
+_CSS_STACKED = r"""
 /* ---------- tablet ---------- */
 @media (max-width:1000px){
   .mast{grid-template-columns:auto 1fr auto auto;gap:1.2rem}
@@ -398,15 +413,112 @@ html body .stApp .st-key-letter [data-testid="stSelectbox"] div[class]{border:0 
   .lab-stage .d,.lab-stage .pill{grid-column:2}
   .lab-charts{grid-template-columns:1fr}
 }
-/* ---------- reduced motion: no intro, no crossfades, no slide-ins ---------- */
-@media (prefers-reduced-motion:reduce){
-  .intro{display:none !important}
-  *,*::before,*::after{animation:none !important;transition:none !important}
-  .xfade img:not(:first-child){opacity:0 !important}
-  .films-row video{display:none}
-  .films-row .still{display:block}
+"""
+
+
+# ---------------------------------------------------------------- phone layout
+# site.json "phone_layout":
+#   "desktop_scaled" (default): below NARROW_MAX the page is laid out exactly as on a DESKTOP_WIDTH desktop and
+#       zoomed down to the screen width (portrait and landscape). The stacked rules are left out.
+#   "stacked": the responsive tablet/phone layout (_CSS_STACKED).
+PHONE_LAYOUTS = ("desktop_scaled", "stacked")
+DEFAULT_PHONE_LAYOUT = "desktop_scaled"
+DESKTOP_WIDTH = 1440      # the desktop layout that is scaled down
+DESKTOP_HEIGHT = 900      # the tallest desktop window it imitates (100vh = at most this)
+NARROW_MAX = 1000         # below this width the desktop layout is scaled (the old tablet breakpoint)
+
+# Viewport units are written as var(--vw)/var(--vh), 1vw/1vh by default. In the scaled mode they are set to the
+# desktop's units (14.4px / up to 9px) so that, zoomed down, every size matches the desktop exactly.
+_VIEWPORT_UNIT = re.compile(r"(?<![\w.#-])(\d*\.?\d+)(vw|s?vh)\b")
+
+# The zoom is applied to the content container, NOT to <html>: Streamlit's dropdowns and date pickers render in a
+# portal outside it, so they stay phone-sized and correctly placed. The WhatsApp button is zoomed back to its
+# real size so it stays an easy tap target. The stepped --rv-zoom values below are a CSS-only fallback (always a
+# little smaller than the screen, so nothing overflows) until the script sets the exact value.
+_CSS_SCALED = r"""
+@media (max-width:%(narrow)spx){
+  :root{--vw:%(dvw)spx;--vh:%(dvh)spx;--rv-zoom:%(zmin)s;--rv-unzoom:1}
+%(steps)s
+  html,body,.stApp,[data-testid="stAppViewContainer"],[data-testid="stMain"]{overflow-x:hidden}
+  [data-testid="stMainBlockContainer"]{zoom:var(--rv-zoom);min-width:0 !important}
+  .wa-float{zoom:var(--rv-unzoom);inset-inline-start:14px;bottom:14px}
+  /* Streamlit stacks columns below 640px of SCREEN width; the scaled page is 1440px wide, so keep them in a row */
+  [data-testid="stHorizontalBlock"]{flex-wrap:nowrap !important}
+  [data-testid="stHorizontalBlock"]>[data-testid="stColumn"]{min-width:0 !important;width:auto !important;flex:1 1 0 !important}
+  /* dropdown lists open outside the zoom (phone-sized); give them room for the option text (Streamlit's own
+     positioning keeps the wider list on screen) */
+  [data-testid="stSelectboxVirtualDropdown"]{min-width:min(240px,calc(100vw - 16px)) !important;max-width:calc(100vw - 16px)}
 }
 """
+
+# Exact zoom and desktop units for this screen, recomputed on resize and rotation. It runs in the page itself
+# (installed once from the components iframe, which is replaced on every rerun).
+_SCALE_JS = r"""
+(function () {
+  var w = window, r = document.documentElement;
+  function fit() {
+    var vw = w.innerWidth, vh = w.innerHeight;
+    if (vw >= %(narrow)s || !vw) {
+      ["--rv-zoom", "--rv-unzoom", "--vw", "--vh"].forEach(function (p) { r.style.removeProperty(p); });
+      r.classList.remove("rv-scaled");
+      return;
+    }
+    var z = vw / %(width)s;
+    r.style.setProperty("--rv-zoom", String(z));
+    r.style.setProperty("--rv-unzoom", String(1 / z));
+    r.style.setProperty("--vw", (%(width)s / 100) + "px");
+    r.style.setProperty("--vh", (Math.min(%(height)s, vh / z) / 100) + "px");
+    r.classList.add("rv-scaled");
+  }
+  w.__rvFit = fit;
+  w.addEventListener("resize", fit);
+  w.addEventListener("orientationchange", fit);
+  fit();
+})();
+"""
+
+_SCALE_LOADER = """
+<script>
+(function () {
+  var w;
+  try { w = window.parent; w.document; } catch (e) { return; }
+  if (w.__rvFit) { w.__rvFit(); return; }
+  var s = w.document.createElement("script");
+  s.id = "rv-scale";
+  s.textContent = %s;
+  w.document.head.appendChild(s);
+})();
+</script>"""
+
+
+def phone_layout(settings: dict | None = None) -> str:
+    """The phone layout chosen in site.json; anything unknown falls back to the default."""
+    import content as C  # local import: keeps theme importable on its own
+
+    value = (C.site() if settings is None else settings).get("phone_layout", DEFAULT_PHONE_LAYOUT)
+    return value if value in PHONE_LAYOUTS else DEFAULT_PHONE_LAYOUT
+
+
+def _units_to_vars(css: str) -> str:
+    return _VIEWPORT_UNIT.sub(lambda m: f"calc({m.group(1)}*var(--{'vw' if m.group(2) == 'vw' else 'vh'}))", css)
+
+
+def scaled_css() -> str:
+    steps = "\n".join(f"  @media (min-width:{w}px){{:root{{--rv-zoom:{w / DESKTOP_WIDTH:.4f}}}}}"
+                      for w in range(320, NARROW_MAX, 20))
+    return _CSS_SCALED % {"narrow": NARROW_MAX - 0.02, "dvw": DESKTOP_WIDTH / 100, "dvh": DESKTOP_HEIGHT / 100,
+                          "zmin": f"{240 / DESKTOP_WIDTH:.4f}", "steps": steps}
+
+
+def scale_script() -> str:
+    js = _SCALE_JS % {"narrow": NARROW_MAX, "width": DESKTOP_WIDTH, "height": DESKTOP_HEIGHT}
+    return _SCALE_LOADER % json.dumps(js)
+
+
+def site_css(layout: str) -> str:
+    """The site CSS for a phone layout (without fonts and icons)."""
+    base = ":root{--vw:1vw;--vh:1vh}\n" + _units_to_vars(_CSS)
+    return base + (scaled_css() if layout == "desktop_scaled" else _CSS_STACKED)
 
 
 @st.cache_data
@@ -415,13 +527,18 @@ def _fonts_css() -> str:
 
 
 @st.cache_resource(show_spinner=False)
-def _stylesheet() -> str:
+def _stylesheet(layout: str) -> str:
     """Fonts + site CSS + icon masks, built once per server process (the same for every visitor)."""
     from ui import icon_css  # local import: ui imports theme
 
-    return f"<style>{_fonts_css()}\n{_CSS}\n{icon_css()}</style>"
+    return f"<style>{_fonts_css()}\n{site_css(layout)}\n{icon_css()}</style>"
 
 
 def inject() -> None:
-    """Inject fonts and site CSS. Call once per page run, before any content."""
-    st.html(_stylesheet())
+    """Inject fonts and site CSS (and the scaling script in the desktop_scaled layout). Call once per page run,
+    before any content."""
+    layout = phone_layout()
+    st.html(_stylesheet(layout))
+    if layout == "desktop_scaled":
+        with st.container(key="scalejs"):
+            components.html(scale_script(), height=0)

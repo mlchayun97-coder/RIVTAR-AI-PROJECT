@@ -178,6 +178,10 @@ python -m pytest
 - All site text is in `app/content/en.json` and `he.json`, and every project has its own file in
   `app/content/projects/` (photos, chapters, palette, EN/HE text and alt text). Contact details are in
   `app/content/site.json`. All of it can be edited without code.
+- **Phones:** `"phone_layout"` in `site.json` chooses how screens narrower than 1000 px look.
+  `"desktop_scaled"` (default) shows the 1440 px desktop layout zoomed down to the screen width (portrait and
+  landscape, also inside the Streamlit Cloud frame); the WhatsApp button and dropdown lists stay phone-sized.
+  `"stacked"` brings back the one-column phone layout. No code change is needed to switch.
 - `python scripts/translate_content.py` drafts only missing or changed Hebrew, and never overwrites reviewed text.
 - `python scripts/prepare_media.py` exports the curated photos named in the content files (400–1600 px, neutral
   names, no EXIF) and muted video loops, and checks the 40 MB budget.

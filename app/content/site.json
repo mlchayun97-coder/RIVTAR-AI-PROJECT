@@ -1,5 +1,7 @@
 {
   "_help": "Site settings. Edit, save, then run: python scripts/prepare_media.py  (only needed when a photo file changes). See README > Editing content.",
+  "phone_layout": "desktop_scaled",
+  "_phone_layout_help": "Phones and narrow screens: \"desktop_scaled\" shows the 1440px desktop layout zoomed down to the screen width; \"stacked\" shows the one-column phone layout.",
   "hero_background": "courtyard",
   "home": {
     "courtyard": {"source": "design-reference/17-home-left-dcity-courtyard-bw.jpg", "focus": "50% 60%", "bw": true},

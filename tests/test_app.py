@@ -214,6 +214,49 @@ def test_every_page_renders_in_both_languages(call, lang):
         assert 'dir="rtl"' in html
 
 
+# ---------------------------------------------------------------- phone layout setting (site.json)
+def test_phone_layout_setting_is_valid_and_falls_back():
+    import theme
+    site = json.loads((CONTENT / "site.json").read_text(encoding="utf-8"))
+    assert site["phone_layout"] in theme.PHONE_LAYOUTS
+    assert theme.phone_layout({"phone_layout": "stacked"}) == "stacked"
+    assert theme.phone_layout({"phone_layout": "desktop_scaled"}) == "desktop_scaled"
+    assert theme.phone_layout({"phone_layout": "nonsense"}) == theme.DEFAULT_PHONE_LAYOUT == "desktop_scaled"
+    assert theme.phone_layout({}) == "desktop_scaled"
+
+
+def test_phone_layout_switches_the_css():
+    import theme
+    scaled, stacked = theme.site_css("desktop_scaled"), theme.site_css("stacked")
+    # desktop_scaled: the desktop layout is zoomed below the old tablet breakpoint; the stacked rules are left out
+    assert "zoom:var(--rv-zoom)" in scaled and f"max-width:{theme.NARROW_MAX - 0.02}px" in scaled
+    assert "@media (max-width:700px)" not in scaled and "@media (max-width:1000px)" not in scaled
+    assert "--vw:14.4px" in scaled and ".wa-float{zoom:var(--rv-unzoom)" in scaled
+    # stacked: the original phone and tablet rules, no zoom
+    assert "@media (max-width:700px)" in stacked and "@media (max-width:1000px)" in stacked
+    assert "rv-zoom" not in stacked
+    # viewport units go through --vw/--vh in both, so the scaled page can use the desktop's units
+    base = scaled[:scaled.index("@media (max-width:999.98px)")]
+    assert not re.search(r"\d(vw|s?vh)\b", base.replace(":root{--vw:1vw;--vh:1vh}", ""))
+    assert "--rv-zoom" in theme.scale_script() and "1440" in theme.scale_script()
+
+
+@pytest.mark.parametrize("layout", ["desktop_scaled", "stacked"])
+def test_page_renders_in_each_phone_layout(layout):
+    from streamlit.testing.v1 import AppTest
+    script = (f"import sys; sys.path[:0] = [{str(APP)!r}, {str(ROOT / 'src')!r}]\n"
+              "import content as C, theme\n"
+              "orig = C.site\n"  # AppTest runs in this process: restore the module afterwards
+              f"C.site = lambda: {{'phone_layout': {layout!r}}}\n"
+              "try:\n    theme.inject()\nfinally:\n    C.site = orig\n")
+    at = AppTest.from_string(script, default_timeout=60)
+    at.run()
+    assert not at.exception
+    css = " ".join(str(h.proto.body) for h in at.get("html"))
+    assert ("zoom:var(--rv-zoom)" in css) == (layout == "desktop_scaled")
+    assert ("@media (max-width:700px)" in css) == (layout == "stacked")
+
+
 def test_full_app_runs():
     from streamlit.testing.v1 import AppTest
     at = AppTest.from_file(str(APP / "streamlit_app.py"), default_timeout=60)
